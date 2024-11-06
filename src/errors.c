@@ -39,8 +39,14 @@ void print_error(int num, char* target, char* obs) {
             printf("Cantidad invalida, la cantidad ingresada de be ser mayor a 0\n");
             exit(-1);
             break;
+        case 203:
+            printf("Acceso a puntero nulo\n");
+            break;
         case 300:
             printf("Lista vacia\n");
+            break;
+        case 301:
+            printf("Nodo no encontrado\n");
             break;
         default:
             printf("Codigo de error desconocido\n");
