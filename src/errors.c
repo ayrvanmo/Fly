@@ -48,6 +48,9 @@ void print_error(int num, char* target, char* obs) {
         case 301:
             printf("Nodo no encontrado\n");
             break;
+        case 302:
+            printf("Tabla hash no existe\n");
+            break;
         default:
             printf("Codigo de error desconocido\n");
     }
