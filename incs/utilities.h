@@ -7,6 +7,8 @@
 #define UTILITIES_H
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
 
 // Colores para texto
 #define CLEAR_SCREEN "\033[H\033[J"
@@ -17,5 +19,7 @@
 #define ANSI_COLOR_MAGENTA  "\x1b[35m"
 #define ANSI_COLOR_CYAN     "\x1b[36m"
 #define ANSI_COLOR_RESET    "\x1b[0m"
+
+void generarCadenaAleatoria(char *string, int length);
 
 #endif

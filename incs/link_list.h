@@ -7,10 +7,6 @@
 #ifndef LINK_LIST_H
 #define LINK_LIST_H
 
-//Provisorio
-typedef int GraphNode;
-typedef int* PtrToGraphNode;
-
 typedef struct _linkListNode LinkListNode;
 typedef LinkListNode *PtrToLinkNode;
 typedef PtrToLinkNode LinkPosition;
@@ -18,7 +14,9 @@ typedef PtrToLinkNode LinkList;
 
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 #include "errors.h"
+#include "graph.h"
 
 
 /** \struct _linkListNode

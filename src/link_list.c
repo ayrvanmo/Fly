@@ -11,7 +11,8 @@
  * @param linkList Lista de enlaces
  * @return Puntero a una lista vacia
 */
-LinkList create_empty_linkList(LinkList linkList){
+LinkList create_empty_linkList(LinkList linkList)
+{
     if(!is_empty_linkList(linkList)){
         delete_linkList(linkList);
     }
@@ -60,7 +61,7 @@ void print_linkList(LinkList linkList) {
     LinkPosition P = linkList_first(linkList);
 
     while (P != NULL) {
-        printf("Nodo: %d, Peso: %lf\n", *(P->graphNode), P->weight);
+        printf("Nodo: %s, Peso: %lf\n", P->graphNode->name, P->weight);
         P = P->next;
     }
 }
@@ -77,7 +78,7 @@ LinkPosition find_linkList_node(LinkList linkList, GraphNode graphNode)
         return NULL;
     }
     LinkPosition P = linkList_first(linkList);
-    while (P != NULL && *(P->graphNode) != graphNode) {
+    while (P != NULL && strcmp(P->graphNode->name, graphNode.name) != 0) {
         P = P->next;
     }
     return P;
