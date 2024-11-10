@@ -6,23 +6,29 @@
 #include "hash.h"
 
 /**
- *  @brief Función de hash de Jenkins (One-at-a-time)
- *  @param key Cadena de texto a hashear
- *  @param len Longitud de la cadena a hashear
- *  @return Hash
-*/
-unsigned int jenkinsHash(char *key, size_t len) {
-    unsigned int hash = 0;
-    for (size_t i = 0; i < len; i++) {
-        hash += key[i];
-        hash += (hash << 10);
-        hash ^= (hash >> 6);
-    }
-    hash += (hash << 3);
-    hash ^= (hash >> 11);
-    hash += (hash << 15);
-    return hash;
+ * @brief Función que calcula el hash de un string usando el algoritmo de Jenkins
+ * @param key Palabra a calcular el hash
+ * @return Devuelve el hash
+ */
+unsigned int jenkins_hash(char* key)
+{
+   unsigned int hash = 0;
+
+   while (*key){
+      hash += (unsigned char)(*key);
+      hash += (hash << 10);     
+      hash ^= (hash >> 6);
+       
+      key++;
+   }
+
+   hash += (hash << 3);
+   hash ^= (hash >> 11);
+   hash += (hash << 15);
+   
+   return hash;
 }
+
 /**
  *  @brief Función para leer el contenido de un archivo y calcular el hash
  *  @param filename Nombre del archivo a hashear
@@ -58,7 +64,7 @@ unsigned int hashFile(char *filename) {
     fclose(file);
 
     // Calcular el hash del contenido
-    unsigned int hash = jenkinsHash(buffer, fileSize);
+    unsigned int hash = jenkins_hash(buffer);
 
     // Liberar la memoria del buffer
     free(buffer);

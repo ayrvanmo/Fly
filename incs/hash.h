@@ -11,7 +11,7 @@
 
 #include "errors.h"
 
-unsigned int jenkinsHash (char *key, size_t len);
+unsigned int jenkins_hash(char* key);
 
 unsigned int hashFile (char *filename);
 

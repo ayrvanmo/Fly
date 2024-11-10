@@ -21,5 +21,6 @@
 #define ANSI_COLOR_RESET    "\x1b[0m"
 
 void generarCadenaAleatoria(char *string, int length);
+char* generate_random_word();
 
 #endif
