@@ -22,6 +22,7 @@ GraphList create_empty_graphList(GraphList graphList)
         print_error(200, NULL, NULL);
     }
     newList->pageRank = 0;
+    newList->next = NULL;
     return newList;
 }
 
@@ -66,6 +67,11 @@ void print_graphList(GraphList graphList)
     }
 }
 
+/**
+ * @brief Funcion para imprimir un nodo de la lista de nodos
+ *
+ * @param P Puntero al nodo a imprimir
+*/
 void print_graphNode(GraphPosition P)
 {
     printf("Nodo: %s, PageRank: %lf\n", P->name, P->pageRank);

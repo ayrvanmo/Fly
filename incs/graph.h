@@ -3,8 +3,8 @@
  * author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
  * brief Archivo de cabecera para grafos (graph.c)
 */
-#ifndef _GRAPH_H
-#define _GRAPH_H
+#ifndef GRAPH_H
+#define GRAPH_H
 
 // Provisorio
 #define GRAPH_HASH_SIZE 2
@@ -34,7 +34,7 @@ struct _graphNode {
     GraphPosition next; /*!< Posición siguiente en la lista de nodos del grafo */
 };
 
-/** \struct HashTable
+/** \struct _graphHasTable
  *  @brief Estructura para representar un grafo como tabla hash
  */
 struct _graphHasTable{
