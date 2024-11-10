@@ -25,6 +25,7 @@ typedef struct _graphHasTable* Graph;
  * @brief Nodo perteneciente al grafo de archivos
 */
 struct _graphNode {
+    double prevPagerank; /*!< PageRank anteriordel nodo */
     double pageRank; /*!< PageRank del nodo */
     char name[30]; /*!< Nombre del archivo relacionado con el nodo (provisorio)*/
     LinkList adjacency; /*!< Lista de nodos adyacentes al nodo */
