@@ -7,7 +7,7 @@
 #define _GRAPH_H
 
 // Provisorio
-#define GRAPH_HASH_SIZE 100
+#define GRAPH_HASH_SIZE 2
 
 typedef struct _graphNode GraphNode;
 typedef GraphNode *PtrToGraphNode;
@@ -47,6 +47,7 @@ GraphList create_empty_graphList(GraphList graphList);
 void delete_graphList(GraphList graphList);
 bool is_empty_graphList(GraphList graphList);
 void print_graphList(GraphList graphList);
+void print_graphNode(GraphPosition P);
 GraphPosition find_graphList_node(GraphList graphList, char *name);
 GraphPosition find_graphList_prev_node(GraphPosition P, GraphList graphList);
 GraphPosition insert_graphList_node(GraphPosition prevPosition, char *name);
@@ -67,5 +68,7 @@ void print_graph(Graph graph);
 GraphPosition insert_graphNode(char *name, Graph graph);
 void delete_graphNode(char *name, Graph graph);
 void delete_graph(Graph graph);
+PtrToLinkNode create_graph_edge(GraphPosition node1, GraphPosition node2, double weight);
+void remove_graph_edge(GraphPosition node1, GraphPosition node2);
 
 #endif

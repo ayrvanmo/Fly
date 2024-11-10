@@ -54,6 +54,9 @@ void print_error(int num, char* target, char* obs) {
         case 302:
             printf("Tabla hash no existe\n");
             break;
+        case 303:
+            printf("No se encontro el enlace\n");
+            break;
         default:
             printf("Codigo de error desconocido\n");
     }

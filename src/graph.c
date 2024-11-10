@@ -66,6 +66,15 @@ void print_graphList(GraphList graphList)
     }
 }
 
+void print_graphNode(GraphPosition P)
+{
+    printf("Nodo: %s, PageRank: %lf\n", P->name, P->pageRank);
+    printf("Lista de adyacencias [%d]:\n", P->adjacencyNumber);
+    print_linkList(P->adjacency);
+    printf("Lista de incidencias [%d]:\n", P->incidenceNumber);
+    print_linkList(P->incidence);
+}
+
 /**
  * @brief Funcion para buscar un nodo en una lista de nodos (por su nombre)
  * @param graphList Puntero a la lista de nodos
@@ -116,7 +125,9 @@ GraphPosition insert_graphList_node(GraphPosition prevPosition, char *name)
     newNode->adjacency = create_empty_linkList(NULL);
     newNode->incidence = create_empty_linkList(NULL);
     strcpy(newNode->name, name);
-    newNode->pageRank = 0;
+    newNode->pageRank = 1;
+    newNode->adjacencyNumber = 0;
+    newNode->incidenceNumber = 0;
     return newNode;
 }
 
@@ -311,4 +322,53 @@ void delete_graph(Graph graph)
         delete_graphList(graph[i].nodeList);
     }
     free(graph);
+}
+
+/**
+ * @brief Funcion para crear un enlace entre dos nodos de un grafo
+ * @param node1 Nodo de origen del enlace
+ * @param node2 Nodo de destino del enlace
+ * @param weight Peso del enlace
+ * @return Puntero al enlace creado (En la lista de adyacencias de @p node1)
+*/
+LinkPosition create_graph_edge(GraphPosition node1, GraphPosition node2, double weight)
+{
+    LinkPosition nodeTo = insert_linkList_node(node1->adjacency, node2, weight);
+    if(nodeTo == NULL){
+        print_error(303, NULL, NULL);
+        return NULL;
+    }
+    LinkPosition nodeFrom = insert_linkList_node(node2->incidence, node1, weight);
+    if(nodeFrom == NULL){
+        print_error(303, NULL, NULL);
+        return NULL;
+    }
+    node1->adjacencyNumber++;
+    node2->incidenceNumber++;
+    return nodeTo;
+}
+
+/**
+ * @brief Funcion para eliminar un enlace entre dos nodos de un grafo
+ *
+ * @param node1 Nodo de origen del enlace
+ * @param node2 Nodo de destino del enlace
+*/
+void remove_graph_edge(GraphPosition node1, GraphPosition node2)
+{
+    LinkPosition nodeTo = find_linkList_node(node1->adjacency, *node2);
+    if(nodeTo == NULL){
+        print_error(301, NULL, NULL);
+        return;
+    }
+    delete_linkList_node(nodeTo, node1->adjacency);
+    node1->adjacencyNumber--;
+
+    LinkPosition nodeFrom = find_linkList_node(node2->incidence, *node1);
+    if(nodeFrom == NULL){
+        print_error(301, NULL, NULL);
+        return;
+    }
+    delete_linkList_node(nodeFrom, node2->incidence);
+    node2->incidenceNumber--;
 }
