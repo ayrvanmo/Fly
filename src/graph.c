@@ -292,7 +292,7 @@ void print_graph(Graph graph)
 */
 GraphPosition insert_graphNode(char *name, Graph graph)
 {
-    int index = jenkinsHash(name, strlen(name)) % GRAPH_HASH_SIZE;
+    int index = jenkins_hash(name) % GRAPH_HASH_SIZE;
     GraphPosition P = insert_graphList_node(graph[index].nodeList, name);
     if(P!=NULL){
         graph[index].nodeNumber++;
@@ -307,7 +307,7 @@ GraphPosition insert_graphNode(char *name, Graph graph)
 */
 void delete_graphNode(char *name, Graph graph)
 {
-    int index = jenkinsHash(name, strlen(name)) % GRAPH_HASH_SIZE;
+    int index = jenkins_hash(name) % GRAPH_HASH_SIZE;
     GraphPosition P = find_graphList_node(graph[index].nodeList, name);
     if(P == NULL){
         print_error(301, NULL, NULL);

@@ -113,8 +113,12 @@ LinkPosition insert_linkList_node(LinkPosition prevPosition, PtrToGraphNode grap
     }
     newNode->graphNode = graphNode;
     newNode->weight = weight;
+    
+    
     newNode->next = prevPosition->next;
+    
     prevPosition->next = newNode;
+    
     return newNode;
 }
 
