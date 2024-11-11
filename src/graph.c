@@ -270,13 +270,13 @@ Graph create_graph(Graph graph)
 void print_graph(Graph graph)
 {
     // Impresion completa
-    /* for(int i = 0; i < GRAPH_HASH_SIZE; i++)
+    for(int i = 0; i < GRAPH_HASH_SIZE; i++)
     {
         printf("-----------------------------\n");
         printf("Hash key: %d\n", i);
         print_graphList(graph[i].nodeList);
         printf("\n\n");
-    } */
+    }
     // Cantidad de nodos
     for(int i = 0; i < GRAPH_HASH_SIZE; i++)
     {

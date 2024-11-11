@@ -101,11 +101,8 @@ void print_hash_table(ReverseIndexTable hashTable){
         ReverseIndexList aux = hashTable[i].wordList->next;
         printf("[HASH %u] - CANTIDAD PALABRAS: %d\n", i,hashTable[i].wordNumber);
         while(aux){
-            printf("   %d. %s\n",j, aux->word);
-            
-            LinkList auxList = aux->files->next;
+            printf("   %d. %s [archivos: %d]\n",j, aux->word, aux->fileNumbers);
             print_linkList(aux->files);
-
             j++;
             aux = aux->next;
         }
@@ -129,14 +126,13 @@ ReverseIndexList search_hash(ReverseIndexTable hashTable, char* word){
 
     unsigned int hash = jenkins_hash(word) % MAX_HASH_TABLE_SIZE;
 
-    ReverseIndexList aux = hashTable[hash].wordList;
-    aux = aux->next;
+    ReverseIndexList aux = hashTable[hash].wordList->next;
     while(aux != NULL){
         if(strcmp(aux->word, word) == 0){
             printf("La palabra %s se encuentra en el hash key %u\n", word, hash);
             return aux;
         }
-       
+        aux=aux->next;
     }
     printf("La palabra %s no se encuentra en ningún hash key\n", word);
     return NULL;
@@ -236,19 +232,21 @@ void insert_file_to_index(ReverseIndexTable hashTable, PtrToGraphNode file, char
         print_error(302,NULL,NULL);
         return;
     }
-    unsigned int hash = jenkins_hash(word) % MAX_HASH_TABLE_SIZE;
-
-    ReverseIndexList tmp = hashTable[hash].wordList->next;
-    while(tmp){
-        if(strcmp(tmp->word, word) == 0){
-            break;
-        }
-        tmp = tmp->next;
-    }
-    insert_linkList_node(tmp->files, file, 0);
     
-    hashTable[hash].wordList->fileNumbers++;
+    ReverseIndexList search = search_hash(hashTable, word);
+    if(search==NULL){;
+        insert_hash(hashTable, word);
+        search = search_hash(hashTable, word); 
+    }
+    else if(find_linkList_node(search->files, *file)){
+        printf("El archivo '%s' ya se encuentra en la lista de archivos asociados a la palabra '%s'\n", file->name, word);
+    }
+    insert_linkList_node(search->files, file, 0);
+    search->fileNumbers++;
+
+    return;
 }
+
 
 
 

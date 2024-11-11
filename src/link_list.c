@@ -61,7 +61,7 @@ void print_linkList(LinkList linkList) {
     LinkPosition P = linkList_first(linkList);
 
     while (P != NULL) {
-        printf("Nodo: %s, Peso: %lf\n", P->graphNode->name, P->weight);
+        printf("        Nodo: %s, Peso: %lf\n", P->graphNode->name, P->weight);
         P = P->next;
     }
 }
@@ -111,14 +111,12 @@ LinkPosition insert_linkList_node(LinkPosition prevPosition, PtrToGraphNode grap
     if(newNode == NULL){
         print_error(200, NULL, NULL);
     }
+
     newNode->graphNode = graphNode;
     newNode->weight = weight;
     
-    
     newNode->next = prevPosition->next;
-    
     prevPosition->next = newNode;
-    
     return newNode;
 }
 
