@@ -26,6 +26,7 @@ ReverseIndexList init_empty_hashList(){
  * @brief Función que inicializa una tabla hash
  * 
  * @param hashTable Tabla hash a inicializar
+ * @return ReverseIndexTable
  */
 ReverseIndexTable init_hash_table(){
     ReverseIndexTable hashTable = malloc(sizeof(struct _ReverseIndexTable)*MAX_HASH_TABLE_SIZE);
@@ -115,7 +116,7 @@ void print_hash_table(ReverseIndexTable hashTable){
  * @param hashTable Tabla hash
  * @param word Palabra a buscar
  * 
- * @return Posición de la palabra en la lista asociada al hash key
+ * @return ReverseIndexList
  */
 ReverseIndexList search_hash(ReverseIndexTable hashTable, char* word){
 
@@ -143,7 +144,7 @@ ReverseIndexList search_hash(ReverseIndexTable hashTable, char* word){
  * 
  * @param hashTable Tabla hash
  * @param word Palabra a buscar su anterior
- * @return ReverseIndexList* 
+ * @return ReverseIndexList
  */
 ReverseIndexList find_previous_hash(ReverseIndexTable hashTable, char* word){
 
@@ -207,6 +208,12 @@ void delete_hash_table(ReverseIndexTable hashTable){
     free(hashTable);
 }
 
+/**
+ * @brief Mueve una palabra a la primera posición de su lista asociada al hash key
+ * 
+ * @param hashTable 
+ * @param word 
+ */
 void move_word_to_front(ReverseIndexTable hashTable, char* word){
     if(!hashTable){
         print_error(302,NULL,NULL);
@@ -227,6 +234,13 @@ void move_word_to_front(ReverseIndexTable hashTable, char* word){
     hashTable[hash].wordList->next = tmp;
 }
 
+/**
+ * @brief Inserta un archivo en el índice invertido
+ * 
+ * @param hashTable 
+ * @param file 
+ * @param word 
+ */
 void insert_file_to_index(ReverseIndexTable hashTable, PtrToGraphNode file, char* word){
     if(!hashTable){
         print_error(302,NULL,NULL);
