@@ -57,6 +57,12 @@ void print_error(int num, char* target, char* obs) {
         case 303:
             printf("No se encontro el enlace\n");
             break;
+        case 304:
+            printf("No se encontro el archivo %s\n", target);
+            break;
+        case 305:
+            printf("No se pudo abrir el directorio %s\n", target);
+            break;
         default:
             printf("Codigo de error desconocido\n");
     }
