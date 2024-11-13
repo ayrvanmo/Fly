@@ -7,7 +7,7 @@
  * @param list Lista de archivos
  * @return Lista de archivos
  */
-fileList get_files_from_directory(char *directory, fileList list)
+FileList get_files_from_directory(char *directory, FileList list)
 {
     DIR *Dir;
     struct dirent *Entry;
@@ -80,9 +80,9 @@ fileList get_files_from_directory(char *directory, fileList list)
  * @param P Posicion donde se inserta el archivo
  * @return Posicion donde se inserto el archivo
  */
-filePosition insert_fileList_file(fileInfo X, fileList L, filePosition P) 
+FilePosition insert_fileList_file(fileInfo X, FileList L, FilePosition P) 
 {
-    filePosition TmpCell;
+    FilePosition TmpCell;
     TmpCell = malloc(sizeof(struct Node));
 
     if (TmpCell == NULL){
@@ -101,9 +101,9 @@ filePosition insert_fileList_file(fileInfo X, fileList L, filePosition P)
  * 
  * @param L Lista de archivos
  */
-void print_fileList(fileList L) 
+void print_fileList(FileList L) 
 {
-    filePosition P = L->Next;
+    FilePosition P = L->Next;
     printf("Lista de archivos:\n");
 
     while (P != NULL) {
@@ -118,10 +118,10 @@ void print_fileList(fileList L)
  * 
  * @param L Lista de archivos
  */
-void delete_fileList(fileList L) 
+void delete_fileList(FileList L) 
 {
-    filePosition P = L->Next;
-    filePosition Tmp;
+    FilePosition P = L->Next;
+    FilePosition Tmp;
     L->Next = NULL;
 
     while (P != NULL) {
@@ -139,7 +139,7 @@ void delete_fileList(fileList L)
  * 
  * @param L Lista de archivos
  */
-fileList make_empty_fileList(fileList L) 
+FileList make_empty_fileList(FileList L) 
 {
     if (L != NULL){
         delete_fileList(L);
@@ -160,7 +160,7 @@ fileList make_empty_fileList(fileList L)
  * 
  * @return numero de archivos
  */
-int count_filesList(fileList L) 
+int count_filesList(FileList L) 
 {
     return L->fileCount;
 }
@@ -171,11 +171,11 @@ int count_filesList(fileList L)
  * @param L Lista de archivos
  * @param fileName Nombre del archivo a eliminar
  */
-void delete_fileList_file(fileList L, char *fileName)
+void delete_fileList_file(FileList L, char *fileName)
 {
     fileName = get_only_fileName(fileName);
-    filePosition P = L->Next;
-    filePosition Tmp = L;
+    FilePosition P = L->Next;
+    FilePosition Tmp = L;
 
     while (P != NULL) {
         if (strcmp(P->Element.name, fileName) == 0) {
@@ -199,9 +199,9 @@ void delete_fileList_file(fileList L, char *fileName)
  * @param L Lista de archivos
  * @param fileName Nombre del archivo a buscar
  */
-/*filePosition find_fileList_file(fileList L, char* fileName)
+/*FilePosition find_fileList_file(FileList L, char* fileName)
 {
-    filePosition P = L->Next;
+    FilePosition P = L->Next;
     
     while (P != NULL && strcmp(P->Element.name, fileName) != 0) {
             P = P->Next;

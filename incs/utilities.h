@@ -9,6 +9,8 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <string.h>
+#include <ctype.h>
 
 // Colores para texto
 #define CLEAR_SCREEN "\033[H\033[J"
@@ -22,5 +24,9 @@
 
 void generarCadenaAleatoria(char *string, int length);
 char* generate_random_word();
+
+// Para cadenas de caracteres
+void to_low_case(char* s1);
+void remove_punctuation(char* s1);
 
 #endif

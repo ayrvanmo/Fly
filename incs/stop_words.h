@@ -4,7 +4,7 @@
  * brief Archivo de cabecera para stop words (stop_words.c)
 */
 #ifndef STOP_WORDS_H
-#define Stop_WORDS_H
+#define STOP_WORDS_H
 
 #define STOP_WORDS_HASH_SIZE 100
 

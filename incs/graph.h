@@ -17,7 +17,7 @@ typedef struct _graphHasTable* Graph;
 
 #include <stdbool.h>
 #include <string.h>
-
+#include "files.h"
 #include "link_list.h"
 #include "hash.h"
 
@@ -27,7 +27,7 @@ typedef struct _graphHasTable* Graph;
 struct _graphNode {
     double prevPagerank; /*!< PageRank anteriordel nodo */
     double pageRank; /*!< PageRank del nodo */
-    char name[30]; /*!< Nombre del archivo relacionado con el nodo (provisorio)*/
+    FilePosition file; /*!<Puntero a la estructura que contiene información sobre el archivo */
     LinkList adjacency; /*!< Lista de nodos adyacentes al nodo */
     LinkList incidence; /*!< Lista de nodos que lo incluyen como adyacente */
     int adjacencyNumber; /*!< Numero de nodos adyacentes al nodo */
@@ -51,7 +51,7 @@ void print_graphList(GraphList graphList);
 void print_graphNode(GraphPosition P);
 GraphPosition find_graphList_node(GraphList graphList, char *name);
 GraphPosition find_graphList_prev_node(GraphPosition P, GraphList graphList);
-GraphPosition insert_graphList_node(GraphPosition prevPosition, char *name);
+GraphPosition insert_graphList_node(GraphPosition prevPosition, FilePosition file);
 void delete_graphList_node(GraphPosition P, GraphList graphList);
 
 // Funciones de interaccion con el usuario
@@ -66,7 +66,7 @@ double get_pageRank(GraphPosition P);
 // Funciones del grafo general
 Graph create_graph(Graph graph);
 void print_graph(Graph graph);
-GraphPosition insert_graphNode(char *name, Graph graph);
+GraphPosition insert_graphNode(FilePosition file, Graph graph);
 void delete_graphNode(char *name, Graph graph);
 void delete_graph(Graph graph);
 PtrToLinkNode create_graph_edge(GraphPosition node1, GraphPosition node2, double weight);
