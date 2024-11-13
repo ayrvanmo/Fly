@@ -49,7 +49,6 @@ FileList get_files_from_directory(char *directory, FileList list);
 int count_filesList(FileList L);
 void delete_fileList_file(FileList L, char *fileName);
 /*FilePosition find_fileList_file(FileList L, char* fileName);*/
-char* get_only_fileName(char* name);
 void process_file(FilePosition file, Graph graph, ReverseIndexTable index, StopWordsTable stopWords);
 
 #endif

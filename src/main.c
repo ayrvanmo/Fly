@@ -68,7 +68,7 @@ int main(){
 
     //Prueba de lista de archivos
 
-    FileList archivos = get_files_from_directory("./build/docs", NULL);
+    /* FileList archivos = get_files_from_directory("./build/docs", NULL);
     StopWordsTable stopWords = read_stopWord_file("./build/spanish.txt", NULL);
     ReverseIndexTable reverseIndex = init_hash_table();
     Graph graph = create_graph(NULL);
@@ -104,7 +104,21 @@ int main(){
     delete_stopWordsTable(stopWords);
     delete_hash_table(reverseIndex);
     delete_graph(graph);
-    delete_fileList(archivos);
+    delete_fileList(archivos); */
+
+    // Prueba de links
+    char* ejemplos[] = {
+        "hola.txt",
+        "windows 3.1.txt",
+        "windows 3.1",
+        "/hola/este/es/un/path.md",
+        "/hola/este/es/un/path.md|alias|center|500",
+        "/hola/este/es/un/path.md#titulo1|alias|center|500"
+    };
+
+    for (int i = 0; i < 5; i++) {
+        printf("WikiLink: %s => Archivo: %s\n", ejemplos[i], get_only_fileName(ejemplos[i]));
+    }
 
     return 0;
 }

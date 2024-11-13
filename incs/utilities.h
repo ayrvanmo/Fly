@@ -11,6 +11,8 @@
 #include <time.h>
 #include <string.h>
 #include <ctype.h>
+#include <stdbool.h>
+#include "errors.h"
 
 // Colores para texto
 #define CLEAR_SCREEN "\033[H\033[J"
@@ -28,5 +30,7 @@ char* generate_random_word();
 // Para cadenas de caracteres
 void to_low_case(char* s1);
 void remove_punctuation(char* s1);
+char* get_only_fileName(char* file);
+bool is_valid_extension(char* extension);
 
 #endif

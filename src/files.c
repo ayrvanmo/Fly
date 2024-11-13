@@ -211,42 +211,6 @@ void delete_fileList_file(FileList L, char *fileName)
 }*/
 
 /**
- * @brief conserva solo el nombre del archivo sin extension
- *
- * @param name Nombre del archivo
- *
- * @return Nombre del archivo sin extension
- * @warning Esta funcion retorna un puntero con memoria reservada, debe liberarse fuera de esta funcion
- */
-char* get_only_fileName(char* name){
-    char* NameWithDot = strrchr(name, '/');
-    if (NameWithDot == NULL) {
-        NameWithDot = name;
-    }
-    else {
-        NameWithDot++;
-    }
-    char* OnlyName = malloc(sizeof(char) * (strlen(NameWithDot) + 1));
-    strcpy(OnlyName, NameWithDot);
-    int Length = strlen(OnlyName);
-
-    if (OnlyName[0] == '.') {
-        if (strrchr(OnlyName, '.') != OnlyName) {
-            *strrchr(OnlyName, '.') = '\0';
-        }
-        return OnlyName;
-    }
-
-    for(int i = 0; i < Length; i++){
-        if(OnlyName[i] == '.'){
-            OnlyName[i] = '\0';
-            break;
-        }
-    }
-    return OnlyName;
-}
-
-/**
  * @brief Procesa un archivo para incluirlo en el sistema de busqueda
  *
  * @param fileInfo Puntero a la estructura que contiene información sobre el archivo

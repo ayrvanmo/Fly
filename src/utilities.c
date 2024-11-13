@@ -70,3 +70,73 @@ void remove_punctuation(char* s1)
         s1[length - 1] = '\0';
     }
 }
+
+/**
+ * @brief conserva solo el nombre del archivo sin extension
+ *
+ * @param file Nombre del archivo
+ *
+ * @return Nombre del archivo sin extension
+ * @warning Esta funcion retorna un puntero con memoria reservada, debe liberarse fuera de esta funcion
+*/
+char* get_only_fileName(char* file){
+    size_t originalLength = strlen(file);
+    // Creamos una copia de la cadena para preservar el original
+    char* name = malloc(sizeof(char) * (originalLength - 1));
+    if(name == NULL){
+        print_error(200,NULL,NULL);
+    }
+
+    strcpy(name, file);
+    name[originalLength] = '\0';
+
+    // Encontrar la última aparición de '/' para obtener solo el nombre del archivo
+    char* filename = strrchr(name, '/');
+    if (filename) {
+        filename++;  // Mover el puntero al carácter después de la última '/'
+    } else {
+        filename = name;  // No hay '/', entonces la cadena completa es el nombre
+    }
+
+    // Eliminar el contenido después del primer '|', si existe
+    char* pipe_pos = strchr(filename, '|');
+    if (pipe_pos) {
+        *pipe_pos = '\0';
+    }
+
+    char* hashtag_pos = strchr(filename, '#');
+    if (hashtag_pos) {
+        *hashtag_pos = '\0';
+    }
+
+    // Encontrar la última aparición de '.' en filename
+    char* dot_pos = strrchr(filename, '.');
+
+    // Si encontramos un punto, lo analizamos
+    if (dot_pos && dot_pos != filename && dot_pos[1] != '\0') {
+        // Verificar si el texto después del punto es una extensión
+        if (is_valid_extension(dot_pos + 1)) {
+            *dot_pos = '\0'; // Truncamos en el punto para eliminar la extensión
+        }
+    }
+
+    return filename;
+}
+
+/**
+ * @brief Comprueba si una cadena corresponde a una extension de archivo conocida por el programa
+ * @param extension Cadena de caracteres a evaluar
+ * @return TRUE si la extensión es valida, FALSE en caso contrario
+*/
+bool is_valid_extension(char* extension)
+{
+    const char* valid_extensions[] = {"txt", "md", "log", "conf", "ini", "cfg", "yaml", "yml", "json", "xml", "csv", "tsv", "sh", "bash", "zsh", "php", "py", "js", "html", "css", "cpp", "c", "h", "java", "sql", "r", "pl", "rb", "go", "rs"};
+    size_t extensionNumber = 30;
+
+    for (size_t i = 0; i < extensionNumber; i++) {
+        if (strcmp(extension, valid_extensions[i]) == 0) {
+            return true;
+        }
+    }
+    return false;
+}
