@@ -6,6 +6,7 @@
 #include "stop_words.h"
 #include "graph.h"
 #include "utilities.h"
+#include "page_rank.h"
 
 #define MAX 5
 
@@ -68,21 +69,27 @@ int main(){
 
     //Prueba de lista de archivos
 
-    FileList archivos = get_files_from_directory("./build/example", NULL);
+    FileList files = get_files_from_directory("./build/example", NULL);
     StopWordsTable stopWords = read_stopWord_file("./build/spanish.txt", NULL);
     ReverseIndexTable reverseIndex = init_indexTable();
     Graph graph = create_graph(NULL);
 
-    FilePosition P = archivos->Next;
+    FilePosition P = files->Next;
+
+    print_fileList(files);
+
     while(P != NULL){
         printf(ANSI_COLOR_BLUE"Archivo: %s\n"ANSI_COLOR_RESET, P->name);
-        process_file(P, graph, reverseIndex, stopWords);
+        process_file(P, graph, reverseIndex, stopWords, files);
         P = P->Next;
     }
+    calculate_page_rank(graph);
+    print_graph(graph);
+
     delete_stopWordsTable(stopWords);
     delete_indexTable(reverseIndex);
     delete_graph(graph);
-    delete_fileList(archivos);
+    delete_fileList(files);
 
     return 0;
 }

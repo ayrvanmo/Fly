@@ -218,13 +218,52 @@ FilePosition find_fileList_prev_file(FileList L, FilePosition File)
  * @param index Puntero al indice invertido donde se almacenan las palabras del archivo
  * @param stopWords Puntero al diccionario de stop words
 */
-void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, StopWordsTable stopWords)
+void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, StopWordsTable stopWords, FileList files)
 {
     FILE* file = fopen(fileInfo->filePath, "r");
-    GraphPosition P = insert_graphNode(fileInfo, graph);
+    GraphPosition P = find_graphNode(fileInfo->name, graph);
+    if(!P){
+        P = insert_graphNode(fileInfo, graph);
+    }
 
-    char word[50];
+    printf("Archivo %s\n",P->file->name);
+
+    char word[256];
+    char link[1024];
+
     while(fscanf(file, "%s", word) != EOF){
+        if(strstr(word, "[[")){
+            strcpy(link, strstr(word, "[[")+2);
+            if(strstr(word, "]]")){
+                strstr(link, "]]")[0] = '\0';
+            }
+            else{
+                while(fscanf(file, "%s", word) != EOF){
+                    strcat(link, " ");
+                    strcat(link, word);
+                    if(strstr(word, "]]")){
+                        strstr(link, "]]")[0] = '\0';
+                        break;
+                    }
+                }
+            }
+            char* pointerToFileName = get_only_fileName(link);
+            GraphPosition nodeToLink = find_graphNode(pointerToFileName, graph);
+
+            if(nodeToLink == NULL){
+                FilePosition fileToLink = find_fileList_file(files, pointerToFileName);
+                printf("Se buscó el archivo: %s\n",pointerToFileName);
+                if(!fileToLink){
+                    continue;
+                }
+                nodeToLink = insert_graphNode(fileToLink, graph);
+            }
+            create_graph_edge(P, nodeToLink, 1);
+            printf("Link con: %s\n",pointerToFileName);
+            free(pointerToFileName);
+            continue;
+        }
+
         to_low_case(word);
         remove_punctuation(word);
 
@@ -232,6 +271,7 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
             printf("%s\n", word);
             insert_file_to_index(index, P, word);
         }
+
     }
     fclose(file);
 }

@@ -43,6 +43,6 @@ int count_filesList(FileList L);
 void delete_fileList_file(FileList L, FilePosition file);
 FilePosition find_fileList_file(FileList L, char* fileName);
 FilePosition find_fileList_prev_file(FileList L, FilePosition File);
-void process_file(FilePosition file, Graph graph, ReverseIndexTable index, StopWordsTable stopWords);
+void process_file(FilePosition file, Graph graph, ReverseIndexTable index, StopWordsTable stopWords, FileList files);
 
 #endif
