@@ -53,7 +53,7 @@ ReverseIndexList insert_word_to_index(ReverseIndexTable hashTable, char* word){
 
     if(!hashTable){
         print_error(302,NULL,NULL);
-        return;
+        return NULL;
     }
 
     /* se obtiene el hash correspondiente a la palabra a insertar*/

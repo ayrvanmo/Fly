@@ -7,17 +7,17 @@
 #ifndef REVERSE_INDEX_H
 #define REVERSE_INDEX_H
 
+typedef struct _ReverseIndexNode ReverseIndexNode;
+typedef ReverseIndexNode* ReverseIndexList;
+typedef struct _ReverseIndexTable ReverseIndexTableNode;
+typedef ReverseIndexTableNode* ReverseIndexTable;
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
 #include "errors.h"
 #include "link_list.h"
-
-typedef struct _ReverseIndexNode ReverseIndexNode;
-typedef ReverseIndexNode* ReverseIndexList;
-typedef struct _ReverseIndexTable ReverseIndexTableNode;
-typedef ReverseIndexTableNode* ReverseIndexTable;
 
 #define MAX_STRING_LENGTH 50
 #define MAX_HASH_TABLE_SIZE 10

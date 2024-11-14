@@ -12,7 +12,7 @@
 int main(){
      // Prueba de indice invertido
     /* srand(time(NULL));
-    ReverseIndexTable hashTable=init_hash_table(); */
+    ReverseIndexTable hashTable=init_indexTable(); */
 
     // Prueba de grafo
 
@@ -33,11 +33,11 @@ int main(){
     insert_file_to_index(hashTable, nodos[3], "hola");
     insert_file_to_index(hashTable, nodos[4], "buenas");
     print_hash_table(hashTable);
-    
-    
-    
+
+
+
     //liberar
-    delete_hash_table(hashTable);
+    delete_indexTable(hashTable);
     delete_graph(myGrpah);
     */
 
@@ -68,9 +68,9 @@ int main(){
 
     //Prueba de lista de archivos
 
-    FileList archivos = get_files_from_directory("./build/docs", NULL);
+    FileList archivos = get_files_from_directory("./build/example", NULL);
     StopWordsTable stopWords = read_stopWord_file("./build/spanish.txt", NULL);
-    ReverseIndexTable reverseIndex = init_hash_table();
+    ReverseIndexTable reverseIndex = init_indexTable();
     Graph graph = create_graph(NULL);
 
     FilePosition P = archivos->Next;
@@ -79,11 +79,8 @@ int main(){
         process_file(P, graph, reverseIndex, stopWords);
         P = P->Next;
     }
-
-    print_hash_table(reverseIndex);
-
     delete_stopWordsTable(stopWords);
-    delete_hash_table(reverseIndex);
+    delete_indexTable(reverseIndex);
     delete_graph(graph);
     delete_fileList(archivos);
 
