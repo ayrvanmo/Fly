@@ -254,7 +254,7 @@ void insert_file_to_index(ReverseIndexTable hashTable, PtrToGraphNode file, char
     }
 
     if(find_linkList_node(search->files, *file)){
-        printf("El archivo '%s' ya se encuentra en la lista de archivos asociados a la palabra '%s'\n", file->file->Element.name, word);
+        printf("El archivo '%s' ya se encuentra en la lista de archivos asociados a la palabra '%s'\n", file->file->name, word);
     }
     else{
         insert_linkList_node(search->files, file, 0);

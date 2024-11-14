@@ -7,8 +7,8 @@
 #ifndef FILES_H
 #define FILES_H
 
-typedef struct _elementType fileInfo;
-typedef struct Node *PtrToFileNode;
+typedef struct _fileNode FileNode;
+typedef FileNode *PtrToFileNode;
 typedef PtrToFileNode FileList;
 typedef PtrToFileNode FilePosition;
 
@@ -22,33 +22,27 @@ typedef PtrToFileNode FilePosition;
 #include "errors.h"
 #include "utilities.h"
 
-/** \struct _elementType
-     *  @brief Estructura que representa un archivo
-     */
-struct _elementType {
+/** \struct _fileNode
+ *  @brief Estructura que representa una lista de archivos
+*/
+struct _fileNode {
+    int fileCount;
     char* filePath;
     char* name;
     unsigned long id;
-};
-
-/** \struct Node
-     *  @brief Estructura que representa una lista de archivos
-     */
-struct Node {
-    fileInfo Element;
-    struct Node *Next;
-    int fileCount;
+    PtrToFileNode Next;
 };
 
 // funciones para el manejo de archivos
 FileList make_empty_fileList(FileList L);
-FilePosition insert_fileList_file(fileInfo X, FileList L, FilePosition P);
+FilePosition insert_fileList_file(FileList L, FilePosition Prev, char* filePath, char* name, unsigned long id);
 void delete_fileList(FileList L);
 void print_fileList(FileList L);
 FileList get_files_from_directory(char *directory, FileList list);
 int count_filesList(FileList L);
-void delete_fileList_file(FileList L, char *fileName);
-/*FilePosition find_fileList_file(FileList L, char* fileName);*/
+void delete_fileList_file(FileList L, FilePosition file);
+FilePosition find_fileList_file(FileList L, char* fileName);
+FilePosition find_fileList_prev_file(FileList L, FilePosition File);
 void process_file(FilePosition file, Graph graph, ReverseIndexTable index, StopWordsTable stopWords);
 
 #endif

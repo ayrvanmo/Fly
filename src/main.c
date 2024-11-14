@@ -75,7 +75,7 @@ int main(){
 
     FilePosition P = archivos->Next;
     while(P != NULL){
-        printf(ANSI_COLOR_BLUE"Archivo: %s\n"ANSI_COLOR_RESET, P->Element.name);
+        printf(ANSI_COLOR_BLUE"Archivo: %s\n"ANSI_COLOR_RESET, P->name);
         process_file(P, graph, reverseIndex, stopWords);
         P = P->Next;
     }
