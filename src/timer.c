@@ -7,9 +7,9 @@
  */
 void init_timer(Timer* timer)
 {
-    timer->start = clock(); 
-    timer->total = 0.0; 
-    timer->in_pause = false; 
+    timer->start = clock();
+    timer->total = 0.0;
+    timer->in_pause = false;
     printf("Temporizador iniciado\n");
 }
 
@@ -20,10 +20,10 @@ void init_timer(Timer* timer)
  */
 void pause_timer(Timer* timer)
 {
-    if(!timer->in_pause){ 
-        timer->pause = clock(); 
-        timer->total += (double)(timer->pause - timer->start) / CLOCKS_PER_SEC; 
-        timer->in_pause = true; 
+    if(!timer->in_pause){
+        timer->pause = clock();
+        timer->total += (double)(timer->pause - timer->start) / CLOCKS_PER_SEC;
+        timer->in_pause = true;
         printf("Temporizador pausado\n");
     }
 }
@@ -35,9 +35,9 @@ void pause_timer(Timer* timer)
  */
 void resume_timer(Timer* timer)
 {
-    if(timer->in_pause){ 
-        timer->start = clock(); 
-        timer->in_pause = false; 
+    if(timer->in_pause){
+        timer->start = clock();
+        timer->in_pause = false;
         printf("Temporizador reanudado\n");
     }
 }
@@ -49,15 +49,15 @@ void resume_timer(Timer* timer)
  */
 void end_timer(Timer* timer)
 {
-    if (!timer->in_pause){ 
-        timer->total += (double)(clock() - timer->start) / CLOCKS_PER_SEC; 
+    if (!timer->in_pause){
+        timer->total += (double)(clock() - timer->start) / CLOCKS_PER_SEC;
     }
     printf("Temporizador terminado en %.6f segundos\n", timer->total);
 }
 
 /**
  * @brief imprime el tiempo del temporizador
- * 
+ *
  * @param timer Puntero al struct del temporizador
  */
 void print_timer(Timer* timer)

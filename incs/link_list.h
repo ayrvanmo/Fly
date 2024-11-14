@@ -17,6 +17,7 @@ typedef PtrToLinkNode LinkList;
 #include <string.h>
 #include "errors.h"
 #include "graph.h"
+#include "utilities.h"
 
 
 /** \struct _linkListNode

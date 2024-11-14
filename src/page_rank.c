@@ -5,9 +5,14 @@
  */
 
 #include "page_rank.h"
-
+/**
+ * @brief Calcula el page rank de un grafo
+ * @param rankGraph Grafo a calcular el page rank
+ * @return Retorna el grafo con los valores de page rank actualizados
+ */
 void calculate_page_rank(Graph rankGraph)
 {
+    printf("Calculando PageRank\n");
     double diff = FRONTIER; // Diferencia entre los page rank
     double noLinks;// Valor de los nodos que no cuentan con enlaces incidentes
     double N = 0; // Cantidad de nodos
@@ -76,4 +81,5 @@ void calculate_page_rank(Graph rankGraph)
             }
         }
     }
+    printf("PageRank calculado\n");
 }
