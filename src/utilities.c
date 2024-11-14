@@ -87,40 +87,39 @@ char* get_only_fileName(char* file){
         print_error(200,NULL,NULL);
     }
 
-    strcpy(name, file);
-    name[originalLength] = '\0';
-
-    // Encontrar la última aparición de '/' para obtener solo el nombre del archivo
-    char* filename = strrchr(name, '/');
-    if (filename) {
-        filename++;  // Mover el puntero al carácter después de la última '/'
-    } else {
-        filename = name;  // No hay '/', entonces la cadena completa es el nombre
+    // Guardamos en name solamente el contenido despues de la barra '/'
+    char* barPosition = strrchr(file, '/');
+    if(barPosition != NULL){
+        strcpy(name, barPosition + 1);
+    }
+    else{
+        strcpy(name, file);
     }
 
     // Eliminar el contenido después del primer '|', si existe
-    char* pipe_pos = strchr(filename, '|');
+    char* pipe_pos = strchr(name, '|');
     if (pipe_pos) {
         *pipe_pos = '\0';
     }
 
-    char* hashtag_pos = strchr(filename, '#');
+    // Eliminar el contenido después del primer '#', si existe
+    char* hashtag_pos = strchr(name, '#');
     if (hashtag_pos) {
         *hashtag_pos = '\0';
     }
 
     // Encontrar la última aparición de '.' en filename
-    char* dot_pos = strrchr(filename, '.');
+    char* dot_pos = strrchr(name, '.');
 
     // Si encontramos un punto, lo analizamos
-    if (dot_pos && dot_pos != filename && dot_pos[1] != '\0') {
+    if (dot_pos && dot_pos != name && dot_pos[1] != '\0') {
         // Verificar si el texto después del punto es una extensión
         if (is_valid_extension(dot_pos + 1)) {
             *dot_pos = '\0'; // Truncamos en el punto para eliminar la extensión
         }
     }
 
-    return filename;
+    return name;
 }
 
 /**

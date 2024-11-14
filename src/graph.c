@@ -62,7 +62,7 @@ void print_graphList(GraphList graphList)
     GraphPosition P = graphList_first(graphList);
 
     while (P != NULL) {
-        printf("Nodo: %s, PageRank: %lf\n", P->file->Element.name, P->pageRank);
+        printf("Nodo: %s, PageRank: %lf\n", P->file->name, P->pageRank);
         P = P->next;
     }
 }
@@ -74,7 +74,7 @@ void print_graphList(GraphList graphList)
 */
 void print_graphNode(GraphPosition P)
 {
-    printf("Nodo: %s, PageRank: %lf\n", P->file->Element.name, P->pageRank);
+    printf("Nodo: %s, PageRank: %lf\n", P->file->name, P->pageRank);
     printf("Lista de adyacencias [%d]:\n", P->adjacencyNumber);
     print_linkList(P->adjacency);
     printf("Lista de incidencias [%d]:\n", P->incidenceNumber);
@@ -93,7 +93,7 @@ GraphPosition find_graphList_node(GraphList graphList, char *name)
         return NULL;
     }
     GraphPosition P = graphList_first(graphList);
-    while (P != NULL && strcmp(P->file->Element.name, name) != 0) {
+    while (P != NULL && strcmp(P->file->name, name) != 0) {
         P = P->next;
     }
     return P;
@@ -108,7 +108,7 @@ GraphPosition find_graphList_node(GraphList graphList, char *name)
 GraphPosition find_graphList_prev_node(GraphPosition P, GraphList graphList)
 {
     GraphPosition aux = graphList;
-    while (aux != NULL && strcmp(aux->next->file->Element.name, P->file->Element.name) != 0){
+    while (aux != NULL && strcmp(aux->next->file->name, P->file->name) != 0){
         aux = aux->next;
     }
     return aux;
@@ -220,7 +220,7 @@ LinkList get_incidentList(GraphPosition P){
 */
 char *get_name(GraphPosition P)
 {
-    return P->file->Element.name;
+    return P->file->name;
 }
 
 /**
@@ -291,7 +291,7 @@ void print_graph(Graph graph)
 */
 GraphPosition insert_graphNode(FilePosition file, Graph graph)
 {
-    int index = jenkins_hash(file->Element.name) % GRAPH_HASH_SIZE;
+    int index = jenkins_hash(file->name) % GRAPH_HASH_SIZE;
     GraphPosition P = insert_graphList_node(graph[index].nodeList, file);
     if(P!=NULL){
         graph[index].nodeNumber++;

@@ -29,29 +29,21 @@ FileList get_files_from_directory(char *directory, FileList list)
         }
 
         if (Entry->d_type == 8) { // archivo
-            fileInfo NewFile;
+            unsigned long entryId;
+            char* entryPath;
+            char* entryName;
 
             size_t routeLength = strlen(directory) + strlen(Entry->d_name) + 2;
-            NewFile.filePath = malloc(routeLength);
-            if (NewFile.filePath == NULL) {
+            entryPath = malloc(routeLength);
+            if (entryPath == NULL) {
                 print_error(200,NULL,NULL);
                 continue;
             }
 
-            size_t LengthName = strlen(Entry->d_name) + 1;
-            NewFile.name = malloc(LengthName);
-            if (NewFile.name == NULL) {
-                print_error(200,NULL,NULL);
-                continue;
-            }
-
-            strcpy(NewFile.name, Entry->d_name);
-            snprintf(NewFile.filePath, routeLength, "%s/%s", directory, Entry->d_name);
-            NewFile.id = Entry->d_ino;
-            char* tmp = get_only_fileName(NewFile.filePath);
-            strcpy(NewFile.name, tmp);
-            free(tmp);
-            insert_fileList_file(NewFile, list, list);
+            snprintf(entryPath, routeLength, "%s/%s", directory, Entry->d_name);
+            entryId = Entry->d_ino;
+            entryName = get_only_fileName(entryPath);
+            insert_fileList_file(list, list, entryPath, entryName, entryId);
         }
 
         if (Entry->d_type == 4) {  // subdirectorio
@@ -75,23 +67,27 @@ FileList get_files_from_directory(char *directory, FileList list)
 /**
  * @brief Inserta un archivo en la lista de archivos
  *
- * @param X Archivo a insertar
- * @param L Lista de archivos
- * @param P Posicion donde se inserta el archivo
- * @return Posicion donde se inserto el archivo
- */
-FilePosition insert_fileList_file(fileInfo X, FileList L, FilePosition P)
+ * @param L Lista en la que se desea insertar el archivo
+ * @param Prev Nodo previo al que se desea insertar el archivo
+ * @param filePath Ruta del archivo
+ * @param name Nombre del archivo
+ * @param id Identificador del archivo
+ * @return Puntero al archivo creado
+*/
+FilePosition insert_fileList_file(FileList L, FilePosition Prev, char* filePath, char* name, unsigned long id)
 {
     FilePosition TmpCell;
-    TmpCell = malloc(sizeof(struct Node));
+    TmpCell = malloc(sizeof(struct _fileNode));
 
     if (TmpCell == NULL){
         print_error(200,NULL,NULL);
     }
 
-    TmpCell->Element = X;
-    TmpCell->Next = P->Next;
-    P->Next = TmpCell;
+    TmpCell->filePath = filePath;
+    TmpCell->name = name;
+    TmpCell->id = id;
+    TmpCell->Next = Prev->Next;
+    Prev->Next = TmpCell;
     L->fileCount++;
     return TmpCell;
 }
@@ -107,7 +103,7 @@ void print_fileList(FileList L)
     printf("Lista de archivos:\n");
 
     while (P != NULL) {
-        printf("Archivo: %s, Inodo(ID): %lu, Nombre: %s\n", P->Element.filePath, P->Element.id, P->Element.name);
+        printf("Archivo: %s, Inodo(ID): %lu, Nombre: %s\n", P->filePath, P->id, P->name);
         P = P->Next;
     }
     printf("Numero de archivos: %d\n", count_filesList(L));
@@ -121,15 +117,10 @@ void print_fileList(FileList L)
 void delete_fileList(FileList L)
 {
     FilePosition P = L->Next;
-    FilePosition Tmp;
-    L->Next = NULL;
 
     while (P != NULL) {
-        Tmp = P->Next;
-        free(P->Element.filePath);
-        free(P->Element.name);
-        free(P);
-        P = Tmp;
+        delete_fileList_file(L, P);
+        P = L->Next;
     }
     free(L);
 }
@@ -144,7 +135,7 @@ FileList make_empty_fileList(FileList L)
     if (L != NULL){
         delete_fileList(L);
     }
-    L = malloc(sizeof(struct Node));
+    L = malloc(sizeof(struct _fileNode));
     if (L == NULL) {
         print_error(200,NULL,NULL);
     }
@@ -171,26 +162,20 @@ int count_filesList(FileList L)
  * @param L Lista de archivos
  * @param fileName Nombre del archivo a eliminar
  */
-void delete_fileList_file(FileList L, char *fileName)
+void delete_fileList_file(FileList L, FilePosition file)
 {
-    fileName = get_only_fileName(fileName);
-    FilePosition P = L->Next;
-    FilePosition Tmp = L;
-
-    while (P != NULL) {
-        if (strcmp(P->Element.name, fileName) == 0) {
-            free(P->Element.filePath);
-            free(P->Element.name);
-            Tmp->Next = P->Next;
-            free(P);
-            free(fileName);
-            L->fileCount--;
-            return;
-        }
-        Tmp = P;
-        P = P->Next;
+    if(file == NULL){
+        print_error(203, NULL, NULL);
     }
-    print_error(304,fileName,NULL);
+    FilePosition prevNode = find_fileList_prev_file(L, file);
+    if(prevNode == NULL){
+        print_error(301, NULL, NULL);
+        return;
+    }
+    free(file->name);
+    free(file->filePath);
+    prevNode->Next = file->Next;
+    free(file);
 }
 
 /**
@@ -199,16 +184,31 @@ void delete_fileList_file(FileList L, char *fileName)
  * @param L Lista de archivos
  * @param fileName Nombre del archivo a buscar
  */
-/*FilePosition find_fileList_file(FileList L, char* fileName)
+FilePosition find_fileList_file(FileList L, char* fileName)
 {
     FilePosition P = L->Next;
-
-    while (P != NULL && strcmp(P->Element.name, fileName) != 0) {
+    while (P != NULL && strcmp(P->name, fileName) != 0) {
             P = P->Next;
-        }
-
+    }
     return P;
-}*/
+}
+
+/**
+ * @brief Encontrar el archivo anterior a @p File en @p L
+ *
+ * @param L Lista de archivos
+ * @param File Puntero a la estructura que contiene información sobre el archivo
+ * @return Puntero a la estructura que contiene información sobre el archivo
+*/
+FilePosition find_fileList_prev_file(FileList L, FilePosition File)
+{
+    FilePosition aux = L;
+    while (aux != NULL && aux->Next != File)
+    {
+        aux = aux->Next;
+    }
+    return aux;
+}
 
 /**
  * @brief Procesa un archivo para incluirlo en el sistema de busqueda
@@ -220,7 +220,7 @@ void delete_fileList_file(FileList L, char *fileName)
 */
 void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, StopWordsTable stopWords)
 {
-    FILE* file = fopen(fileInfo->Element.filePath, "r");
+    FILE* file = fopen(fileInfo->filePath, "r");
     GraphPosition P = insert_graphNode(fileInfo, graph);
 
     char word[50];
