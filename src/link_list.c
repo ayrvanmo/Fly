@@ -61,7 +61,7 @@ void print_linkList(LinkList linkList) {
     LinkPosition P = linkList_first(linkList);
 
     while (P != NULL) {
-        printf("        Nodo: %s, Peso: %lf\n", P->graphNode->file->Element.name, P->weight);
+        printf("        Nodo: %s, Peso: %lf\n", P->graphNode->file->name, P->weight);
         P = P->next;
     }
 }
@@ -78,7 +78,7 @@ LinkPosition find_linkList_node(LinkList linkList, GraphNode graphNode)
         return NULL;
     }
     LinkPosition P = linkList_first(linkList);
-    while (P != NULL && strcmp(P->graphNode->file->Element.name, graphNode.file->Element.name) != 0) {
+    while (P != NULL && strcmp(P->graphNode->file->name, graphNode.file->name) != 0) {
         P = P->next;
     }
     return P;
@@ -114,7 +114,7 @@ LinkPosition insert_linkList_node(LinkPosition prevPosition, PtrToGraphNode grap
 
     newNode->graphNode = graphNode;
     newNode->weight = weight;
-    
+
     newNode->next = prevPosition->next;
     prevPosition->next = newNode;
     return newNode;
