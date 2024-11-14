@@ -19,8 +19,8 @@ void generarCadenaAleatoria(char *string, int length) {
 /**
  * @brief Función para generar palabras aleatorias
  * @note Función para debug
- * 
- * @return char* 
+ *
+ * @return char*
  */
 char* generate_random_word() {
     int length = rand() % 20 + 1;
@@ -139,4 +139,23 @@ bool is_valid_extension(char* extension)
         }
     }
     return false;
+}
+/**
+ * @brief Funcion para comparar si un valor es mayor o igual a otro
+ * @param a Primer valor
+ * @param b Segundo valor
+ * @return TRUE si @p a es mayor o igual a @p b, FALSE en caso contrario
+*/
+bool increasing(double a, double b){
+    return a <= b;
+}
+
+/**
+ * @brief Funcion para comparar si un valor es menor o igual a otro
+ * @param a Primer valor
+ * @param b Segundo valor
+ * @return TRUE si @p a es menor o igual a @p b, FALSE en caso contrario
+*/
+bool decreasing(double a, double b){
+    return a >= b;
 }

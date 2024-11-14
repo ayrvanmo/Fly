@@ -114,7 +114,7 @@ LinkPosition insert_linkList_node(LinkPosition prevPosition, PtrToGraphNode grap
 
     newNode->graphNode = graphNode;
     newNode->weight = weight;
-    
+
     newNode->next = prevPosition->next;
     prevPosition->next = newNode;
     return newNode;
@@ -233,23 +233,3 @@ unsigned int get_weight(LinkPosition P)
 }
 
 
-// Funciones para usar como parametros
-/**
- * @brief Funcion para comparar si un valor es mayor o igual a otro
- * @param a Primer valor
- * @param b Segundo valor
- * @return TRUE si @p a es mayor o igual a @p b, FALSE en caso contrario
-*/
-bool increasing(double a, double b){
-    return a <= b;
-}
-
-/**
- * @brief Funcion para comparar si un valor es menor o igual a otro
- * @param a Primer valor
- * @param b Segundo valor
- * @return TRUE si @p a es menor o igual a @p b, FALSE en caso contrario
-*/
-bool decreasing(double a, double b){
-    return a >= b;
-}
