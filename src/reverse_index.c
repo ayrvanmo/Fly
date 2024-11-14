@@ -8,8 +8,8 @@
 
 /**
  * @brief Función para inicializar una lista de palabras vacia
- * 
- * @return ReverseIndexList 
+ *
+ * @return ReverseIndexList
  */
 ReverseIndexList init_empty_hashList(){
     ReverseIndexList newList = malloc(sizeof(ReverseIndexNode));
@@ -24,7 +24,7 @@ ReverseIndexList init_empty_hashList(){
 
 /**
  * @brief Función que inicializa una tabla hash
- * 
+ *
  * @param hashTable Tabla hash a inicializar
  * @return ReverseIndexTable
  */
@@ -43,10 +43,10 @@ ReverseIndexTable init_hash_table(){
 
 /**
  * @brief Inserta una palabra en una tabla hash
- * 
+ *
  * @param hashTable Tabla hash a insertar la palabra
  * @param word Palabra a insertar
- * 
+ *
  * @note Se inserta la palabra al inicio de la lista
  */
 void insert_hash(ReverseIndexTable hashTable, char* word){
@@ -60,7 +60,7 @@ void insert_hash(ReverseIndexTable hashTable, char* word){
     unsigned int hash = jenkins_hash(word) % MAX_HASH_TABLE_SIZE;
 
     ReverseIndexList tmpCell;
-    
+
     tmpCell = (ReverseIndexList)malloc(sizeof(ReverseIndexNode));
     if(!tmpCell){
         print_error(200,NULL,NULL);
@@ -73,16 +73,17 @@ void insert_hash(ReverseIndexTable hashTable, char* word){
     strcpy(tmpCell->word, word);
 
     tmpCell->files=create_empty_linkList(NULL);
+    tmpCell->fileNumbers = 0;
 
     tmpCell->next = hashTable[hash].wordList->next;
     hashTable[hash].wordList->next = tmpCell;
-    
+
     hashTable[hash].wordNumber++;
 }
 
 /**
  * @brief Imprime la tabla hash
- * 
+ *
  * @param hashTable Tabla hash
  * @note Ignora los hash que tengan su lista de palabras vacía
  */
@@ -112,10 +113,10 @@ void print_hash_table(ReverseIndexTable hashTable){
 
 /**
  * @brief Función para buscar una palabra en una tabla hash
- * 
+ *
  * @param hashTable Tabla hash
  * @param word Palabra a buscar
- * 
+ *
  * @return ReverseIndexList
  */
 ReverseIndexList search_hash(ReverseIndexTable hashTable, char* word){
@@ -141,7 +142,7 @@ ReverseIndexList search_hash(ReverseIndexTable hashTable, char* word){
 
 /**
  * @brief Encuentra palabra anterior en una lista de palabras asociadas a un hash key
- * 
+ *
  * @param hashTable Tabla hash
  * @param word Palabra a buscar su anterior
  * @return ReverseIndexList
@@ -163,7 +164,7 @@ ReverseIndexList find_previous_hash(ReverseIndexTable hashTable, char* word){
 
 /**
  * @brief Elimina una palabra de la tabla hash
- * 
+ *
  * @param hashTable Tabla hash
  * @param word Palabra a eliminar
  */
@@ -188,7 +189,7 @@ void delete_hash(ReverseIndexTable hashTable, char* word){
 
 /**
  * @brief Libera memoria de la tabla hash en su totalidad
- * 
+ *
  * @param hashTable Tabla hash a liberar memoria
  */
 void delete_hash_table(ReverseIndexTable hashTable){
@@ -210,9 +211,9 @@ void delete_hash_table(ReverseIndexTable hashTable){
 
 /**
  * @brief Mueve una palabra a la primera posición de su lista asociada al hash key
- * 
- * @param hashTable 
- * @param word 
+ *
+ * @param hashTable
+ * @param word
  */
 void move_word_to_front(ReverseIndexTable hashTable, char* word){
     if(!hashTable){
@@ -236,27 +237,30 @@ void move_word_to_front(ReverseIndexTable hashTable, char* word){
 
 /**
  * @brief Inserta un archivo en el índice invertido
- * 
- * @param hashTable 
- * @param file 
- * @param word 
+ *
+ * @param hashTable
+ * @param file
+ * @param word
  */
 void insert_file_to_index(ReverseIndexTable hashTable, PtrToGraphNode file, char* word){
     if(!hashTable){
         print_error(302,NULL,NULL);
         return;
     }
-    
+
     ReverseIndexList search = search_hash(hashTable, word);
     if(search==NULL){;
         insert_hash(hashTable, word);
-        search = search_hash(hashTable, word); 
+        search = search_hash(hashTable, word);
     }
-    else if(find_linkList_node(search->files, *file)){
+
+    if(find_linkList_node(search->files, *file)){
         printf("El archivo '%s' ya se encuentra en la lista de archivos asociados a la palabra '%s'\n", file->file->Element.name, word);
     }
-    insert_linkList_node(search->files, file, 0);
-    search->fileNumbers++;
+    else{
+        insert_linkList_node(search->files, file, 0);
+        search->fileNumbers++;
+    }
 
     return;
 }

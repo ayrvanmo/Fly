@@ -38,19 +38,9 @@ FileList get_files_from_directory(char *directory, FileList list)
                 continue;
             }
 
-            size_t LengthName = strlen(Entry->d_name) + 1;
-            NewFile.name = malloc(LengthName);
-            if (NewFile.name == NULL) {
-                print_error(200,NULL,NULL);
-                continue;
-            }
-
-            strcpy(NewFile.name, Entry->d_name);
             snprintf(NewFile.filePath, routeLength, "%s/%s", directory, Entry->d_name);
             NewFile.id = Entry->d_ino;
-            char* tmp = get_only_fileName(NewFile.filePath);
-            strcpy(NewFile.name, tmp);
-            free(tmp);
+            NewFile.name = get_only_fileName(NewFile.filePath);
             insert_fileList_file(NewFile, list, list);
         }
 
