@@ -11,7 +11,7 @@
  *
  * @return ReverseIndexList
  */
-ReverseIndexList init_empty_hashList(){
+ReverseIndexList init_empty_indexList(){
     ReverseIndexList newList = malloc(sizeof(ReverseIndexNode));
     if(!newList){
         print_error(200,NULL,NULL);
@@ -28,14 +28,14 @@ ReverseIndexList init_empty_hashList(){
  * @param hashTable Tabla hash a inicializar
  * @return ReverseIndexTable
  */
-ReverseIndexTable init_hash_table(){
+ReverseIndexTable init_indexTable(){
     ReverseIndexTable hashTable = malloc(sizeof(struct _ReverseIndexTable)*MAX_HASH_TABLE_SIZE);
     if(!hashTable){
         print_error(200,NULL,NULL);
     }
     /* inicializar la tabla hash */
     for(int i = 0; i < MAX_HASH_TABLE_SIZE; i++){
-        hashTable[i].wordList = init_empty_hashList();
+        hashTable[i].wordList = init_empty_indexList();
         hashTable[i].wordNumber = 0;
     }
     return hashTable;
@@ -49,7 +49,7 @@ ReverseIndexTable init_hash_table(){
  *
  * @note Se inserta la palabra al inicio de la lista
  */
-void insert_hash(ReverseIndexTable hashTable, char* word){
+ReverseIndexList insert_word_to_index(ReverseIndexTable hashTable, char* word){
 
     if(!hashTable){
         print_error(302,NULL,NULL);
@@ -79,6 +79,7 @@ void insert_hash(ReverseIndexTable hashTable, char* word){
     hashTable[hash].wordList->next = tmpCell;
 
     hashTable[hash].wordNumber++;
+    return tmpCell;
 }
 
 /**
@@ -87,7 +88,7 @@ void insert_hash(ReverseIndexTable hashTable, char* word){
  * @param hashTable Tabla hash
  * @note Ignora los hash que tengan su lista de palabras vacía
  */
-void print_hash_table(ReverseIndexTable hashTable){
+void print_hashTable(ReverseIndexTable hashTable){
 
     if(!hashTable){
         print_error(302,NULL,NULL);
@@ -118,8 +119,9 @@ void print_hash_table(ReverseIndexTable hashTable){
  * @param word Palabra a buscar
  *
  * @return ReverseIndexList
+ * @note Devuelve NULL si la palabra no se encuentra
  */
-ReverseIndexList search_hash(ReverseIndexTable hashTable, char* word){
+ReverseIndexList search_word_in_index(ReverseIndexTable hashTable, char* word){
 
     if(!hashTable){
         print_error(302,NULL,NULL);
@@ -131,12 +133,10 @@ ReverseIndexList search_hash(ReverseIndexTable hashTable, char* word){
     ReverseIndexList aux = hashTable[hash].wordList->next;
     while(aux != NULL){
         if(strcmp(aux->word, word) == 0){
-            printf("La palabra %s se encuentra en el hash key %u\n", word, hash);
             return aux;
         }
         aux=aux->next;
     }
-    printf("La palabra %s no se encuentra en ningún hash key\n", word);
     return NULL;
 }
 
@@ -147,7 +147,7 @@ ReverseIndexList search_hash(ReverseIndexTable hashTable, char* word){
  * @param word Palabra a buscar su anterior
  * @return ReverseIndexList
  */
-ReverseIndexList find_previous_hash(ReverseIndexTable hashTable, char* word){
+ReverseIndexList find_previous_index(ReverseIndexTable hashTable, char* word){
 
     unsigned int hash = jenkins_hash(word) % MAX_HASH_TABLE_SIZE;
 
@@ -168,7 +168,7 @@ ReverseIndexList find_previous_hash(ReverseIndexTable hashTable, char* word){
  * @param hashTable Tabla hash
  * @param word Palabra a eliminar
  */
-void delete_hash(ReverseIndexTable hashTable, char* word){
+void delete_index_word(ReverseIndexTable hashTable, char* word){
     if(!hashTable){
         print_error(302,NULL,NULL);
         return;
@@ -176,7 +176,7 @@ void delete_hash(ReverseIndexTable hashTable, char* word){
 
     unsigned int hash = jenkins_hash(word) % MAX_HASH_TABLE_SIZE;
 
-    ReverseIndexList aux = find_previous_hash(hashTable, word);
+    ReverseIndexList aux = find_previous_index(hashTable, word);
     if(aux == NULL){
         return;
     }
@@ -192,7 +192,7 @@ void delete_hash(ReverseIndexTable hashTable, char* word){
  *
  * @param hashTable Tabla hash a liberar memoria
  */
-void delete_hash_table(ReverseIndexTable hashTable){
+void delete_indexTable(ReverseIndexTable hashTable){
     for(int i = 0; i < MAX_HASH_TABLE_SIZE; i++){
         ReverseIndexList aux = hashTable[i].wordList->next;
         while(aux != NULL){
@@ -221,7 +221,7 @@ void move_word_to_front(ReverseIndexTable hashTable, char* word){
         return;
     }
     unsigned int hash = jenkins_hash(word) % MAX_HASH_TABLE_SIZE;
-    ReverseIndexList aux = find_previous_hash(hashTable, word);
+    ReverseIndexList aux = find_previous_index(hashTable, word);
     if(!aux){
         printf("La palabra %s no se encuentra en la tabla hash\n", word);
         return;
@@ -248,10 +248,9 @@ void insert_file_to_index(ReverseIndexTable hashTable, PtrToGraphNode file, char
         return;
     }
 
-    ReverseIndexList search = search_hash(hashTable, word);
+    ReverseIndexList search = search_word_in_index(hashTable, word);
     if(search==NULL){;
-        insert_hash(hashTable, word);
-        search = search_hash(hashTable, word);
+        search=insert_word_to_index(hashTable, word);
     }
 
     if(find_linkList_node(search->files, *file)){
@@ -261,8 +260,6 @@ void insert_file_to_index(ReverseIndexTable hashTable, PtrToGraphNode file, char
         insert_linkList_node(search->files, file, 0);
         search->fileNumbers++;
     }
-
-    return;
 }
 
 
