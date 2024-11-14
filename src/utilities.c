@@ -1,10 +1,54 @@
 /**
  * @file utilities.c
  * @author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
- * @brief Definiciones de funciones de micelania
+ * @brief Definiciones de funciones de miscelania
 */
 
 #include "utilities.h"
+
+
+/**
+ * @brief Funcion para obtener los parametros de la terminal
+ * 
+ * @param argc 
+ * @param argv 
+ * @return char*
+ * 
+ * @note Devuelve NULL si no se quiere/puede ejecutar el programa según lo dado
+ */
+char* get_terminal_parameters(int argc, char **argv){
+    int opt; // Variable para el manejo de opciones
+	int opt_index = 0;
+
+    // estructura para las opciones
+	static struct option long_options[] = {
+        {"help", no_argument, 0, 'h'},
+        {"directory", required_argument, 0, 'd'},
+        {0, 0, 0, 0}
+    };
+
+    while((opt = getopt_long(argc, argv, ":hd:", long_options, &opt_index)) != -1){
+
+		switch(opt){
+			case 'h':
+				printf("fly -d <directorio>      Ejecuta el programa sobre un directorio\n");
+				return NULL;
+                break;
+			case 'd':
+                return optarg;
+                break;
+			case ':':
+                printf("Uso: 'fly -d <directorio>'\n'fly -h' para mostrar ayuda\n");
+				return NULL;
+				break;
+			default:
+				printf("Uso: 'fly -d <directorio>'\n'fly -h' para mostrar ayuda\n");
+                return NULL;
+				break;
+		}
+	}
+    return NULL;
+}
 
 void generarCadenaAleatoria(char *string, int length) {
     const char characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";

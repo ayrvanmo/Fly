@@ -10,7 +10,16 @@
 
 #define MAX 5
 
-int main(){
+int main(int argc, char **argv){
+
+    char* root_dir=get_terminal_parameters(argc, argv);
+    // Obtener los parametros de la terminal
+    if(!root_dir){
+        return -1;
+    }
+    printf("Directorio: %s\n", root_dir);
+
+
      // Prueba de indice invertido
     /* srand(time(NULL));
     ReverseIndexTable hashTable=init_indexTable(); */
@@ -69,27 +78,27 @@ int main(){
 
     //Prueba de lista de archivos
 
-    FileList files = get_files_from_directory("./build/example", NULL);
-    StopWordsTable stopWords = read_stopWord_file("./build/spanish.txt", NULL);
-    ReverseIndexTable reverseIndex = init_indexTable();
-    Graph graph = create_graph(NULL);
+    // FileList files = get_files_from_directory("./build/example", NULL);
+    // StopWordsTable stopWords = read_stopWord_file("./build/spanish.txt", NULL);
+    // ReverseIndexTable reverseIndex = init_indexTable();
+    // Graph graph = create_graph(NULL);
 
-    FilePosition P = files->Next;
+    // FilePosition P = files->Next;
 
-    print_fileList(files);
+    // print_fileList(files);
 
-    while(P != NULL){
-        printf(ANSI_COLOR_BLUE"Archivo: %s\n"ANSI_COLOR_RESET, P->name);
-        process_file(P, graph, reverseIndex, stopWords, files);
-        P = P->Next;
-    }
-    calculate_page_rank(graph);
-    print_graph(graph);
+    // while(P != NULL){
+    //     printf(ANSI_COLOR_BLUE"Archivo: %s\n"ANSI_COLOR_RESET, P->name);
+    //     process_file(P, graph, reverseIndex, stopWords, files);
+    //     P = P->Next;
+    // }
+    // calculate_page_rank(graph);
+    // print_graph(graph);
 
-    delete_stopWordsTable(stopWords);
-    delete_indexTable(reverseIndex);
-    delete_graph(graph);
-    delete_fileList(files);
+    // delete_stopWordsTable(stopWords);
+    // delete_indexTable(reverseIndex);
+    // delete_graph(graph);
+    // delete_fileList(files);
 
     return 0;
 }

@@ -12,7 +12,9 @@
 #include <string.h>
 #include <ctype.h>
 #include <stdbool.h>
+#include <getopt.h>
 #include "errors.h"
+
 
 // Colores para texto
 #define CLEAR_SCREEN "\033[H\033[J"
@@ -23,6 +25,8 @@
 #define ANSI_COLOR_MAGENTA  "\x1b[35m"
 #define ANSI_COLOR_CYAN     "\x1b[36m"
 #define ANSI_COLOR_RESET    "\x1b[0m"
+
+char* get_terminal_parameters(int argc, char **argv);
 
 void generarCadenaAleatoria(char *string, int length);
 char* generate_random_word();
