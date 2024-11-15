@@ -225,6 +225,7 @@ FilePosition find_fileList_prev_file(FileList L, FilePosition File)
 */
 void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, StopWordsTable stopWords, FileList files)
 {
+    // Abrimos archivo y creamos su nodo correspondiente en el grafo
     FILE* file = fopen(fileInfo->filePath, "r");
     GraphPosition P = find_graphNode(fileInfo->name, graph);
     if(!P){
@@ -236,13 +237,16 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
     char word[256];
     char link[1024];
 
+    // Leemos todo el archivo y clasificamos cada palabra/link segun corresponda
     while(fscanf(file, "%s", word) != EOF){
+
+        // Si se leyo un "[[" es el inicio de un link
         if(strstr(word, "[[")){
             strcpy(link, strstr(word, "[[")+2);
-            if(strstr(word, "]]")){
+            if(strstr(word, "]]")){ // Si se leyo un "]]" es el final de un link
                 strstr(link, "]]")[0] = '\0';
             }
-            else{
+            else{ // El link tiene espacios, luego construimos el link leyendo palabras hasta encontrar el "]]"
                 while(fscanf(file, "%s", word) != EOF){
                     strcat(link, " ");
                     strcat(link, word);
@@ -252,10 +256,13 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
                     }
                 }
             }
+            // Obtenemos el nombre del archivo que se va a enlazar, a partir del link encontrado
             char* pointerToFileName = get_only_fileName(link);
-            GraphPosition nodeToLink = find_graphNode(pointerToFileName, graph);
 
+            // Buscamos el nodo que se va a enlazar, que contiene el archivo a enlazar
+            GraphPosition nodeToLink = find_graphNode(pointerToFileName, graph);
             if(nodeToLink == NULL){
+                // En caso de que no exista se revisa si el archivo existe pero si aun no tiene nodo
                 FilePosition fileToLink = find_fileList_file(files, pointerToFileName);
                 printf("Se buscó el archivo: %s\n",pointerToFileName);
                 if(!fileToLink){
@@ -263,20 +270,23 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
                 }
                 nodeToLink = insert_graphNode(fileToLink, graph);
             }
+
+            // Creamos la relación entre el nodo del archivo y el nodo de destino
             create_graph_edge(P, nodeToLink, 1);
             printf("Link con: %s\n",pointerToFileName);
             free(pointerToFileName);
-            continue;
+            continue; // Se proceso un enlace, luego no se hace el proceso para una palabra normal
         }
 
+        // Ajustamos las palabras a minusculas y eliminamos comas puntos y demas
         to_low_case(word);
         remove_punctuation(word);
 
+        // Si la palabra no es stop word, se agrega al reverse index
         if(!is_stopWord(word, stopWords)){
             printf("%s\n", word);
             insert_file_to_index(index, P, word);
         }
-
     }
     fclose(file);
 }
