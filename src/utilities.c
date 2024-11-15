@@ -161,6 +161,10 @@ char* get_only_fileName(char* file){
         if (is_valid_extension(dot_pos + 1)) {
             *dot_pos = '\0'; // Truncamos en el punto para eliminar la extensión
         }
+        else {
+            free(name);
+            return NULL;
+        }
     }
 
     return name;
@@ -173,7 +177,9 @@ char* get_only_fileName(char* file){
 */
 bool is_valid_extension(char* extension)
 {
-    const char* valid_extensions[] = {"txt", "md", "log", "conf", "ini", "cfg", "yaml", "yml", "json", "xml", "csv", "tsv", "sh", "bash", "zsh", "php", "py", "js", "html", "css", "cpp", "c", "h", "java", "sql", "r", "pl", "rb", "go", "rs"};
+    const char* valid_extensions[] = {"txt", "md", "log", "conf", "ini", "cfg", "yaml", "yml", "json", "xml",
+    "csv", "tsv", "sh", "bash", "zsh", "php", "py", "js", "html", "css", "cpp", "c", "h", "java", "sql", "r",
+    "pl", "rb", "go", "rs"};
     size_t extensionNumber = 30;
 
     for (size_t i = 0; i < extensionNumber; i++) {

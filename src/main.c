@@ -36,7 +36,7 @@ int main(int argc, char **argv){
     nodos[3] = insert_graphNode("D", myGrpah);
     nodos[4] = insert_graphNode("E", myGrpah);
 
-    
+
     insert_file_to_index(hashTable, nodos[0], "buenas");
     insert_file_to_index(hashTable, nodos[1], "salut");
     insert_file_to_index(hashTable, nodos[2], "hola");
