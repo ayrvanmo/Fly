@@ -1,0 +1,8 @@
+\babel@toc {spanish}{}\relax 
+\contentsline {section}{\numberline {1}Introduction}{2}{section.1}%
+\contentsline {section}{\numberline {2}Planteamiento del desarrollo del proyecto}{3}{section.2}%
+\contentsline {section}{\numberline {3}Implementación}{4}{section.3}%
+\contentsline {section}{\numberline {4}Gestión del equipo de trabajo}{5}{section.4}%
+\contentsline {section}{\numberline {5}Posibles Mejoras a futuro}{6}{section.5}%
+\contentsline {section}{\numberline {6}Conclusiones}{6}{section.6}%
+\contentsfinish 
