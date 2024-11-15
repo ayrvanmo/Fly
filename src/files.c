@@ -43,8 +43,7 @@ FileList get_files_from_directory(char *directory, FileList list)
             snprintf(entryPath, routeLength, "%s/%s", directory, Entry->d_name);
             entryId = Entry->d_ino;
             entryName = get_only_fileName(entryPath);
-            if(entryName == NULL){
-                print_error(200,NULL,NULL);
+            if (entryName == NULL) {
                 free(entryPath);
                 continue;
             }
@@ -258,7 +257,9 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
             }
             // Obtenemos el nombre del archivo que se va a enlazar, a partir del link encontrado
             char* pointerToFileName = get_only_fileName(link);
-
+            if (pointerToFileName == NULL) {
+                continue;
+            }
             // Buscamos el nodo que se va a enlazar, que contiene el archivo a enlazar
             GraphPosition nodeToLink = find_graphNode(pointerToFileName, graph);
             if(nodeToLink == NULL){

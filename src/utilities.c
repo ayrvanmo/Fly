@@ -127,11 +127,10 @@ void remove_punctuation(char* s1)
 char* get_only_fileName(char* file){
     size_t originalLength = strlen(file);
     // Creamos una copia de la cadena para preservar el original
-    char* name = malloc(sizeof(char) * (originalLength - 1));
+    char* name = malloc(sizeof(char) * (originalLength + 1));
     if(name == NULL){
         print_error(200,NULL,NULL);
     }
-
     // Guardamos en name solamente el contenido despues de la barra '/'
     char* barPosition = strrchr(file, '/');
     if(barPosition != NULL){
@@ -140,6 +139,7 @@ char* get_only_fileName(char* file){
     else{
         strcpy(name, file);
     }
+    //printf("aqui toy\n");
 
     // Eliminar el contenido después del primer '|', si existe
     char* pipe_pos = strchr(name, '|');
@@ -155,12 +155,14 @@ char* get_only_fileName(char* file){
 
     // Encontrar la última aparición de '.' en filename
     char* dot_pos = strrchr(name, '.');
-
     // Si encontramos un punto, lo analizamos
     if (dot_pos && dot_pos != name && dot_pos[1] != '\0') {
         // Verificar si el texto después del punto es una extensión
         if (is_valid_extension(dot_pos + 1)) {
             *dot_pos = '\0'; // Truncamos en el punto para eliminar la extensión
+        }
+        else{
+            return NULL;
         }
     }
 
