@@ -162,6 +162,7 @@ char* get_only_fileName(char* file){
             *dot_pos = '\0'; // Truncamos en el punto para eliminar la extensión
         }
         else{
+            free(name);
             return NULL;
         }
     }

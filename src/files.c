@@ -231,10 +231,10 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
         P = insert_graphNode(fileInfo, graph);
     }
 
-    printf("Archivo %s\n",P->file->name);
+    //printf("Archivo %s\n",P->file->name);
 
-    char word[256];
-    char link[1024];
+    char word[2048];
+    char link[2048];
 
     // Leemos todo el archivo y clasificamos cada palabra/link segun corresponda
     while(fscanf(file, "%s", word) != EOF){
@@ -265,8 +265,9 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
             if(nodeToLink == NULL){
                 // En caso de que no exista se revisa si el archivo existe pero si aun no tiene nodo
                 FilePosition fileToLink = find_fileList_file(files, pointerToFileName);
-                printf("Se buscó el archivo: %s\n",pointerToFileName);
+                //printf("Se buscó el archivo: %s\n",pointerToFileName);
                 if(!fileToLink){
+                    free(pointerToFileName);
                     continue;
                 }
                 nodeToLink = insert_graphNode(fileToLink, graph);
@@ -274,7 +275,7 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
 
             // Creamos la relación entre el nodo del archivo y el nodo de destino
             create_graph_edge(P, nodeToLink, 1);
-            printf("Link con: %s\n",pointerToFileName);
+            //printf("Link con: %s\n",pointerToFileName);
             free(pointerToFileName);
             continue; // Se proceso un enlace, luego no se hace el proceso para una palabra normal
         }
@@ -285,7 +286,7 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
 
         // Si la palabra no es stop word, se agrega al reverse index
         if(!is_stopWord(word, stopWords)){
-            printf("%s\n", word);
+            //printf("%s\n", word);
             insert_file_to_index(index, P, word);
         }
     }
