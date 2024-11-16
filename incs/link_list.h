@@ -15,6 +15,7 @@ typedef PtrToLinkNode LinkList;
 #include <stdlib.h>
 #include <stdbool.h>
 #include <string.h>
+#include <unistd.h>
 #include "errors.h"
 #include "graph.h"
 #include "utilities.h"
@@ -39,6 +40,9 @@ LinkPosition find_linkList_prev_node(LinkPosition P, LinkList linkList);
 LinkPosition insert_linkList_node(LinkPosition prevPosition, PtrToGraphNode graphNode, double weight);
 LinkPosition insert_ordered_linkList_node(bool (*order)(double, double), LinkList linkList, PtrToGraphNode graphNode, double weight);
 void delete_linkList_node(LinkPosition P, LinkList linkList);
+LinkPosition mergeSort_linkList(LinkPosition L);
+LinkPosition merge_linkList(LinkPosition a, LinkPosition b);
+LinkPosition mid_point_linkList(LinkPosition L);
 
 // Funciones de interaccion con el usuario
 LinkPosition linkList_first(LinkList linkList);
@@ -47,9 +51,11 @@ LinkPosition linkList_advance(LinkPosition P);
 PtrToGraphNode get_graphNode(LinkPosition P);
 unsigned int get_weight(LinkPosition P);
 
+
 // Funciones para usar como parametros
 bool increasing(double a, double b);
 bool decreasing(double a, double b);
+
 
 
 #endif
