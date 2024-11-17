@@ -214,80 +214,107 @@ FilePosition find_fileList_prev_file(FileList L, FilePosition File)
     return aux;
 }
 
-/**
- * @brief Procesa un archivo para incluirlo en el sistema de busqueda
- *
- * @param fileInfo Puntero a la estructura que contiene información sobre el archivo
- * @param graph Puntero al grafo en el que se desea insertar el archivo
- * @param index Puntero al indice invertido donde se almacenan las palabras del archivo
- * @param stopWords Puntero al diccionario de stop words
-*/
+
 void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, StopWordsTable stopWords, FileList files)
 {
     // Abrimos archivo y creamos su nodo correspondiente en el grafo
-    FILE* file = fopen(fileInfo->filePath, "r");
+    FILE *file = fopen(fileInfo->filePath, "r");
+    if (file == NULL) {
+        print_error(200, NULL, NULL);
+        return;
+    }
+
     GraphPosition P = find_graphNode(fileInfo->name, graph);
-    if(!P){
+    if (!P) {
         P = insert_graphNode(fileInfo, graph);
     }
 
-    printf("Archivo %s\n",P->file->name);
+    printf("Archivo %s\n", P->file->name);
+
 
     char word[256];
     char link[1024];
 
-    // Leemos todo el archivo y clasificamos cada palabra/link segun corresponda
-    while(fscanf(file, "%s", word) != EOF){
 
-        // Si se leyo un "[[" es el inicio de un link
-        if(strstr(word, "[[")){
-            strcpy(link, strstr(word, "[[")+2);
-            if(strstr(word, "]]")){ // Si se leyo un "]]" es el final de un link
-                strstr(link, "]]")[0] = '\0';
-            }
-            else{ // El link tiene espacios, luego construimos el link leyendo palabras hasta encontrar el "]]"
-                while(fscanf(file, "%s", word) != EOF){
-                    strcat(link, " ");
-                    strcat(link, word);
-                    if(strstr(word, "]]")){
-                        strstr(link, "]]")[0] = '\0';
-                        break;
+    fseek(file, 0, SEEK_END);
+    long fileSize = ftell(file);
+    fseek(file, 0, SEEK_SET);
+
+    char *fsize = malloc(fileSize + 1);
+    if (fsize == NULL) {
+        print_error(200, NULL, NULL);
+        fclose(file);
+        return;
+    }
+    long paragraph_start_position;
+    // Leemos todo el archivo y clasificamos cada palabra/link segun corresponda
+    while (1){
+        paragraph_start_position = ftell(file);
+        fgets(fsize, fileSize + 1, file);
+        char *token;
+        char *aux_ptr;
+        token = strtok_r(fsize, " \n\t", &aux_ptr);
+        while (token != NULL) {
+            strcpy(word, token);
+            long paragraph_byte = paragraph_start_position;
+            // Si se leyo un "[[" es el inicio de un link
+            if (strstr(word, "[[")) {
+                strcpy(link, strstr(word, "[[") + 2);
+                if (strstr(word, "]]")) { // Si se leyo un "]]" es el final de un link
+                    strstr(link, "]]")[0] = '\0';
+                } else { // El link tiene espacios, luego construimos el link leyendo palabras hasta encontrar el "]]"
+                    while (fscanf(file, "%s", word) != EOF) {
+                        strcat(link, " ");
+                        strcat(link, word);
+                        if (strstr(word, "]]")) {
+                            strstr(link, "]]")[0] = '\0';
+                            break;
+                        }
                     }
                 }
-            }
-            // Obtenemos el nombre del archivo que se va a enlazar, a partir del link encontrado
-            char* pointerToFileName = get_only_fileName(link);
-            if (pointerToFileName == NULL) {
-                continue;
-            }
-            // Buscamos el nodo que se va a enlazar, que contiene el archivo a enlazar
-            GraphPosition nodeToLink = find_graphNode(pointerToFileName, graph);
-            if(nodeToLink == NULL){
-                // En caso de que no exista se revisa si el archivo existe pero si aun no tiene nodo
-                FilePosition fileToLink = find_fileList_file(files, pointerToFileName);
-                printf("Se buscó el archivo: %s\n",pointerToFileName);
-                if(!fileToLink){
+                // Obtenemos el nombre del archivo que se va a enlazar, a partir del link encontrado
+                char *pointerToFileName = get_only_fileName(link);
+                if (pointerToFileName == NULL) {
+                    token = strtok_r(NULL, " \n\t", &aux_ptr);
                     continue;
                 }
-                nodeToLink = insert_graphNode(fileToLink, graph);
+                // Buscamos el nodo que se va a enlazar, que contiene el archivo a enlazar
+                GraphPosition nodeToLink = find_graphNode(pointerToFileName, graph);
+                if (nodeToLink == NULL) {
+                    // En caso de que no exista se revisa si el archivo existe pero si aun no tiene nodo
+                    FilePosition fileToLink = find_fileList_file(files, pointerToFileName);
+                    printf("Se buscó el archivo: %s\n", pointerToFileName);
+                    if (!fileToLink) {
+                        free(pointerToFileName);
+                        token = strtok_r(NULL, " \n\t", &aux_ptr);
+                        continue;
+                    }
+                    nodeToLink = insert_graphNode(fileToLink, graph);
+                }
+
+                // Creamos la relación entre el nodo del archivo y el nodo de destino
+                create_graph_edge(P, nodeToLink, 1);
+                printf("Link con: %s\n", pointerToFileName);
+                free(pointerToFileName);
+                token = strtok_r(NULL, " \n\t", &aux_ptr);
+                continue; // Se proceso un enlace, luego no se hace el proceso para una palabra normal
             }
 
-            // Creamos la relación entre el nodo del archivo y el nodo de destino
-            create_graph_edge(P, nodeToLink, 1);
-            printf("Link con: %s\n",pointerToFileName);
-            free(pointerToFileName);
-            continue; // Se proceso un enlace, luego no se hace el proceso para una palabra normal
+            // Ajustamos las palabras a minusculas y eliminamos comas puntos y demas
+            to_low_case(word);
+            remove_punctuation(word);
+
+            // Si la palabra no es stop word, se agrega al reverse index
+            if (!is_stopWord(word, stopWords)) {
+                printf("%s\n", word);
+                insert_file_to_index(index, P, word, paragraph_byte);
+            }
+            token = strtok_r(NULL, " \n\t", &aux_ptr);
         }
-
-        // Ajustamos las palabras a minusculas y eliminamos comas puntos y demas
-        to_low_case(word);
-        remove_punctuation(word);
-
-        // Si la palabra no es stop word, se agrega al reverse index
-        if(!is_stopWord(word, stopWords)){
-            printf("%s\n", word);
-            insert_file_to_index(index, P, word);
+        if(ftell(file) == fileSize){
+            break;
         }
     }
+    free(fsize);
     fclose(file);
 }
