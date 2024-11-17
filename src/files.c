@@ -232,8 +232,8 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
     printf("Archivo %s\n", P->file->name);
 
 
-    char word[256];
-    char link[1024];
+    char word[2048];
+    char link[2048];
 
 
     fseek(file, 0, SEEK_END);

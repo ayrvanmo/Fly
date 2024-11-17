@@ -7,6 +7,7 @@
 #include "graph.h"
 #include "utilities.h"
 #include "page_rank.h"
+#include "timer.h"
 
 #define MAX 5
 
@@ -19,86 +20,88 @@ int main(int argc, char **argv){
     }
     printf("Directorio: %s\n", root_dir);
 
+    Timer timer;
 
-     // Prueba de indice invertido
-    /* srand(time(NULL));
-    ReverseIndexTable hashTable=init_indexTable(); */
+    // Obtener los archivos de la carpeta e inicializar variables
+    Graph graph = create_graph(NULL);
+    ReverseIndexTable reverse_index = init_indexTable(NULL);
+    init_timer(&timer);
+    printf("Listando archivos...\n");
+    FileList files = get_files_from_directory(root_dir, NULL);
 
-    // Prueba de grafo
+    printf("Leyendo stop words...\n");
+    StopWordsTable stop_words = read_stopWord_file("./build/spanish.txt", NULL);
 
-    /**GraphPosition nodos[5];
+    // Procesar los archivos
+    printf("Procesando archivos...\n");
+    FilePosition P = files->Next;
+    while(P != NULL){
+        printf("Archivo: %s\n", P->name);
+        process_file(P, graph, reverse_index, stop_words, files);
+        P = P->Next;
+    }
 
-    Graph myGrpah = create_graph(NULL);
+    // Calculamos el PageRank
+    printf("Calculando PageRank...\n");
+    calculate_page_rank(graph);
 
-    nodos[0] = insert_graphNode("A", myGrpah);
-    nodos[1] = insert_graphNode("B", myGrpah);
-    nodos[2] = insert_graphNode("C", myGrpah);
-    nodos[3] = insert_graphNode("D", myGrpah);
-    nodos[4] = insert_graphNode("E", myGrpah);
+    // Ordenamos las palabras por PageRank
+    printf("Ordenando palabras...\n");
+    for(int i = 0; i < MAX_HASH_TABLE_SIZE; i++){
+        ReverseIndexList aux = reverse_index[i].wordList->next;
+        while(aux != NULL){
+            LinkList toProcess = aux->files;
+            toProcess->next = mergeSort_linkList(toProcess->next);
+            //printf("Lista de archivos para la palabra %s:\n", aux->word);
+            //print_linkList(toProcess);
+            aux=aux->next;
+        }
+    }
+    end_timer(&timer);
+    sleep(1);
+    printf(CLEAR_SCREEN);
 
-
-    insert_file_to_index(hashTable, nodos[0], "buenas");
-    insert_file_to_index(hashTable, nodos[1], "salut");
-    insert_file_to_index(hashTable, nodos[2], "hola");
-    insert_file_to_index(hashTable, nodos[3], "hola");
-    insert_file_to_index(hashTable, nodos[4], "buenas");
-    print_hash_table(hashTable);
-
-
-
-    //liberar
-    delete_indexTable(hashTable);
-    delete_graph(myGrpah);
-    */
-
-
-
-     // Prueba de stop words
-    /* char word[25];
-
-    StopWordsTable stopWords = read_stopWord_file("./spanish.txt", NULL);
-
-    printf("exit para salir\n");
+    // Interaccion con el usuario
     while(1)
     {
-        printf("Ingrese una palabra: ");
-        scanf("%s", word);
+        printf("\n\n\tIngrese una palabra: ");
+        char word[500];
+        if(scanf("%s", word) != 1)
+        {
+            printf("Error: No se pudo leer la palabra\n");
+            break;
+        }
+
+        to_low_case(word);
+        remove_punctuation(word);
+
         if(strcmp(word, "exit") == 0){
             break;
         }
-        if(is_stopWord(word, stopWords)){
+
+        if(is_stopWord(word, stop_words)){
             printf("Palabra %s es un stop word\n", word);
+            continue;
         }
-        else{
-            printf("Palabra %s no es un stop word\n", word);
+
+        ReverseIndexList search = search_word_in_index(reverse_index, word);
+        if(search == NULL){
+            printf("Palabra %s no encontrada\n", word);
+            continue;
+        }
+
+        LinkList files = search->files->next;
+        while(files != NULL){
+            printf("Archivo: %s - %lf\n", files->graphNode->file->name, files->graphNode->pageRank);
+            files = files->next;
         }
     }
 
-    delete_stopWordsTable(stopWords);*/
 
-    //Prueba de lista de archivos
-
-    // FileList files = get_files_from_directory("./build/example", NULL);
-    // StopWordsTable stopWords = read_stopWord_file("./build/spanish.txt", NULL);
-    // ReverseIndexTable reverseIndex = init_indexTable();
-    // Graph graph = create_graph(NULL);
-
-    // FilePosition P = files->Next;
-
-    // print_fileList(files);
-
-    // while(P != NULL){
-    //     printf(ANSI_COLOR_BLUE"Archivo: %s\n"ANSI_COLOR_RESET, P->name);
-    //     process_file(P, graph, reverseIndex, stopWords, files);
-    //     P = P->Next;
-    // }
-    // calculate_page_rank(graph);
-    // print_graph(graph);
-
-    // delete_stopWordsTable(stopWords);
-    // delete_indexTable(reverseIndex);
-    // delete_graph(graph);
-    // delete_fileList(files);
+    delete_stopWordsTable(stop_words);
+    delete_indexTable(reverse_index);
+    delete_graph(graph);
+    delete_fileList(files);
 
     return 0;
 }
