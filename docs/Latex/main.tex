@@ -1,5 +1,7 @@
 \documentclass[9pt,letterpaper,onecolumn]{rho-class/rho}
 \usepackage[spanish,es-nodecimaldot,es-noindentfirst]{babel}
+\usepackage{graphicx}
+\usepackage{float}
 \setlength{\parindent}{0pt}  % Elimina la sangría
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
@@ -66,6 +68,7 @@
 %----------------------------------------------------------
 
 \begin{abstract}
+    En el presente informe se presentará un sistema de recuperación de información tipo motor de búsqueda, el cual indexa documentos web con hipervínculos a otros documentos a través de las técnicas de índice invertido y PageRank.
 \end{abstract}
 
 %----------------------------------------------------------
@@ -82,7 +85,9 @@
 
 
     \newpage
-    \input{src/sections/introduction.tex}
+    \input{src/sections/introduccion.tex}
+    \newpage
+    \input{src/sections/objetivos.tex}
     \newpage
     \input{src/sections/desarrollo.tex}
     \newpage
