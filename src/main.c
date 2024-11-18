@@ -60,36 +60,33 @@ int main(int argc, char **argv){
     sleep(1);
     printf(CLEAR_SCREEN);
     char *token = NULL;
-
+    char *aux_ptr;
 
     // Interaccion con el usuario
     while(1)
     {
-
         printf(CLEAR_SCREEN);
         printf("\tIngrese una palabra (exit para terminar): ");
         char word[500];
+
         if(fgets(word, sizeof(word), stdin) == NULL)
-        {
+         {
             print_error(204,NULL,NULL);
             break;
-        }
-
+         }
 
         // Remover el caracter de nueva línea
-        word[strcspn(word, "\n")] = '\0';
-
+         word[strcspn(word, "\n")] = '\0';
         if(word[0] == '\0'){
             //print_error(306, NULL, NULL);
-            //sleep(1);
             continue;
-        }
+         }
 
-        if((token = strtok(word, " \t")) == NULL){
+        if((token = strtok_r(word, " \t", &aux_ptr)) == NULL){
             //print_error(306, NULL, NULL);
             continue;
         }
-        char *next_token = strtok(NULL, " \t");
+        char *next_token = strtok_r(NULL, " \t", &aux_ptr);
         if(next_token != NULL){
             print_error(307, NULL, NULL);
             sleep(1);
@@ -113,6 +110,7 @@ int main(int argc, char **argv){
         if(is_stopWord(word, stop_words)){
             printf("    Palabra %s es un stop word\n", word);
             sleep(1);
+            fflush(stdin);
             continue;
         }
 
@@ -120,6 +118,7 @@ int main(int argc, char **argv){
         if(search == NULL){
             printf("    Palabra %s no encontrada\n", word);
             sleep(1);
+            fflush(stdin);
             continue;
         }
         else{
