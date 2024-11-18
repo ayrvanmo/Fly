@@ -8,8 +8,7 @@
 
 /**
  * @brief Función para inicializar una lista de palabras vacia
- *
- * @return ReverseIndexList
+ * @return ReverseIndexList Lista de palabras vacia
  */
 ReverseIndexList init_empty_indexList(){
     ReverseIndexList newList = malloc(sizeof(ReverseIndexNode));
@@ -24,7 +23,6 @@ ReverseIndexList init_empty_indexList(){
 
 /**
  * @brief Función que inicializa una tabla hash
- *
  * @param hashTable Tabla hash a inicializar
  * @return ReverseIndexTable
  */
@@ -43,10 +41,8 @@ ReverseIndexTable init_indexTable(){
 
 /**
  * @brief Inserta una palabra en una tabla hash
- *
  * @param hashTable Tabla hash a insertar la palabra
  * @param word Palabra a insertar
- *
  * @note Se inserta la palabra al inicio de la lista
  */
 ReverseIndexList insert_word_to_index(ReverseIndexTable hashTable, char* word){
@@ -86,7 +82,6 @@ ReverseIndexList insert_word_to_index(ReverseIndexTable hashTable, char* word){
 
 /**
  * @brief Imprime la tabla hash
- *
  * @param hashTable Tabla hash
  * @note Ignora los hash que tengan su lista de palabras vacía
  */
@@ -116,10 +111,8 @@ void print_hashTable(ReverseIndexTable hashTable){
 
 /**
  * @brief Función para buscar una palabra en una tabla hash
- *
  * @param hashTable Tabla hash
  * @param word Palabra a buscar
- *
  * @return ReverseIndexList
  * @note Devuelve NULL si la palabra no se encuentra
  */
@@ -144,7 +137,6 @@ ReverseIndexList search_word_in_index(ReverseIndexTable hashTable, char* word){
 
 /**
  * @brief Encuentra palabra anterior en una lista de palabras asociadas a un hash key
- *
  * @param hashTable Tabla hash
  * @param word Palabra a buscar su anterior
  * @return ReverseIndexList
@@ -166,7 +158,6 @@ ReverseIndexList find_previous_index(ReverseIndexTable hashTable, char* word){
 
 /**
  * @brief Elimina una palabra de la tabla hash
- *
  * @param hashTable Tabla hash
  * @param word Palabra a eliminar
  */
@@ -191,7 +182,6 @@ void delete_index_word(ReverseIndexTable hashTable, char* word){
 
 /**
  * @brief Libera memoria de la tabla hash en su totalidad
- *
  * @param hashTable Tabla hash a liberar memoria
  */
 void delete_indexTable(ReverseIndexTable hashTable){
@@ -213,8 +203,7 @@ void delete_indexTable(ReverseIndexTable hashTable){
 
 /**
  * @brief Mueve una palabra a la primera posición de su lista asociada al hash key
- *
- * @param hashTable
+ * @param hashTable Tabla hash dada
  * @param word
  */
 void move_word_to_front(ReverseIndexTable hashTable, char* word){
@@ -239,10 +228,9 @@ void move_word_to_front(ReverseIndexTable hashTable, char* word){
 
 /**
  * @brief Inserta un archivo en el índice invertido
- *
- * @param hashTable
- * @param file
- * @param word
+ * @param hashTable Tabla hash dada
+ * @param file Archivo a insertar
+ * @param word Palabra a insertar
  */
 void insert_file_to_index(ReverseIndexTable hashTable, PtrToGraphNode file, char* word, long byte){
     if(!hashTable){
@@ -267,10 +255,4 @@ void insert_file_to_index(ReverseIndexTable hashTable, PtrToGraphNode file, char
         insert_sentenceList_node(positionNode->sentenceList, byte);
     }
 }
-
-
-
-
-
-
 

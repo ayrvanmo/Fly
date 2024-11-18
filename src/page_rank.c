@@ -12,7 +12,7 @@
  */
 void calculate_page_rank(Graph rankGraph)
 {
-    printf("Calculando PageRank\n");
+    //printf("Calculando PageRank\n");
     double diff = FRONTIER; // Diferencia entre los page rank
     double noLinks;// Valor de los nodos que no cuentan con enlaces incidentes
     double N = 0; // Cantidad de nodos
@@ -81,5 +81,5 @@ void calculate_page_rank(Graph rankGraph)
             }
         }
     }
-    printf("PageRank calculado\n");
+    //printf("PageRank calculado\n");
 }

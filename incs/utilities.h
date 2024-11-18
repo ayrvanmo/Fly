@@ -26,11 +26,8 @@
 #define ANSI_COLOR_CYAN     "\x1b[36m" //5
 #define ANSI_COLOR_RESET    "\x1b[0m"
 
+
 char* get_terminal_parameters(int argc, char **argv);
-
-void generarCadenaAleatoria(char *string, int length);
-char* generate_random_word();
-
 // Para cadenas de caracteres
 void to_low_case(char* s1);
 void remove_punctuation(char* s1);

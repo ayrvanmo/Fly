@@ -1,7 +1,7 @@
 /**
  * @file reverse_index.h
  * @author Franco Aguilar, Milton Hernández, Iván Mansilla, Ayrton Morrison
- * @brief Cabecera relacionada a funciones de índice invertido
+ * @brief Cabecera relacionada a funciones de índice invertido (reverse_index.c)
  */
 
 #ifndef REVERSE_INDEX_H

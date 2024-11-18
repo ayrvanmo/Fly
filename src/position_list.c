@@ -232,8 +232,7 @@ void delete_sentenceList(SentenceList sentenceList)
     }
     SentencePosition aux = sentenceList->next;
     while(aux != NULL){
-        sentenceList->next = aux->next;
-        free(aux);
+        delete_sentenceList_node(aux, sentenceList);
         aux = sentenceList->next;
     }
     free(sentenceList);
@@ -304,8 +303,8 @@ SentencePosition find_sentenceList_element(SentenceList sentenceList, long byte)
 }
 
 /**
- * @brief Funcion para ordenar una lista de enlaces
- * @param L Lista de enlaces
+ * @brief Funcion para ordenar una lista de posiciones
+ * @param L Lista de posiciones
  * @return La lista ordenada
  * @note Esta funcion debe recibir el PRIMER(->next) elemento de la lista, NO el centinela
 */
@@ -329,7 +328,7 @@ PositionList mergeSort_positionList(PositionList L)
 
 /**
  * @brief Funcion para encontrar el punto medio de una lista
- * @param L Lista de enlaces
+ * @param L Lista de posiciones
  * @return el punto medio de la lista
 */
 PositionLocation mid_point_positionList(PositionLocation L)
@@ -383,4 +382,41 @@ PositionLocation merge_positionList(PositionLocation a, PositionLocation b)
     PositionLocation result = tmpCell->next;
     free(tmpCell); // Libera el nodo temporal
     return result;
+}
+
+/**
+ * @brief Funcion que encuentra el nodo previo a uno dado en una lista de oraciones
+ * @param P Posicion dada
+ * @param sentenceList Lista dada
+ * @return SentencePosition Retorna la posicion previa
+ */
+SentencePosition find_sentenceList_prev_node(SentencePosition P, SentenceList sentenceList)
+{
+    if(P == NULL){
+        print_error(203, NULL, NULL);
+    }
+    SentencePosition prevNode = sentenceList;
+    while (prevNode->next != P) {
+        prevNode = prevNode->next;
+    }
+    return prevNode;
+}
+
+/**
+ * @brief Funcion para eliminar un nodo de una lista de oraciones
+ * @param P Nodo a eliminar
+ * @param sentenceList Lista dada
+ */
+void delete_sentenceList_node(SentencePosition P, SentenceList sentenceList)
+{
+    if(P == NULL){
+        print_error(203, NULL, NULL);
+    }
+    SentencePosition prevNode = find_sentenceList_prev_node(P, sentenceList);
+    if(prevNode == NULL){
+        print_error(301, NULL, NULL);
+        return;
+    }
+    prevNode->next = P->next;
+    free(P);
 }

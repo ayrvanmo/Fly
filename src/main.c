@@ -93,8 +93,6 @@ int main(int argc, char **argv){
             show_coincidences(reverse_index, word);
         }
     }
-
-
     delete_stopWordsTable(stop_words);
     delete_indexTable(reverse_index);
     delete_graph(graph);

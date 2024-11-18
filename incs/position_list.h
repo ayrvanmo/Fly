@@ -1,7 +1,7 @@
 /**
  * file position_list.h
  * author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
- * brief Archivo de cabecera para position_list
+ * brief Archivo de cabecera para position_list (position_list.c)
 */
 
 #ifndef POSITION_LIST_H
@@ -71,6 +71,8 @@ PtrToGraphNode get_position_graphNode(PositionLocation P);
 SentenceList create_empty_sentenceList(SentenceList sentenceList);
 SentencePosition insert_sentenceList_node(SentencePosition prevPosition, long byte);
 SentencePosition find_sentenceList_element(SentenceList sentenceList, long byte);
+SentencePosition find_sentenceList_prev_node(SentencePosition P, SentenceList sentenceList);
+void delete_sentenceList_node(SentencePosition P, SentenceList sentenceList);
 void delete_sentenceList(SentenceList sentenceList);
 void print_sentenceList(SentenceList sentenceList);
 bool is_empty_sentenceList(SentenceList sentenceList);

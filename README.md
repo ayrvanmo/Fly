@@ -32,10 +32,21 @@ Este proyecto tiene como objetivo la creación de un sistema avanzado de recuper
 ### Fases
 
 #### Semana 1:
-- [ ] Investigación del concepto de `pageRank` (Ayrton)
-- [ ] Investigar el concepto de `Índice invertido` y su funcionamiento (Iván)
-- [ ] Implementación de la estructura del grafo de archivos con una lista de adyacencias (Milton)
-- [ ] Encontrar una manera de obtener referencias a los archivos de un directorio y sus subdirectorios mediante `dirent.h` (Franco)
-
-## Asignación de roles
-Sección Pendiente (se revisará luego de la primera semana)
+- [X] Investigación del concepto de `pageRank` (Ayrton)
+- [X] Investigar el concepto de `Índice invertido` y su funcionamiento (Iván)
+- [X] Implementación de la estructura del grafo de archivos con una lista de adyacencias (Milton)
+- [X] Encontrar una manera de obtener referencias a los archivos de un directorio y sus subdirectorios mediante `dirent.h` (Franco)
+#### Semana 2:
+- [X] Implementacion `pageRank` (Ayrton)
+- [X] Implementar `Índice invertido`(Iván)
+- [X] Implementación de la estructura del grafo de archivos con una lista de adyacencias (Milton)
+- [X] Implementar archivos relacionados a las archivos dentro de directorios y subdirectorios mediante`dirent.h` (Franco)
+#### Semana 3:
+- [X] Implementar listas de posiciones y oraciones para una correcta implmentacion por pantalla (Ayrton)
+- [X] Resolver errores y trabajar informe(Iván)
+- [X] Resolucion de errores y casos limite (Milton)
+- [X] Trabajar en el informe y apoyar en la resolucion de errores (Franco)
+#### Recta final
+- [X] Ensamblar el programa principal
+- [ ] Resolver casos limites
+- [ ] Finalizar informe

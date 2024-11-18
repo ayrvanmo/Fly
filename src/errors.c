@@ -7,7 +7,6 @@
 
 /**
  * @brief Funcion para imprimir un error
- *
  * @param num Codigo de error
  * @param target Algun parametro que puede ser necesario para el error
  * @param obs Algun texto que puede acompanhar el error

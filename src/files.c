@@ -1,8 +1,12 @@
+/**
+ * @file files.c
+ * @author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
+ * @brief Funciones para manejo de archivos
+*/
 #include "files.h"
 
 /**
  * @brief Consigue los archivos de un directorio
- *
  * @param directory Directorio donde comienza la busqueda
  * @param list Lista de archivos
  * @return Lista de archivos
@@ -70,7 +74,6 @@ FileList get_files_from_directory(char *directory, FileList list)
 
 /**
  * @brief Inserta un archivo en la lista de archivos
- *
  * @param L Lista en la que se desea insertar el archivo
  * @param Prev Nodo previo al que se desea insertar el archivo
  * @param filePath Ruta del archivo
@@ -98,7 +101,6 @@ FilePosition insert_fileList_file(FileList L, FilePosition Prev, char* filePath,
 
 /**
  * @brief imprime la lista de archivos
- *
  * @param L Lista de archivos
  */
 void print_fileList(FileList L)
@@ -115,7 +117,6 @@ void print_fileList(FileList L)
 
 /**
  * @brief Elimina la lista de archivos
- *
  * @param L Lista de archivos
  */
 void delete_fileList(FileList L)
@@ -131,7 +132,6 @@ void delete_fileList(FileList L)
 
 /**
  * @brief Crea una lista de archivos vacia
- *
  * @param L Lista de archivos
  */
 FileList make_empty_fileList(FileList L)
@@ -150,9 +150,7 @@ FileList make_empty_fileList(FileList L)
 
 /**
  * @brief numero de archivos en la lista de archivos
- *
  * @param L Lista de archivos
- *
  * @return numero de archivos
  */
 int count_filesList(FileList L)
@@ -162,7 +160,6 @@ int count_filesList(FileList L)
 
 /**
  * @brief Elimina un archivo de la lista de archivos
- *
  * @param L Lista de archivos
  * @param fileName Nombre del archivo a eliminar
  */
@@ -184,7 +181,6 @@ void delete_fileList_file(FileList L, FilePosition file)
 
 /**
  * @brief Encuentra un archivo en la lista de archivos
- *
  * @param L Lista de archivos
  * @param fileName Nombre del archivo a buscar
  */
@@ -199,7 +195,6 @@ FilePosition find_fileList_file(FileList L, char* fileName)
 
 /**
  * @brief Encontrar el archivo anterior a @p File en @p L
- *
  * @param L Lista de archivos
  * @param File Puntero a la estructura que contiene información sobre el archivo
  * @return Puntero a la estructura que contiene información sobre el archivo
@@ -214,7 +209,14 @@ FilePosition find_fileList_prev_file(FileList L, FilePosition File)
     return aux;
 }
 
-
+/**
+ * @brief Funcion que procesa un archivo
+ * @param fileInfo Información del archivo
+ * @param graph Grafo dado
+ * @param index Tabla de índices invertidos
+ * @param stopWords Tabla de palabras que no se deben considerar
+ * @param files Lista de archivos
+ */
 void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, StopWordsTable stopWords, FileList files)
 {
     // Abrimos archivo y creamos su nodo correspondiente en el grafo
@@ -229,12 +231,10 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
         P = insert_graphNode(fileInfo, graph);
     }
 
-    printf("Archivo %s\n", P->file->name);
-
+    //printf("Archivo %s\n", P->file->name);
 
     char word[2048];
     char link[2048];
-
 
     fseek(file, 0, SEEK_END);
     long fileSize = ftell(file);

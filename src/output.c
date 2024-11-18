@@ -4,10 +4,13 @@
  * @brief Funciones para manejo de entrega de datos por pantalla
 */
 
-
 #include "output.h"
 
-
+/**
+ * @brief Muestra las coincidencias de una palabra en los archivos
+ * @param indexTable Tabla de índices invertidos
+ * @param asked_word Palabra a buscar
+ */
 void show_coincidences(ReverseIndexTable indexTable, char *asked_word)
 {
     printf(CLEAR_SCREEN);
@@ -74,6 +77,12 @@ void show_coincidences(ReverseIndexTable indexTable, char *asked_word)
     }while(id_elegido != 0);
 }
 
+/**
+ * @brief Imprime los párrafos de un archivo que contienen una palabra
+ * @param file Archivo en el que se buscará
+ * @param bytes Byte en el que se encuentra la palabra
+ * @param asked_word Palabra buscada
+ */
 void print_file_paragraphs(FilePosition file, SentenceList bytes, char *asked_word)
 {
     FILE *to_search_file = fopen(file->filePath, "r");
@@ -109,9 +118,5 @@ void print_file_paragraphs(FilePosition file, SentenceList bytes, char *asked_wo
 
     fclose(to_search_file);
     free(buffer);
-    // IDEAS PARA LA FUNCION
-    // 1. AGARRAR UN ARCHIVO ABIERTO, DEBIDO A QUE PUEDE IMPRIMIR MAS DE UN PARAGRAPH
-    // 2. LEER EL ARCHIVO E IMPRIMIR EL ARCHIVO HASTA EL PRIMER SALTO DE LINEA
-    // 3. IMPRIMIR EL PARAGRAPH QUE CONTIENE LA PALABRA BUSCADA
-    // 4. RESALTAR LA PALABRA BUSCADA
+
 }

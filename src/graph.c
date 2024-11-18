@@ -301,7 +301,6 @@ GraphPosition insert_graphNode(FilePosition file, Graph graph)
 
 /**
  * @brief Busca un nodo en el grafo basado en el nombre del archivo que contiene
- *
  * @param name Nombre del archivo a buscar
  * @param graph Grafo en el que se busca el nodo de nombre @p name
 */

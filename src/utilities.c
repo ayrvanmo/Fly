@@ -9,11 +9,9 @@
 
 /**
  * @brief Funcion para obtener los parametros de la terminal. Devuelve el directorio en donde se ejecutara el programa
- * 
- * @param argc 
- * @param argv 
- * @return char*
- * 
+ * @param argc Cantidad de argumentos
+ * @param argv Argumentos
+ * @return char* Directorio en donde se ejecutara el programa
  * @note Devuelve NULL si no se quiere/puede ejecutar el programa según lo dado
  */
 char* get_terminal_parameters(int argc, char **argv){
@@ -51,39 +49,8 @@ char* get_terminal_parameters(int argc, char **argv){
     return NULL;
 }
 
-void generarCadenaAleatoria(char *string, int length) {
-    const char characters[] = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    int numCaracteres = sizeof(characters) - 1;
-
-    for (int i = 0; i < length; i++) {
-        string[i] = characters[rand() % numCaracteres];
-    }
-    string[length] = '\0'; // Agrega el terminador de cadena
-}
-
-/**
- * @brief Función para generar palabras aleatorias
- * @note Función para debug
- *
- * @return char*
- */
-char* generate_random_word() {
-    int length = rand() % 20 + 1;
-    char* word = (char*)malloc(length + 1);
-    if (!word) {
-        printf("Error: No se pudo asignar memoria para la palabra generada\n");
-        return NULL;
-    }
-    for (int i = 0; i < length; i++) {
-        word[i] = 'a' + rand() % 26;
-    }
-    word[length] = '\0';
-    return word;
-}
-
 /**
  * @brief Funcion para convertir una cadena de caracteres a minusculas
- *
  * @param s1 Cadena de caracteres
  * @warning Esta funcion no funciona con caracteres no ASCII
 */
@@ -95,7 +62,6 @@ void to_low_case(char* s1)
 
 /**
  * @brief Elimina los signos de puntuacion que acompannan una cadena de caracteres
- *
  * @param s1 Cadena de caracteres a afectar
 */
 void remove_punctuation(char* s1)
@@ -118,9 +84,7 @@ void remove_punctuation(char* s1)
 
 /**
  * @brief conserva solo el nombre del archivo sin extension
- *
  * @param file Nombre del archivo
- *
  * @return Nombre del archivo sin extension
  * @warning Esta funcion retorna un puntero con memoria reservada, debe liberarse fuera de esta funcion
 */

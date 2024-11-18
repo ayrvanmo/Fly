@@ -1,8 +1,13 @@
+/**
+ * @file timer.c
+ * @author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
+ * @brief Funciones relacionadas a temporizador
+ */
+
 # include "timer.h"
 
 /**
  * @brief inicializa el temporizador
- *
  * @param timer Puntero al struct del temporizador
  */
 void init_timer(Timer* timer)
@@ -15,7 +20,6 @@ void init_timer(Timer* timer)
 
 /**
  * @brief pausa el temporizador
- *
  * @param timer Puntero al struct del temporizador
  */
 void pause_timer(Timer* timer)
@@ -30,7 +34,6 @@ void pause_timer(Timer* timer)
 
 /**
  * @brief reanuda el temporizador
- *
  * @param timer Puntero al struct del temporizador
  */
 void resume_timer(Timer* timer)
@@ -44,7 +47,6 @@ void resume_timer(Timer* timer)
 
 /**
  * @brief finaliza el temporizador
- *
  * @param timer Puntero al struct del temporizador
  */
 void end_timer(Timer* timer)
@@ -57,7 +59,6 @@ void end_timer(Timer* timer)
 
 /**
  * @brief imprime el tiempo del temporizador
- *
  * @param timer Puntero al struct del temporizador
  */
 void print_timer(Timer* timer)
