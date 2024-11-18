@@ -59,10 +59,13 @@ int main(int argc, char **argv){
     end_timer(&timer);
     sleep(1);
     printf(CLEAR_SCREEN);
+    char *token = NULL;
+
 
     // Interaccion con el usuario
     while(1)
     {
+
         printf(CLEAR_SCREEN);
         printf("\tIngrese una palabra (exit para terminar): ");
         char word[500];
@@ -72,14 +75,18 @@ int main(int argc, char **argv){
             break;
         }
 
+
         // Remover el caracter de nueva línea
         word[strcspn(word, "\n")] = '\0';
 
-        // Verificar si hay mas de una palabra
-        char *token = strtok(word, " \t");
-        if(token == NULL){
-            print_error(306, NULL, NULL);
-            sleep(1);
+        if(word[0] == '\0'){
+            //print_error(306, NULL, NULL);
+            //sleep(1);
+            continue;
+        }
+
+        if((token = strtok(word, " \t")) == NULL){
+            //print_error(306, NULL, NULL);
             continue;
         }
         char *next_token = strtok(NULL, " \t");
@@ -91,6 +98,7 @@ int main(int argc, char **argv){
 
         // Se reactualiza la palabra
         strcpy(word, token);
+        token = NULL;
 
         to_low_case(word);
         remove_punctuation(word);
@@ -117,6 +125,7 @@ int main(int argc, char **argv){
         else{
             show_coincidences(reverse_index, word);
         }
+
     }
     delete_stopWordsTable(stop_words);
     delete_indexTable(reverse_index);
