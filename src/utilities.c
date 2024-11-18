@@ -67,18 +67,19 @@ void to_low_case(char* s1)
 void remove_punctuation(char* s1)
 {
     // Removemos caracteres iniciales
-    /* if(s1[0] == '¡' || s1[0] == '¿' || s1[0] == '“'){
+    while(s1[0] == '*'){
         // Desplazar toda la cadena un carácter a la izquierda
         for (int i = 0; s1[i] != '\0'; i++) {
             s1[i] = s1[i + 1];
         }
-    } */
+    }
 
     // Removemos caracteres finales
     int length = strlen(s1);
-    if(s1[length - 1] == '!' || s1[length - 1] == '?' || s1[length - 1] == ',' || s1[length - 1] == '.' || s1[length - 1] == ';' || s1[length - 1] == ':'){
+    while(s1[length - 1] == '!' || s1[length - 1] == '?' || s1[length - 1] == ',' || s1[length - 1] == '.' || s1[length - 1] == ';' || s1[length - 1] == ':' || s1[length - 1] == '*'){
         // Eliminamos el ultimo carácter
         s1[length - 1] = '\0';
+        length = strlen(s1);
     }
 }
 

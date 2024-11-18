@@ -81,12 +81,14 @@ int main(int argc, char **argv){
 
         if(is_stopWord(word, stop_words)){
             printf("Palabra %s es un stop word\n", word);
+            sleep(1);
             continue;
         }
 
         ReverseIndexList search = search_word_in_index(reverse_index, word);
         if(search == NULL){
             printf("Palabra %s no encontrada\n", word);
+            sleep(1);
             continue;
         }
         else{

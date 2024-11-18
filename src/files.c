@@ -231,7 +231,7 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
         P = insert_graphNode(fileInfo, graph);
     }
 
-    //printf("Archivo %s\n", P->file->name);
+    // printf(ANSI_COLOR_BLUE"Archivo %s\n"ANSI_COLOR_RESET, P->file->name);
 
     char word[2048];
     char link[2048];
@@ -251,10 +251,12 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
     while (1){
         paragraph_start_position = ftell(file);
         fgets(fsize, fileSize + 1, file);
+        // printf(ANSI_COLOR_RED"A procesar "ANSI_COLOR_RESET"%s\n", fsize);
         char *token;
         char *aux_ptr;
         token = strtok_r(fsize, " \n\t", &aux_ptr);
         while (token != NULL) {
+            // printf(ANSI_COLOR_GREEN"%s"ANSI_COLOR_RESET"\n", token);
             strcpy(word, token);
             long paragraph_byte = paragraph_start_position;
             // Si se leyo un "[[" es el inicio de un link
@@ -263,15 +265,18 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
                 if (strstr(word, "]]")) { // Si se leyo un "]]" es el final de un link
                     strstr(link, "]]")[0] = '\0';
                 } else { // El link tiene espacios, luego construimos el link leyendo palabras hasta encontrar el "]]"
-                    while (fscanf(file, "%s", word) != EOF) {
+                    // printf(ANSI_COLOR_YELLOW"Buscando "ANSI_COLOR_RESET"final de link\n");
+                    while (token != NULL) {
                         strcat(link, " ");
                         strcat(link, word);
                         if (strstr(word, "]]")) {
                             strstr(link, "]]")[0] = '\0';
                             break;
                         }
+                        token = strtok_r(NULL, " \n\t", &aux_ptr);
                     }
                 }
+                // printf(ANSI_COLOR_MAGENTA"%s"ANSI_COLOR_RESET"\n", link);
                 // Obtenemos el nombre del archivo que se va a enlazar, a partir del link encontrado
                 char *pointerToFileName = get_only_fileName(link);
                 if (pointerToFileName == NULL) {
@@ -283,7 +288,7 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
                 if (nodeToLink == NULL) {
                     // En caso de que no exista se revisa si el archivo existe pero si aun no tiene nodo
                     FilePosition fileToLink = find_fileList_file(files, pointerToFileName);
-                    printf("Se buscó el archivo: %s\n", pointerToFileName);
+                    //printf("Se buscó el archivo: %s\n", pointerToFileName);
                     if (!fileToLink) {
                         free(pointerToFileName);
                         token = strtok_r(NULL, " \n\t", &aux_ptr);
@@ -294,7 +299,7 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
 
                 // Creamos la relación entre el nodo del archivo y el nodo de destino
                 create_graph_edge(P, nodeToLink, 1);
-                printf("Link con: %s\n", pointerToFileName);
+                //printf("Link con: %s\n", pointerToFileName);
                 free(pointerToFileName);
                 token = strtok_r(NULL, " \n\t", &aux_ptr);
                 continue; // Se proceso un enlace, luego no se hace el proceso para una palabra normal
@@ -306,7 +311,7 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
 
             // Si la palabra no es stop word, se agrega al reverse index
             if (!is_stopWord(word, stopWords)) {
-                printf("%s\n", word);
+                // printf("%s\n", word);
                 insert_file_to_index(index, P, word, paragraph_byte);
             }
             token = strtok_r(NULL, " \n\t", &aux_ptr);
