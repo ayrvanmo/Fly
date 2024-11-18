@@ -64,7 +64,10 @@ void print_positionList(PositionList positionList) {
     PositionLocation P = positionList_first(positionList);
 
     while (P != NULL) {
-        printf("        Nodo: "); // COMPLETAR FUNCION
+        printf("Nodo de archivo: %s\n", P->graphNode->file->name);
+        printf("    coincidencias = %d\n", P->coincidences);
+        printf("    Lista de oraciones:\n");
+        print_sentenceList(P->sentenceList);
         P = P->next;
     }
 }
@@ -75,13 +78,13 @@ void print_positionList(PositionList positionList) {
  * @param graphNode Nodo de grafo que se desea buscar en la lista
  * @return Puntero al nodo si se encuentra, NULL en caso contrario
 */
-PositionLocation find_positionList_node(PositionList positionList, GraphNode graphNode)
+PositionLocation find_positionList_node(PositionList positionList, GraphPosition graphNode)
 {
     if(is_empty_positionList(positionList)){
         return NULL;
     }
     PositionLocation P = positionList_first(positionList);
-    while (P != NULL && strcmp(P->graphNode->file->name, graphNode.file->name) != 0) {
+    while (P != NULL && strcmp(P->graphNode->file->name, graphNode->file->name) != 0) {
         P = P->next;
     }
     return P;
@@ -107,7 +110,6 @@ PositionLocation find_positionList_prev_node(PositionLocation P, PositionList po
 /**
  * @brief Inserta un nodo en una lista de posiciones
  * @param prevPosition Nodo anterior al que se desea insertar
- * @param graphNode Nodo de grafo a insertar
  * @return PositionLocation Puntero al nuevo nodo insertado
  */
 PositionLocation insert_positionList_node(PositionLocation prevPosition, PtrToGraphNode graphNode)
@@ -116,11 +118,15 @@ PositionLocation insert_positionList_node(PositionLocation prevPosition, PtrToGr
     if(newNode == NULL){
         print_error(200, NULL, NULL);
     }
-
-    newNode->graphNode = graphNode;
+    //printf("Insertando nodo en lista de posiciones\n");
     newNode->next = prevPosition->next;
+    //printf("Cambiando punteros{1}\n");
     prevPosition->next = newNode;
-    newNode->sentenceList = create_empty_sentenceList(newNode->sentenceList);
+    //printf("Cambiando punteros{2}\n");
+    newNode->sentenceList = create_empty_sentenceList(NULL);
+    newNode->coincidences = 0;
+    newNode->graphNode = graphNode;
+    //printf("Cambiando punteros{3}\n");
     return newNode;
 }
 
@@ -139,7 +145,7 @@ void delete_positionList_node(PositionLocation P, PositionList positionList)
         print_error(301, NULL, NULL);
         return;
     }
-    delete_sentenceList(positionList->sentenceList);
+    delete_sentenceList(P->sentenceList);
     prevNode->next = P->next;
     free(P);
 }
@@ -210,7 +216,8 @@ SentenceList create_empty_sentenceList(SentenceList sentenceList)
     if(newList == NULL){
         print_error(200, NULL, NULL);
     }
-    newList->next = NULL; 
+    newList->byte = 0;
+    newList->next = NULL;
     return newList;
 }
 
@@ -225,6 +232,8 @@ void delete_sentenceList(SentenceList sentenceList)
     }
     SentencePosition aux = sentenceList->next;
     while(aux != NULL){
+        sentenceList->next = aux->next;
+        free(aux);
         aux = sentenceList->next;
     }
     free(sentenceList);
@@ -245,14 +254,17 @@ bool is_empty_sentenceList(SentenceList sentenceList)
  * @param prevPosition Nodo anterior al que se desea insertar
  * @return Puntero al nuevo nodo insertado
  */
-SentencePosition insert_sentenceList_node(SentencePosition prevPosition)
+SentencePosition insert_sentenceList_node(SentencePosition prevPosition, long byte)
 {
     SentencePosition newNode = (SentencePosition) malloc(sizeof(struct _sentenceListNode));
     if(newNode == NULL){
         print_error(200, NULL, NULL);
     }
-
+    //printf("Insertando oracion en byte: %ld\n", byte);
+    newNode->byte = byte;
+    //printf("Cambiando punteros{1}\n");
     newNode->next = prevPosition->next;
+    //printf("Cambiando punteros{2}\n");
     prevPosition->next = newNode;
     return newNode;
 }
@@ -262,10 +274,14 @@ SentencePosition insert_sentenceList_node(SentencePosition prevPosition)
  */
 void print_sentenceList(SentenceList sentenceList)
 {
-    SentencePosition P = sentenceList->next;
+    if (sentenceList == NULL || sentenceList->next == NULL) {
+        printf("La lista de oraciones está vacía.\n");
+        return;
+    }
 
+    SentencePosition P = sentenceList->next;
     while (P != NULL) {
-        printf("        Byte: %ld\n", P->byte);
+        printf("    Byte: %ld\n", P->byte);
         P = P->next;
     }
 }
@@ -287,3 +303,84 @@ SentencePosition find_sentenceList_element(SentenceList sentenceList, long byte)
     return P;
 }
 
+/**
+ * @brief Funcion para ordenar una lista de enlaces
+ * @param L Lista de enlaces
+ * @return La lista ordenada
+ * @note Esta funcion debe recibir el PRIMER(->next) elemento de la lista, NO el centinela
+*/
+PositionList mergeSort_positionList(PositionList L)
+{
+    if (L == NULL || L->next == NULL) {
+        return L;
+    }
+
+    PositionLocation middle = mid_point_positionList(L);
+    if (middle == NULL) return L;
+
+    PositionLocation nextOfMiddle = middle->next;
+    middle->next = NULL;
+
+    PositionLocation a = mergeSort_positionList(L);
+    PositionLocation b = mergeSort_positionList(nextOfMiddle);
+
+    return merge_positionList(a, b);
+}
+
+/**
+ * @brief Funcion para encontrar el punto medio de una lista
+ * @param L Lista de enlaces
+ * @return el punto medio de la lista
+*/
+PositionLocation mid_point_positionList(PositionLocation L)
+{
+    if (L == NULL) return NULL;
+
+    PositionLocation slow = L;
+    PositionLocation fast = L;
+
+    while (fast->next != NULL && fast->next->next != NULL) {
+        slow = slow->next;
+        fast = fast->next->next;
+    }
+    return slow;
+}
+
+/**
+ * @brief Funcion (iterativa) para fusionar dos listas ordenadas
+ * @param a lista a
+ * @param b lista b
+ * @return retorna Lista Ordenada (a,b)
+*/
+PositionLocation merge_positionList(PositionLocation a, PositionLocation b)
+{
+    // Caso base: si una de las listas está vacía, retorna la otra
+    if (a == NULL) return b;
+    if (b == NULL) return a;
+
+    // Nodo temporal para construir la lista resultante
+    PositionLocation tmpCell = malloc(sizeof(*tmpCell));
+    PositionLocation tail = tmpCell; // Puntero para recorrer y construir la lista
+
+    while (a != NULL && b != NULL) {
+        if (a->graphNode->pageRank >= b->graphNode->pageRank) {
+            tail->next = a;
+            a = a->next;
+        } else {
+            tail->next = b;
+            b = b->next;
+        }
+        tail = tail->next;
+    }
+
+    // Agrega cualquier nodo restante en las listas
+    if (a != NULL) {
+        tail->next = a;
+    } else {
+        tail->next = b;
+    }
+
+    PositionLocation result = tmpCell->next;
+    free(tmpCell); // Libera el nodo temporal
+    return result;
+}

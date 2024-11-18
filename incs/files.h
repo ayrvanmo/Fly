@@ -21,6 +21,8 @@ typedef PtrToFileNode FilePosition;
 #include "stop_words.h"
 #include "errors.h"
 #include "utilities.h"
+#include "output.h"
+#include "position_list.h"
 
 /** \struct _fileNode
  *  @brief Estructura que representa una lista de archivos
@@ -43,6 +45,6 @@ int count_filesList(FileList L);
 void delete_fileList_file(FileList L, FilePosition file);
 FilePosition find_fileList_file(FileList L, char* fileName);
 FilePosition find_fileList_prev_file(FileList L, FilePosition File);
-void process_file(FilePosition file, Graph graph, ReverseIndexTable index, StopWordsTable stopWords, FileList files);
+void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, StopWordsTable stopWords, FileList files);
 
 #endif

@@ -72,9 +72,11 @@ ReverseIndexList insert_word_to_index(ReverseIndexTable hashTable, char* word){
     }
     strcpy(tmpCell->word, word);
 
-    tmpCell->files=create_empty_linkList(NULL);
+    //printf("Insertando palabra{1} %s\n", tmpCell->word);
+    tmpCell->files=create_empty_positionList(NULL);
     tmpCell->fileNumbers = 0;
 
+    //printf("Insertando palabra{2} %s\n", tmpCell->word);
     tmpCell->next = hashTable[hash].wordList->next;
     hashTable[hash].wordList->next = tmpCell;
 
@@ -105,9 +107,9 @@ void print_hashTable(ReverseIndexTable hashTable){
         printf("[HASH %u] - CANTIDAD PALABRAS: %d\n", i,hashTable[i].wordNumber);
         while(aux){
             printf("   %d. %s [archivos: %d]\n",j, aux->word, aux->fileNumbers);
-            print_linkList(aux->files);
-            j++;
+            print_positionList(aux->files);
             aux = aux->next;
+            j++;
         }
     }
 }
@@ -198,7 +200,7 @@ void delete_indexTable(ReverseIndexTable hashTable){
         while(aux != NULL){
             ReverseIndexList tmp = aux->next;
             free(aux->word);
-            delete_linkList(aux->files);
+            delete_positionList(aux->files);
             free(aux);
             aux = tmp;
         }
@@ -242,7 +244,7 @@ void move_word_to_front(ReverseIndexTable hashTable, char* word){
  * @param file
  * @param word
  */
-void insert_file_to_index(ReverseIndexTable hashTable, PtrToGraphNode file, char* word){
+void insert_file_to_index(ReverseIndexTable hashTable, PtrToGraphNode file, char* word, long byte){
     if(!hashTable){
         print_error(302,NULL,NULL);
         return;
@@ -252,13 +254,17 @@ void insert_file_to_index(ReverseIndexTable hashTable, PtrToGraphNode file, char
     if(search==NULL){;
         search=insert_word_to_index(hashTable, word);
     }
-
-    if(find_linkList_node(search->files, *file)){
-        //printf("El archivo '%s' ya se encuentra en la lista de archivos asociados a la palabra '%s'\n", file->file->name, word);
+    //printf("Insertando archivo %s\n", file->file->name);
+    PositionLocation positionNode = find_positionList_node(search->files, file);
+    if(!positionNode){
+        //printf("Insertando nodo de archivo %s\n", file->file->name);
+        positionNode = insert_positionList_node(search->files, file);
     }
-    else{
-        insert_linkList_node(search->files, file, 0);
-        search->fileNumbers++;
+
+    positionNode->coincidences++;
+    if(!find_sentenceList_element(positionNode->sentenceList, byte)){
+        //printf("Insertando byte %ld\n", byte);
+        insert_sentenceList_node(positionNode->sentenceList, byte);
     }
 }
 

@@ -8,6 +8,7 @@
 #include "utilities.h"
 #include "page_rank.h"
 #include "timer.h"
+#include "position_list.h"
 
 #define MAX 5
 
@@ -18,8 +19,6 @@ int main(int argc, char **argv){
     if(!root_dir){
         return -1;
     }
-    printf("Directorio: %s\n", root_dir);
-
     Timer timer;
 
     // Obtener los archivos de la carpeta e inicializar variables
@@ -50,8 +49,8 @@ int main(int argc, char **argv){
     for(int i = 0; i < MAX_HASH_TABLE_SIZE; i++){
         ReverseIndexList aux = reverse_index[i].wordList->next;
         while(aux != NULL){
-            LinkList toProcess = aux->files;
-            toProcess->next = mergeSort_linkList(toProcess->next);
+            PositionList toProcess = aux->files;
+            toProcess->next = mergeSort_positionList(toProcess->next);
             //printf("Lista de archivos para la palabra %s:\n", aux->word);
             //print_linkList(toProcess);
             aux=aux->next;
@@ -64,7 +63,8 @@ int main(int argc, char **argv){
     // Interaccion con el usuario
     while(1)
     {
-        printf("\n\n\tIngrese una palabra: ");
+        printf(CLEAR_SCREEN);
+        printf("\tIngrese una palabra (exit para terminar): ");
         char word[500];
         if(scanf("%s", word) != 1)
         {
@@ -89,11 +89,8 @@ int main(int argc, char **argv){
             printf("Palabra %s no encontrada\n", word);
             continue;
         }
-
-        LinkList files = search->files->next;
-        while(files != NULL){
-            printf("Archivo: %s - %lf\n", files->graphNode->file->name, files->graphNode->pageRank);
-            files = files->next;
+        else{
+            show_coincidences(reverse_index, word);
         }
     }
 
@@ -102,6 +99,5 @@ int main(int argc, char **argv){
     delete_indexTable(reverse_index);
     delete_graph(graph);
     delete_fileList(files);
-
     return 0;
 }

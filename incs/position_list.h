@@ -26,6 +26,7 @@ typedef PtrToSentenceListNode SentenceList;
 #include "graph.h"
 #include "utilities.h"
 
+#define MAX_NAME 30
 
 /** \struct _positionListNode
  * @brief Estructura para manejar una lista de enlaces a nodos de un grafo
@@ -51,10 +52,14 @@ PositionList create_empty_positionList(PositionList positionList);
 void delete_positionList(PositionList positionList);
 bool is_empty_positionList(PositionList positionList);
 void print_positionList(PositionList positionList);
-PositionLocation find_positionList_node(PositionList positionList, GraphNode graphNode);
+PositionLocation find_positionList_node(PositionList positionList, GraphPosition graphNode);
 PositionLocation find_positionList_prev_node(PositionLocation P, PositionList positionList);
 PositionLocation insert_positionList_node(PositionLocation prevPosition, PtrToGraphNode graphNode);
+PositionLocation head_positionList(PositionList positionList);
 void delete_positionList_node(PositionLocation P, PositionList positionList);
+PositionList mergeSort_positionList(PositionList L);
+PositionList merge_positionList(PositionList a, PositionList b);
+PositionList mid_point_positionList(PositionList L);
 
 // Funciones de interaccion con el usuario
 PositionLocation positionList_first(PositionList positionList);
@@ -64,7 +69,7 @@ PtrToGraphNode get_position_graphNode(PositionLocation P);
 
 // Funciones relacionadas a la lista de oraciones
 SentenceList create_empty_sentenceList(SentenceList sentenceList);
-SentencePosition insert_sentenceList_node(SentencePosition prevPosition);
+SentencePosition insert_sentenceList_node(SentencePosition prevPosition, long byte);
 SentencePosition find_sentenceList_element(SentenceList sentenceList, long byte);
 void delete_sentenceList(SentenceList sentenceList);
 void print_sentenceList(SentenceList sentenceList);
