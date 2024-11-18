@@ -66,28 +66,51 @@ int main(int argc, char **argv){
         printf(CLEAR_SCREEN);
         printf("\tIngrese una palabra (exit para terminar): ");
         char word[500];
-        if(scanf("%s", word) != 1)
+        if(fgets(word, sizeof(word), stdin) == NULL)
         {
-            printf("Error: No se pudo leer la palabra\n");
+            print_error(204,NULL,NULL);
             break;
         }
+
+        // Remover el caracter de nueva línea
+        word[strcspn(word, "\n")] = '\0';
+
+        // Verificar si hay mas de una palabra
+        char *token = strtok(word, " \t");
+        if(token == NULL){
+            print_error(306, NULL, NULL);
+            sleep(1);
+            continue;
+        }
+        char *next_token = strtok(NULL, " \t");
+        if(next_token != NULL){
+            print_error(307, NULL, NULL);
+            sleep(1);
+            continue;
+        }
+
+        // Se reactualiza la palabra
+        strcpy(word, token);
 
         to_low_case(word);
         remove_punctuation(word);
 
         if(strcmp(word, "exit") == 0){
+            printf(CLEAR_SCREEN);
+            printf("Saliendo de Fly...");
+            sleep(1);
             break;
         }
 
         if(is_stopWord(word, stop_words)){
-            printf("Palabra %s es un stop word\n", word);
+            printf("    Palabra %s es un stop word\n", word);
             sleep(1);
             continue;
         }
 
         ReverseIndexList search = search_word_in_index(reverse_index, word);
         if(search == NULL){
-            printf("Palabra %s no encontrada\n", word);
+            printf("    Palabra %s no encontrada\n", word);
             sleep(1);
             continue;
         }
