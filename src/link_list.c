@@ -1,7 +1,7 @@
 /**
- * file link_list.h
- * author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
- * brief Funciones para el manejo de una lista de enlaces a nodos de un grafo
+ * @file link_list.h
+ * @author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
+ * @brief Funciones para el manejo de una lista de enlaces a nodos de un grafo
 */
 
 #include "link_list.h"

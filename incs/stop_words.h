@@ -1,7 +1,7 @@
 /**
- * file stop_words.h
- * author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
- * brief Archivo de cabecera para stop words (stop_words.c)
+ * @file stop_words.h
+ * @author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
+ * @brief Cabeceras para funciones de stop_words.c
 */
 #ifndef STOP_WORDS_H
 #define STOP_WORDS_H

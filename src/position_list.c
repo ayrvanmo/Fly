@@ -1,7 +1,7 @@
 /**
- * file position_list.h
- * author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
- * brief Funciones para el manejo de una lista de posciones de palabras
+ * @file position_list.h
+ * @author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
+ * @brief Funciones para el manejo de una lista de posciones de palabras
 */
 
 #include "position_list.h"

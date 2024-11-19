@@ -1,0 +1,230 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.2 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{ynt/global//global/global}
+    \entry{PageRankArticle}{online}{}
+      \name{author}{2}{}{%
+        {{hash=ade8269d287e9c1531e4a1cbad0b4b82}{%
+           family={Brin},
+           familyi={B\bibinitperiod},
+           given={Sergey},
+           giveni={S\bibinitperiod}}}%
+        {{hash=5ca20489809aaab392f875d6bc785086}{%
+           family={Page},
+           familyi={P\bibinitperiod},
+           given={Lawrence},
+           giveni={L\bibinitperiod}}}%
+      }
+      \strng{namehash}{67f006a7ae882b83a187215c4e9bdf2f}
+      \strng{fullhash}{67f006a7ae882b83a187215c4e9bdf2f}
+      \strng{bibnamehash}{67f006a7ae882b83a187215c4e9bdf2f}
+      \strng{authorbibnamehash}{67f006a7ae882b83a187215c4e9bdf2f}
+      \strng{authornamehash}{67f006a7ae882b83a187215c4e9bdf2f}
+      \strng{authorfullhash}{67f006a7ae882b83a187215c4e9bdf2f}
+      \field{sortinit}{1}
+      \field{sortinithash}{4f6aaa89bab872aa0999fec09ff8e98a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{The Anatomy of a Large-Scale Hypertextual Web Search Engine}
+      \field{year}{1998}
+      \verb{urlraw}
+      \verb http://infolab.stanford.edu/~backrub/google.html
+      \endverb
+      \verb{url}
+      \verb http://infolab.stanford.edu/~backrub/google.html
+      \endverb
+    \endentry
+    \entry{FuncionesDir}{online}{}
+      \name{author}{1}{}{%
+        {{hash=a633da8dd7883f422e57e787ae95a8ae}{%
+           family={Pasky},
+           familyi={P\bibinitperiod}}}%
+      }
+      \strng{namehash}{a633da8dd7883f422e57e787ae95a8ae}
+      \strng{fullhash}{a633da8dd7883f422e57e787ae95a8ae}
+      \strng{bibnamehash}{a633da8dd7883f422e57e787ae95a8ae}
+      \strng{authorbibnamehash}{a633da8dd7883f422e57e787ae95a8ae}
+      \strng{authornamehash}{a633da8dd7883f422e57e787ae95a8ae}
+      \strng{authorfullhash}{a633da8dd7883f422e57e787ae95a8ae}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Funciones opendir, readdir y closedir en C}
+      \field{urlday}{3}
+      \field{urlmonth}{11}
+      \field{urlyear}{2024}
+      \field{year}{2009}
+      \field{urldateera}{ce}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://pasky.wordpress.com/2009/08/05/funciones-opendir-readdir-y-closedir-en-c/
+      \endverb
+      \verb{url}
+      \verb https://pasky.wordpress.com/2009/08/05/funciones-opendir-readdir-y-closedir-en-c/
+      \endverb
+    \endentry
+    \entry{Dirent.h}{online}{}
+      \name{author}{1}{}{%
+        {{hash=42031852e681de52c24bcef998e6a340}{%
+           family={Pasniuk},
+           familyi={P\bibinitperiod},
+           given={Rodrigo},
+           giveni={R\bibinitperiod}}}%
+      }
+      \strng{namehash}{42031852e681de52c24bcef998e6a340}
+      \strng{fullhash}{42031852e681de52c24bcef998e6a340}
+      \strng{bibnamehash}{42031852e681de52c24bcef998e6a340}
+      \strng{authorbibnamehash}{42031852e681de52c24bcef998e6a340}
+      \strng{authornamehash}{42031852e681de52c24bcef998e6a340}
+      \strng{authorfullhash}{42031852e681de52c24bcef998e6a340}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Directorios y Ficheros en C – Linux}
+      \field{urlday}{1}
+      \field{urlmonth}{11}
+      \field{urlyear}{2024}
+      \field{year}{2013}
+      \field{urldateera}{ce}
+      \verb{urlraw}
+      \verb https://www.programacion.com.py/escritorio/c/directorios-y-ficheros-en-c-linux
+      \endverb
+      \verb{url}
+      \verb https://www.programacion.com.py/escritorio/c/directorios-y-ficheros-en-c-linux
+      \endverb
+    \endentry
+    \entry{IntroduccionPageRank}{online}{}
+      \name{author}{1}{}{%
+        {{hash=fb9542cb213638fe386d4f39aacd5b37}{%
+           family={Pedroche},
+           familyi={P\bibinitperiod},
+           given={Francisco},
+           giveni={F\bibinitperiod}}}%
+      }
+      \strng{namehash}{fb9542cb213638fe386d4f39aacd5b37}
+      \strng{fullhash}{fb9542cb213638fe386d4f39aacd5b37}
+      \strng{bibnamehash}{fb9542cb213638fe386d4f39aacd5b37}
+      \strng{authorbibnamehash}{fb9542cb213638fe386d4f39aacd5b37}
+      \strng{authornamehash}{fb9542cb213638fe386d4f39aacd5b37}
+      \strng{authorfullhash}{fb9542cb213638fe386d4f39aacd5b37}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Una introducción al algoritmo PageRank}
+      \field{year}{2016}
+      \verb{urlraw}
+      \verb https://www.bellera.cat/joomla/images/1617/batx/google/fpedrochev4sema.pdf
+      \endverb
+      \verb{url}
+      \verb https://www.bellera.cat/joomla/images/1617/batx/google/fpedrochev4sema.pdf
+      \endverb
+    \endentry
+    \entry{SpanishStopWords}{online}{}
+      \name{author}{1}{}{%
+        {{hash=8091a2fad99f8e5fdf6fc1a23b459e5e}{%
+           family={C.},
+           familyi={C\bibinitperiod},
+           given={Mauricio\bibnamedelima Matias},
+           giveni={M\bibinitperiod\bibinitdelim M\bibinitperiod}}}%
+      }
+      \strng{namehash}{8091a2fad99f8e5fdf6fc1a23b459e5e}
+      \strng{fullhash}{8091a2fad99f8e5fdf6fc1a23b459e5e}
+      \strng{bibnamehash}{8091a2fad99f8e5fdf6fc1a23b459e5e}
+      \strng{authorbibnamehash}{8091a2fad99f8e5fdf6fc1a23b459e5e}
+      \strng{authornamehash}{8091a2fad99f8e5fdf6fc1a23b459e5e}
+      \strng{authorfullhash}{8091a2fad99f8e5fdf6fc1a23b459e5e}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{stop-words}
+      \field{year}{2022}
+      \verb{urlraw}
+      \verb https://github.com/Alir3z4/stop-words/blob/master/spanish.txt
+      \endverb
+      \verb{url}
+      \verb https://github.com/Alir3z4/stop-words/blob/master/spanish.txt
+      \endverb
+      \warn{\item online entry 'SpanishStopWords' (rho.bib): Invalid format '2024-30-10' of date field 'urldate' - ignoring}
+    \endentry
+    \entry{PageRankVideo}{misc}{}
+      \name{author}{1}{}{%
+        {{hash=af871399931f8d4c6b86ffdd620125c4}{%
+           family={Cabezón},
+           familyi={C\bibinitperiod},
+           given={Eduardo\bibnamedelima Sáenz},
+           giveni={E\bibinitperiod\bibinitdelim S\bibinitperiod},
+           prefix={de},
+           prefixi={d\bibinitperiod}}}%
+      }
+      \strng{namehash}{af871399931f8d4c6b86ffdd620125c4}
+      \strng{fullhash}{af871399931f8d4c6b86ffdd620125c4}
+      \strng{bibnamehash}{af871399931f8d4c6b86ffdd620125c4}
+      \strng{authorbibnamehash}{af871399931f8d4c6b86ffdd620125c4}
+      \strng{authornamehash}{af871399931f8d4c6b86ffdd620125c4}
+      \strng{authorfullhash}{af871399931f8d4c6b86ffdd620125c4}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{PAGE RANK | El algoritmo matemático que hizo a GOOGLE dominar el mundo}
+      \field{year}{2024}
+      \verb{urlraw}
+      \verb https://www.youtube.com/watch?v=b3fwA3EWCd8&t=387s
+      \endverb
+      \verb{url}
+      \verb https://www.youtube.com/watch?v=b3fwA3EWCd8&t=387s
+      \endverb
+    \endentry
+    \entry{SolrTutorialIndexado}{online}{}
+      \name{author}{1}{}{%
+        {{hash=f9619d981023833df88714d6f0c5f7a2}{%
+           family={Tutorial},
+           familyi={T\bibinitperiod},
+           given={Solr},
+           giveni={S\bibinitperiod}}}%
+      }
+      \strng{namehash}{f9619d981023833df88714d6f0c5f7a2}
+      \strng{fullhash}{f9619d981023833df88714d6f0c5f7a2}
+      \strng{bibnamehash}{f9619d981023833df88714d6f0c5f7a2}
+      \strng{authorbibnamehash}{f9619d981023833df88714d6f0c5f7a2}
+      \strng{authornamehash}{f9619d981023833df88714d6f0c5f7a2}
+      \strng{authorfullhash}{f9619d981023833df88714d6f0c5f7a2}
+      \field{sortinit}{2}
+      \field{sortinithash}{8b555b3791beccb63322c22f3320aa9a}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{title}{Indexado en Solr}
+      \field{year}{2024}
+      \true{nocite}
+      \verb{urlraw}
+      \verb https://solrtutorial.es/indexado-solr.html
+      \endverb
+      \verb{url}
+      \verb https://solrtutorial.es/indexado-solr.html
+      \endverb
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+

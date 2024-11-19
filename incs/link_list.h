@@ -1,7 +1,7 @@
 /**
- * file link_list.h
- * author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
- * brief Archivo de cabecera para LinkList (link_list.c)
+ * @file link_list.h
+ * @author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
+ * @brief Cabeceras para funciones de link_list.c
 */
 
 #ifndef LINK_LIST_H

@@ -1,7 +1,7 @@
 /**
  * @file errors.h
  * @author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
- * @brief Funciones para manejo de errores (errors.c)
+ * @brief Cabeceras para funciones de errors.c
 */
 #ifndef ERRORS_H
 #define ERRORS_H

@@ -60,7 +60,7 @@ int main(int argc, char **argv){
     sleep(1);
     printf(CLEAR_SCREEN);
     char *token = NULL;
-    char *aux_ptr;
+    char *auxPtr;
 
     // Interaccion con el usuario
     while(1)
@@ -82,12 +82,12 @@ int main(int argc, char **argv){
             continue;
          }
 
-        if((token = strtok_r(word, " \t", &aux_ptr)) == NULL){
+        if((token = strtok_r(word, " \t", &auxPtr)) == NULL){
             //print_error(306, NULL, NULL);
             continue;
         }
-        char *next_token = strtok_r(NULL, " \t", &aux_ptr);
-        if(next_token != NULL){
+        char *nextToken = strtok_r(NULL, " \t", &auxPtr);
+        if(nextToken != NULL){
             print_error(307, NULL, NULL);
             sleep(1);
             continue;

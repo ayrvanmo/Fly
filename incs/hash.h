@@ -1,7 +1,7 @@
 /**
- * file hash.h
- * author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
- * brief Archivo de cabecera para hashing (hash.c)
+ * @file hash.h
+ * @author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
+ * @brief Cabeceras para funciones de hash.c
 */
 #ifndef HASH
 #define HASH

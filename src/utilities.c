@@ -6,7 +6,6 @@
 
 #include "utilities.h"
 
-
 /**
  * @brief Funcion para obtener los parametros de la terminal. Devuelve el directorio en donde se ejecutara el programa
  * @param argc Cantidad de argumentos

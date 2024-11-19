@@ -1,7 +1,7 @@
 /**
- * file position_list.h
- * author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
- * brief Archivo de cabecera para position_list (position_list.c)
+ * @file position_list.h
+ * @author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
+ * @brief Cabeceras para funciones de position_list.c
 */
 
 #ifndef POSITION_LIST_H

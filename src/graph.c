@@ -1,11 +1,9 @@
 /**
- * file graph.c
- * author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
- * brief Funciones relacionadas con el grafo de archivos
+ * @file graph.c
+ * @author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
+ * @brief Funciones relacionadas con el grafo de archivos
 */
 #include "graph.h"
-
-// Funciones de lista de nodos
 
 /**
  * @brief Funcion para crear una lista de nodos

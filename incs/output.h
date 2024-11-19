@@ -1,7 +1,7 @@
 /**
- * @file output.c
+ * @file output.h
  * @author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
- * @brief Archivo de cabezera para output (output.c)
+ * @brief Archivo de cabezera para output.c
 */
 
 

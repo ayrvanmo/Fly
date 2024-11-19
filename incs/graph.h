@@ -1,7 +1,7 @@
 /**
- * file graph.h
- * author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
- * brief Archivo de cabecera para grafos (graph.c)
+ * @file graph.h
+ * @author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
+ * @brief Cabeceras para funciones de graph.c
 */
 #ifndef GRAPH_H
 #define GRAPH_H

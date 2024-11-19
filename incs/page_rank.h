@@ -1,7 +1,7 @@
 /**
  * @file page_rank.h
  * @author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
- * @brief Cabezeras para funcion de pagerank (page_rank.c)
+ * @brief Cabezeras para funcion de page_rank.c
  */
 
 #ifndef PAGE_RANK_H

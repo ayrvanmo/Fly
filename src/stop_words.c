@@ -1,7 +1,7 @@
 /**
- * file stop_words.c
- * author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
- * brief Funciones relacionadas con el diccionario de stop words
+ * @file stop_words.c
+ * @author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
+ * @brief Funciones relacionadas con el diccionario de stop words
 */
 #include "stop_words.h"
 

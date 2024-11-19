@@ -1,5 +1,45 @@
-# FlySearch
-Autores: Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
+# Documentación general de Fly
+
+## Autores
+Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
+
+## Ejecución del programa
+Para ejecutar el programa, se debe seguir los siguientes pasos:
+1. Clonar el repositorio
+2. Generar las carpetas necesarias con el comando 'make folders'
+3. Compilar el programa con el comando 'make'
+4. Entrar al directorio 'build' y ejecutar el programa con el comando './fly -d [directorio]'
+
+### Otros comandos
+- 'make clean': Borra los archivos generados por el programa
+- 'doxygen': Genera la documentación del código
+
+## Manejo de errores
+Dentro del archivo [errors.c](src/errors.c) se encuentra la función `print_error` que se encarga de manejar los errores que puedan ocurrir en el programa. Los códigos de error que se manejan son los siguientes:
+| Código de error | Descripción |
+| --- | --- |
+| 100 | No se pudo leer el archivo |
+| 200 | No hay memoria disponible |
+| 201 | No se pudo acceder al sistema |
+| 202 | Cantidad invalida, la cantidad ingresada debe ser mayor a 0 |
+| 203 | Acceso a puntero nulo |
+| 204 | No se pudo leer la palabra |
+| 300 | Lista vacía |
+| 301 | Nodo no encontrado |
+| 302 | Tabla hash no existe |
+| 303 | No se encontro el enlace |
+| 304 | No se encontro el archivo |
+| 305 | No se pudo abrir el directorio |
+| 306 | No se ingreso ninguna palabra |
+| 307 | Debe ingresar una palabra única |
+
+Donde:
+- 100 - 199 corresponden a errores comunes
+- 200 - 299 corresponden a errores fatales
+- 300 - 399 corresponden a advertencias
+
+# Bitacora
+
 
 ## Objetivo
 Este proyecto tiene como objetivo la creación de un sistema avanzado de recuperación de información mediante el `Índice invertido` y el algoritmo `PageRank`.
@@ -32,21 +72,10 @@ Este proyecto tiene como objetivo la creación de un sistema avanzado de recuper
 ### Fases
 
 #### Semana 1:
-- [X] Investigación del concepto de `pageRank` (Ayrton)
-- [X] Investigar el concepto de `Índice invertido` y su funcionamiento (Iván)
-- [X] Implementación de la estructura del grafo de archivos con una lista de adyacencias (Milton)
-- [X] Encontrar una manera de obtener referencias a los archivos de un directorio y sus subdirectorios mediante `dirent.h` (Franco)
-#### Semana 2:
-- [X] Implementacion `pageRank` (Ayrton)
-- [X] Implementar `Índice invertido`(Iván)
-- [X] Implementación de la estructura del grafo de archivos con una lista de adyacencias (Milton)
-- [X] Implementar archivos relacionados a las archivos dentro de directorios y subdirectorios mediante`dirent.h` (Franco)
-#### Semana 3:
-- [X] Implementar listas de posiciones y oraciones para una correcta implmentacion por pantalla (Ayrton)
-- [X] Resolver errores y trabajar informe(Iván)
-- [X] Resolucion de errores y casos limite (Milton)
-- [X] Trabajar en el informe y apoyar en la resolucion de errores (Franco)
-#### Recta final
-- [X] Ensamblar el programa principal
-- [ ] Resolver casos limites
-- [ ] Finalizar informe
+- [ ] Investigación del concepto de `pageRank` (Ayrton)
+- [ ] Investigar el concepto de `Índice invertido` y su funcionamiento (Iván)
+- [ ] Implementación de la estructura del grafo de archivos con una lista de adyacencias (Milton)
+- [ ] Encontrar una manera de obtener referencias a los archivos de un directorio y sus subdirectorios mediante `dirent.h` (Franco)
+
+## Asignación de roles
+Sección Pendiente (se revisará luego de la primera semana)

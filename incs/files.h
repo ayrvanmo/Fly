@@ -1,7 +1,7 @@
 /**
  * @file files.h
  * @author Franco Aguilar, Milton Hernández, Iván Mansilla, Ayrton Morrison
- * @brief funciones para manejar archivos de directorio (files.c)
+ * @brief Cabecera para funciones de files.c
  */
 
 #ifndef FILES_H

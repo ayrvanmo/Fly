@@ -9,7 +9,7 @@
  * @brief Funcion para imprimir un error
  * @param num Codigo de error
  * @param target Algun parametro que puede ser necesario para el error
- * @param obs Algun texto que puede acompanhar el error
+ * @param obs Algun texto que puede acompañar el error
 */
 void print_error(int num, char* target, char* obs) {
     if(num>=100 && num<200){
@@ -26,9 +26,6 @@ void print_error(int num, char* target, char* obs) {
         case 100:
             printf("No se pudo leer el archivo %s\n", target);
             break;
-        case 101:
-            printf("No se logro leer el archivo %s\n", target);
-            break;
         case 200:
             printf("No hay memoria disponible\n");
             exit(-1);
@@ -38,7 +35,7 @@ void print_error(int num, char* target, char* obs) {
             exit(-1);
             break;
         case 202:
-            printf("Cantidad invalida, la cantidad ingresada de be ser mayor a 0\n");
+            printf("Cantidad invalida, la cantidad ingresada debe ser mayor a 0\n");
             exit(-1);
             break;
         case 203:

@@ -1,0 +1,53 @@
+# Query: aux_ptr
+# ContextLines: 1
+
+13 results - 3 files
+
+src/files.c:
+  262          char *token;
+  263:         char *aux_ptr;
+  264:         token = strtok_r(fsize, " \n\t", &aux_ptr);
+  265          while (token != NULL) {
+
+  282                          }
+  283:                         token = strtok_r(NULL, " \n\t", &aux_ptr);
+  284                      }
+
+  289                  if (pointerToFileName == NULL) {
+  290:                     token = strtok_r(NULL, " \n\t", &aux_ptr);
+  291                      continue;
+
+  300                          free(pointerToFileName);
+  301:                         token = strtok_r(NULL, " \n\t", &aux_ptr);
+  302                          continue;
+
+  310                  free(pointerToFileName);
+  311:                 token = strtok_r(NULL, " \n\t", &aux_ptr);
+  312                  continue; // Se proceso un enlace, luego no se hace el proceso para una palabra normal
+
+  323              }
+  324:             token = strtok_r(NULL, " \n\t", &aux_ptr);
+  325          }
+
+src/main.c:
+  62      char *token = NULL;
+  63:     char *aux_ptr;
+  64  
+
+  84  
+  85:         if((token = strtok_r(word, " \t", &aux_ptr)) == NULL){
+  86              //print_error(306, NULL, NULL);
+
+  88          }
+  89:         char *next_token = strtok_r(NULL, " \t", &aux_ptr);
+  90          if(next_token != NULL){
+
+src/output.c:
+  110          printf("\n--------------------------------------------------------------------------------------------\n");
+  111:         char *aux_ptr;
+  112:         token = strtok_r(buffer, " \n\t", &aux_ptr);
+  113          while(token != NULL){
+
+  123              }
+  124:             token = strtok_r(NULL, " \n\t", &aux_ptr);
+  125          }

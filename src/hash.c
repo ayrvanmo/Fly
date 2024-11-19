@@ -1,7 +1,7 @@
 /**
- * file hash.c
- * author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
- * brief Funciones de hashing
+ * @file hash.c
+ * @author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
+ * @brief Funciones de hashing
 */
 #include "hash.h"
 
@@ -58,7 +58,7 @@ unsigned int hashFile(char *filename) {
 
     if(fread(buffer, sizeof(char), fileSize, file) < (long unsigned int)fileSize)
     {
-        print_error(101, filename, NULL);
+        print_error(100, filename, NULL);
         return 0;
     }
     fclose(file);

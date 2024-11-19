@@ -1,7 +1,7 @@
 /**
  * @file timer.h
  * @author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
- * @brief Archivo de cabezera para (timer.c) (Only for testing)
+ * @brief Cabecera para funciones de timer.c
 */
 #ifndef TIMER_H
 #define TIMER_H
