@@ -1,0 +1,7 @@
+PWD /home/milton/umag/estructDatos/proyectos/fly/docs
+INPUT /etc/texmf/web2c/texmf.cnf
+INPUT /usr/share/texmf/web2c/texmf.cnf
+INPUT /usr/share/texlive/texmf-dist/web2c/texmf.cnf
+INPUT /var/lib/texmf/web2c/pdftex/pdflatex.fmt
+INPUT /home/milton/umag/estructDatos/proyectos/fly/docs/main.tex
+OUTPUT build/main.log

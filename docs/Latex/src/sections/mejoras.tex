@@ -1,2 +1,16 @@
 \section{Posibles Mejoras a futuro}
-\rhostart{}
+Aun siendo \textit{Fly} un programa eficiente como se esperaba, como equipo de trabajo somos conscientes acerca de aquellos aspectos que se podrían mejorar, que por varias razones no fueron implementadas en este programa ya sea por complejidad, falta de tiempo o poco conocimiento de algunas herramientas o librerías.
+
+A continuación se listan parte de estas posibles mejoras:
+\begin{enumerate}
+    \item \textbf{Uso de hebras}: El uso de hebras para manejar el procesamiento de los diferentes archivos sería un gran acierto para el programa, ya que este puede agilizar mucho los tiempos de espera con respecto a un programa secuencial como lo es \textit{Fly}. Como mencionado previamente esta mejora no se implemento debido a la falta de tiempo y complejidad (se requería el uso de semáforos sobre las múltiples estructuras de datos utilizadas).
+
+    \item \textbf{Uso de estructuras de datos más eficientes}: En el presente trabajo se hizo un gran uso de las LES, principalmente por su sencillez de implementación y las ventajas que proveen, sin embargo la búsqueda sobre estas podría ser más eficiente si se usara, por ejemplo una lista circular doblemente enlazada que reduciría a la mitad los tiempos de búsqueda (aunque ciertamente son ya muy veloces).
+
+    \item \textbf{Experiencia de usuario}: La experiencia en \textit{Fly} es restringida a buscar y mostrar coincidencias de una palabra en particular, dejando de lado tres posibles casos de uso relevantes:
+    \begin{enumerate}
+        \item \textbf{Buscar varias palabras}: Sería una buena mejora poder buscar varias palabras a la vez, aunque no estén en orden, permitiendo un mejor filtrado de los archivos que se muestran.
+        \item \textbf{Buscar frases particulares}: Un uso común de este tipo de motores de búsqueda es buscar frases particulares (no solamente palabras) lo que representaría una mejora considerable en cuanto a experiencia del usuario se refiere.
+        \item \textbf{Búsqueda parcial de palabras}: Otros motores de búsqueda permiten identificar palabras parcialmente, así aparecerían como coincidencias archivos que contienen la palabra ``univer'' como `universidad' o `universo', esto sería muy útil para diferentes necesidades de los usuarios.
+    \end{enumerate}
+\end{enumerate}

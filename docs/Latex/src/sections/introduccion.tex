@@ -1,39 +1,16 @@
 \section{Introducción}
-\rhostart{}
+Un motor de búsqueda es una herramienta que permite buscar y recuperar datos en una colección de archivos.
 
-\textbf{Fly} es un motor de búsqueda que indexa documentos web con hipervínculos a otros documentos, utilizando técnicas como el \textbf{índice invertido} y \textbf{PageRank}. Un sistema de recuperación de información es una herramienta que permite buscar y recuperar datos en una colección de archivos. Esto se utiliza en aplicaciones como buscadores web y bases de datos.
+Particularmente, \textit{Fly} es un motor de búsqueda que indexa documentos enlazados entre sí mediante \textit{WikiLinks}\footnote{Un WikiLink es un tipo de enlace entre documentos de texto usado en la aplicación \href{https://obsidian.md/}{Obsidian.md} consistente en el siguiente formato: \texttt{[[nombre del archivo enlazado|Alias para el archivo de ser necesario]]}. Este formato tiene diversas facilidades para un sistema de archivos con las características deseadas razón por la cuál fue utilizado en este proyecto.}. De estos archivos este motor extrae todas las palabras \textit{relevantes} permitiendo al usuario buscar una palabra y encontrar las coincidencias de la misma a lo largo del sistema de archivos. Para llevar a cabo esta tarea, Fly utiliza técnicas como el \textit{índice invertido} (para la indexación de palabras) y el \textit{PageRank} (para la jerarquización de los archivos analizados).
 
-Las principales funciones de \textbf{Fly} incluyen:
-\begin{itemize}
-\item Procesar documentos de un directorio y extraer palabras clave.
-\item Crear un índice de los archivos que contienen las palabras clave.
-\item Calcular el nivel de importancia de cada archivo (PageRank).
-\item Listar los archivos que contienen la palabra buscada, ordenados por importancia.
-\end{itemize}
+Las principales funciones de \textbf{Fly} son:
+\begin{enumerate}
+    \item Generar un grafo con los archivos de un directorio, almacenando en cada nodo un archivo y relacionándolo con los archivos que lo enlazan y aquellos a los que se enlaza.
+    \item Generar un índice invertido para almacenar la información de cada palabra relevante en el sistema de archivos.
+    \item Calcular el nivel de importancia de cada uno de los archivos en el grafo, utilizando el algoritmo de PageRank.
+    \item Realizar búsquedas eficientes sobre el índice invertido y el grafo permitiendo al usuario encontrar coincidencias entre palabras y sus ubicaciones en cada archivo donde aparecen.
+\end{enumerate}
 
-Para implementar estas funciones, se utilizaron estructuras de datos como grafos, listas enlazadas y tablas hash: Los grafos representan las relaciones entre documentos, las listas enlazadas permiten una navegación sencilla entre elementos relacionados, las tablas hash son esenciales para la búsqueda eficiente de palabras clave.
+Todas estas funciones se implementaron mediante el uso de estructuras de datos tales como grafos, listas enlazadas y tablas hash.
 
-Este informe describe el proceso de desarrollo e implementación de Fly, detallando las decisiones de diseño y las técnicas utilizadas para crear un sistema eficiente de recuperación de información.
-
-\subsection{Índice invertido}
-El índice invertido es una estructura de datos que almacena los archivos que contienen un contenido específico, en lugar de listar los contenidos de un archivo. Esto es útil para trabajar con grandes volúmenes de información, ya que facilita la búsqueda y la relación entre los archivos y su contenido.
-
-\subsection{PageRank}
-PageRank es un algoritmo que calcula la importancia de un archivo dentro de un conjunto de archivos. La idea principal es que los archivos más importantes tendrán más enlaces desde otros archivos. La fórmula para calcular la importancia es:
-
-\begin{equation}
-PR(A)=(1-d)+d\sum_{i=1}^{N}\frac{PR(L_i)}{C(L_i)}
-\end{equation}
-Donde:
-\begin{itemize}
-\item $A:$ Archivo para el cual se calcula el PageRank
-\item $d:$ Factor de amortiguación (0.85)
-\item $L_i:$ Páginas que enlazan a $A$
-\item $C(L_i):$ Número de enlaces en $L_i$
-\end{itemize}
-
-\subsection{Algoritmos}
-
-
-
-\subsection{Otros ejecutables}
+El presente informe describe el proceso de desarrollo e implementación de Fly, detallando las decisiones de diseño y las técnicas utilizadas para crear un sistema eficiente de busqueda y recuperación de información.

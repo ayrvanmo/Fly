@@ -1,0 +1,25 @@
+\section{Ejemplo de uso}
+
+Dentro de esta sección se busca explicar parte del cómo sería una manera correcta de utilizar \textit{Fly} para buscar y mostrar coincidencias de una palabra en particular.
+
+\subsection{Preparación de los archivos}
+A la hora de utilizar \textit{Fly} se debe tener en cuenta que el programa lee solamente archivos de texto plano; particularmente se recomienda el uso de archivos tipo \texttt{Markdown}(.md) para los que el programa está especialmente diseñado.
+
+Como fue mencionado anteriormente Fly reconoce enlaces mediante el uso de WikiLinks, a continuación se muestran algunos ejemplos de enlaces válidos:
+\begin{itemize}
+    \item \texttt{[[nombre archivo enlazado]]}
+    \item \texttt{[[nombre archivo enlazado.extension]]}
+    \item \texttt{[[/ruta/al/archivo/enlazado/nombre archivo enlazado.extension]]}
+    \item \texttt{[[nombre archivo enlazado\#sección del archivo]]} (esto es usado en aplicaciones como \href{https://obsidian.md/}{Obsidian.md} para generar un link a una sección del archivo).
+    \item \texttt{[[nombre archivo enlazado|Alias para el archivo]]} (esto es usado en aplicaciones como Obsidian para generar un link y que aparezca un texto diferente al nombre del archivo).
+\end{itemize}
+
+Por lo general combinaciones de este tipo de links (alias con secciones, rutas, extensiones, etc) son válidas dentro de \textit{Fly}.
+
+\subsection{Uso del programa}
+Una vez con los archivos correctamente formateados se puede ejecutar \textit{Fly} desde la carpeta raíz del repositorio del proyecto con el comando \texttt{./build/fly.out -d <directorio a procesar>} lo cuál procesará el directorio indicado y permitirá ingresar palabras para su búsqueda dentro de los archivos procesados.
+
+\subsection{Prueba de estrés del programa}
+\textit{Fly} fue probado con un dataset de $856$ archivos construidos sobre Obsidian. Con este dataset se obtuvo un tiempo de procesamiento promedio de $15s$ para procesar todos los archivos y permitir la interacción del usuario. Posterior a esto los tiempos de respuesta de Fly son realmente cortos, lo que demuestra la eficiencia del programa.
+
+Adicionalmente se ejecutó el programa bajo la herramienta \texttt{Valgrind} diseñada para encontrar fugas de memoria (herramienta muy útil para la depuración de errores durante el desarrollo de este programa), y se obtuvo un resultado de $0$ fugas de memoria y un total de $\approx 24Mb$ de memoria utilizada durante su ejecución, lo que indica el correcto funcionamiento del programa.
