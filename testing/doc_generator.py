@@ -3,7 +3,7 @@ import time
 import os
 import random
 
-def obtener_articulos_aleatorios(n=15):
+def obtener_articulos_aleatorios(n=20):
     articulos = []
     url_random = "https://es.wikipedia.org/api/rest_v1/page/random/summary"
 
@@ -27,7 +27,17 @@ def obtener_articulos_aleatorios(n=15):
     return articulos
 
 # Llamar a la función y mostrar los resultados
-articulos = obtener_articulos_aleatorios(int(input("Ingrese el número de documentos a generar: ")))
+print("Bienvenido al generador de documentos para Fly!, a continuación se solicita el número de documentos a generar, tenga en cuenta que este script hace uso de la API de Wikipedia para la recolección de información, la cual tiene un límite de 500 archivos extraídos por hora, por tanto se recomienda discreción a la hora de usar este generador.")
+
+cantidad = int(input("Ingrese el número de documentos a generar: "))
+if cantidad <= 0:
+    print("El número de documentos debe ser mayor que 0.")
+    exit()
+elif cantidad > 100:
+    print("El número de documentos no debe ser mayor que 100.")
+    exit()
+
+articulos = obtener_articulos_aleatorios()
 
 # Creamos la carpeta docs si no existe
 if not os.path.exists("docs"):
@@ -36,7 +46,7 @@ if not os.path.exists("docs"):
 for i, (titulo, extracto) in enumerate(articulos, start=1):
     print(f"Procesando artículo {i} de {len(articulos)}")
 
-    # Reemplazar caracteres no válidos en los nombres de archivo
+    # Reemplazar caracteres no validos en los nombres de archivo
     titulo_limpio = titulo.replace("/", "-").replace("\\", "-").replace(":", "-")
 
     # Crear y escribir en el archivo
