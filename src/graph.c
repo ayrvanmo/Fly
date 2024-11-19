@@ -344,17 +344,16 @@ void delete_graph(Graph graph)
  * @brief Funcion para crear un enlace entre dos nodos de un grafo
  * @param node1 Nodo de origen del enlace
  * @param node2 Nodo de destino del enlace
- * @param weight Peso del enlace
  * @return Puntero al enlace creado (En la lista de adyacencias de @p node1)
 */
-LinkPosition create_graph_edge(GraphPosition node1, GraphPosition node2, double weight)
+LinkPosition create_graph_edge(GraphPosition node1, GraphPosition node2)
 {
-    LinkPosition nodeTo = insert_linkList_node(node1->adjacency, node2, weight);
+    LinkPosition nodeTo = insert_linkList_node(node1->adjacency, node2);
     if(nodeTo == NULL){
         print_error(303, NULL, NULL);
         return NULL;
     }
-    LinkPosition nodeFrom = insert_linkList_node(node2->incidence, node1, weight);
+    LinkPosition nodeFrom = insert_linkList_node(node2->incidence, node1);
     if(nodeFrom == NULL){
         print_error(303, NULL, NULL);
         return NULL;

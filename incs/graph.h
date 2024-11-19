@@ -70,7 +70,7 @@ GraphPosition insert_graphNode(FilePosition file, Graph graph);
 GraphPosition find_graphNode(char *name, Graph graph);
 void delete_graphNode(char *name, Graph graph);
 void delete_graph(Graph graph);
-PtrToLinkNode create_graph_edge(GraphPosition node1, GraphPosition node2, double weight);
+PtrToLinkNode create_graph_edge(GraphPosition node1, GraphPosition node2);
 void remove_graph_edge(GraphPosition node1, GraphPosition node2);
 
 #endif

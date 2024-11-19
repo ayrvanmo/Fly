@@ -22,7 +22,6 @@ LinkList create_empty_linkList(LinkList linkList)
     }
     newList->next = NULL;
     newList->graphNode = NULL;
-    newList->weight = 0;
     return newList;
 }
 
@@ -102,10 +101,9 @@ LinkPosition find_linkList_prev_node(LinkPosition P, LinkList linkList)
  * @brief Funcion para insertar un nodo en una lista de enlaces
  * @param prevPosition Puntero al enlace anterior al que se desea insertar el nuevo enlace
  * @param graphNode Nodo de grafo al que apunta el enlace a insertar
- * @param weight Peso del enlace a insertar
  * @return Puntero al nuevo enlace insertado
 */
-LinkPosition insert_linkList_node(LinkPosition prevPosition, PtrToGraphNode graphNode, double weight)
+LinkPosition insert_linkList_node(LinkPosition prevPosition, PtrToGraphNode graphNode)
 {
     LinkPosition newNode = (LinkPosition) malloc(sizeof(struct _linkListNode));
     if(newNode == NULL){
@@ -113,39 +111,10 @@ LinkPosition insert_linkList_node(LinkPosition prevPosition, PtrToGraphNode grap
     }
 
     newNode->graphNode = graphNode;
-    newNode->weight = weight;
 
     newNode->next = prevPosition->next;
     prevPosition->next = newNode;
     return newNode;
-}
-
-/**
- * @brief Funcion para insertar un enlace en una lista de enlaces de forma ordenada segun el peso de los enlaces
- * @param order Funcion que compara dos valores de tipo double para determinar el orden
- * @param linkList Lista de enlaces
- * @param graphNode Puntero a un Nodo de grafo al que apuntara el enlace a insertar
- * @param weight Peso del enlace a insertar
- * @return Puntero al nuevo enlace insertado
- * @note @p order debe ser la funcion increasing (para insertar en orden creciente) o decreasing (para insertar en orden decreciente)
-*/
-LinkPosition insert_ordered_linkList_node(bool (*order)(double, double), LinkList linkList, PtrToGraphNode graphNode, double weight)
-{
-    if(is_empty_linkList(linkList)){
-        print_error(300, NULL, NULL);
-        create_empty_linkList(linkList);
-    }
-    if(linkList->next == NULL){
-        return insert_linkList_node(linkList, graphNode, weight);
-    }
-
-    LinkPosition aux = linkList;
-
-    while (aux->next != NULL && order(aux->next->weight, weight)){
-        aux = aux->next;
-    }
-
-    return insert_linkList_node(aux, graphNode, weight);
 }
 
 
@@ -217,17 +186,4 @@ PtrToGraphNode get_graphNode(LinkPosition P)
         print_error(203, NULL, NULL);
     }
     return P->graphNode;
-}
-
-/**
- * @brief Funcion para obtener el peso de un enlace
- * @param P Puntero al enlace
- * @return Peso del enlace
-*/
-unsigned int get_weight(LinkPosition P)
-{
-    if(P == NULL){
-        print_error(203, NULL, NULL);
-    }
-    return P->weight;
 }

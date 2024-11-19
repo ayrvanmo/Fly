@@ -26,7 +26,6 @@ typedef PtrToLinkNode LinkList;
 */
 struct _linkListNode {
     PtrToGraphNode graphNode; /*!< Nodo de grafo */
-    double weight; /*!< Peso del enlace */
     LinkPosition next; /*!< Posicion siguiente en la lista */
 };
 
@@ -37,8 +36,7 @@ bool is_empty_linkList(LinkList linkList);
 void print_linkList(LinkList linkList);
 LinkPosition find_linkList_node(LinkList linkList, GraphNode graphNode);
 LinkPosition find_linkList_prev_node(LinkPosition P, LinkList linkList);
-LinkPosition insert_linkList_node(LinkPosition prevPosition, PtrToGraphNode graphNode, double weight);
-LinkPosition insert_ordered_linkList_node(bool (*order)(double, double), LinkList linkList, PtrToGraphNode graphNode, double weight);
+LinkPosition insert_linkList_node(LinkPosition prevPosition, PtrToGraphNode graphNode);
 void delete_linkList_node(LinkPosition P, LinkList linkList);
 LinkPosition mergeSort_linkList(LinkPosition L);
 LinkPosition merge_linkList(LinkPosition a, LinkPosition b);
@@ -49,12 +47,6 @@ LinkPosition linkList_first(LinkList linkList);
 LinkPosition linkList_last(LinkList linkList);
 LinkPosition linkList_advance(LinkPosition P);
 PtrToGraphNode get_graphNode(LinkPosition P);
-unsigned int get_weight(LinkPosition P);
-
-
-// Funciones para usar como parametros
-bool increasing(double a, double b);
-bool decreasing(double a, double b);
 
 
 

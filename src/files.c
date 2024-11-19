@@ -298,7 +298,7 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
                 }
 
                 // Creamos la relación entre el nodo del archivo y el nodo de destino
-                create_graph_edge(P, nodeToLink, 1);
+                create_graph_edge(P, nodeToLink);
                 //printf("Link con: %s\n", pointerToFileName);
                 free(pointerToFileName);
                 token = strtok_r(NULL, " \n\t", &aux_ptr);
