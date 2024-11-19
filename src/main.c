@@ -17,7 +17,7 @@ int main(int argc, char **argv){
     char* root_dir=get_terminal_parameters(argc, argv);
     // Obtener los parametros de la terminal
     if(!root_dir){
-        return -1;
+        return 0;
     }
     Timer timer;
 
@@ -35,7 +35,7 @@ int main(int argc, char **argv){
     printf("Procesando archivos...\n");
     FilePosition P = files->Next;
     while(P != NULL){
-        printf("Archivo: %s\n", P->name);
+        printf(ANSI_COLOR_YELLOW"Procesando archivo:"ANSI_COLOR_RESET"%s\n", P->name);
         process_file(P, graph, reverse_index, stop_words, files);
         P = P->Next;
     }
@@ -51,8 +51,8 @@ int main(int argc, char **argv){
         while(aux != NULL){
             PositionList toProcess = aux->files;
             toProcess->next = mergeSort_positionList(toProcess->next);
-            //printf("Lista de archivos para la palabra %s:\n", aux->word);
-            //print_linkList(toProcess);
+            // printf("Lista de archivos para la palabra %s:\n", aux->word);
+            // print_positionList(toProcess);
             aux=aux->next;
         }
     }
@@ -99,11 +99,18 @@ int main(int argc, char **argv){
 
         to_low_case(word);
         remove_punctuation(word);
-
         if(strcmp(word, "exit") == 0){
-            printf(CLEAR_SCREEN);
-            printf("Saliendo de Fly...");
-            sleep(1);
+            printf(CLEAR_SCREEN "Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison\n\n"ANSI_COLOR_CYAN);
+            char frase[] = "Gracias por usar fly, nos vemos pronto... ";
+            for(size_t i = 0; i < strlen(frase); i++){
+                printf("\r            ");
+                for(size_t j = 0; j < i; j++){
+                    printf("%c", frase[j]);
+                }
+                fflush(stdout);
+                for(double j = i; j < 90000000; j++);
+            }
+            printf("\n");
             break;
         }
 

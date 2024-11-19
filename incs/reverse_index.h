@@ -20,8 +20,7 @@ typedef ReverseIndexTableNode* ReverseIndexTable;
 #include "link_list.h"
 #include "position_list.h"
 
-#define MAX_STRING_LENGTH 50
-#define MAX_HASH_TABLE_SIZE 10
+#define MAX_HASH_TABLE_SIZE 800
 
 /**
 * @struct _ReverseIndexNode

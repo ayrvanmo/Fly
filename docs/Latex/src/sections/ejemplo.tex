@@ -20,6 +20,6 @@ Por lo general combinaciones de este tipo de links (alias con secciones, rutas, 
 Una vez con los archivos correctamente formateados se puede ejecutar \textit{Fly} desde la carpeta raíz del repositorio del proyecto con el comando \texttt{./build/fly.out -d <directorio a procesar>} lo cuál procesará el directorio indicado y permitirá ingresar palabras para su búsqueda dentro de los archivos procesados.
 
 \subsection{Prueba de estrés del programa}
-\textit{Fly} fue probado con un dataset de $856$ archivos construidos sobre Obsidian. Con este dataset se obtuvo un tiempo de procesamiento promedio de $15s$ para procesar todos los archivos y permitir la interacción del usuario. Posterior a esto los tiempos de respuesta de Fly son realmente cortos, lo que demuestra la eficiencia del programa.
+\textit{Fly} fue probado con un dataset de $856$ archivos construidos sobre Obsidian. Con este dataset se obtuvo un tiempo de procesamiento promedio menor a $1s$ para procesar todos los archivos y permitir la interacción del usuario. Posterior a esto los tiempos de respuesta de Fly son realmente cortos, lo que demuestra la eficiencia del programa.
 
 Adicionalmente se ejecutó el programa bajo la herramienta \texttt{Valgrind} diseñada para encontrar fugas de memoria (herramienta muy útil para la depuración de errores durante el desarrollo de este programa), y se obtuvo un resultado de $0$ fugas de memoria y un total de $\approx 24Mb$ de memoria utilizada durante su ejecución, lo que indica el correcto funcionamiento del programa.

@@ -38,9 +38,6 @@ LinkPosition find_linkList_node(LinkList linkList, GraphNode graphNode);
 LinkPosition find_linkList_prev_node(LinkPosition P, LinkList linkList);
 LinkPosition insert_linkList_node(LinkPosition prevPosition, PtrToGraphNode graphNode);
 void delete_linkList_node(LinkPosition P, LinkList linkList);
-LinkPosition mergeSort_linkList(LinkPosition L);
-LinkPosition merge_linkList(LinkPosition a, LinkPosition b);
-LinkPosition mid_point_linkList(LinkPosition L);
 
 // Funciones de interaccion con el usuario
 LinkPosition linkList_first(LinkList linkList);

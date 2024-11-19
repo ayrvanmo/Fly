@@ -58,8 +58,8 @@ PositionLocation insert_positionList_node(PositionLocation prevPosition, PtrToGr
 PositionLocation head_positionList(PositionList positionList);
 void delete_positionList_node(PositionLocation P, PositionList positionList);
 PositionList mergeSort_positionList(PositionList L);
-PositionList merge_positionList(PositionList a, PositionList b);
-PositionList mid_point_positionList(PositionList L);
+PositionLocation merge_positionList(PositionLocation a, PositionLocation b);
+PositionLocation mid_point_positionList(PositionLocation L);
 
 // Funciones de interaccion con el usuario
 PositionLocation positionList_first(PositionList positionList);

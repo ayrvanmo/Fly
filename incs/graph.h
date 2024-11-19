@@ -7,7 +7,7 @@
 #define GRAPH_H
 
 // Provisorio
-#define GRAPH_HASH_SIZE 2
+#define GRAPH_HASH_SIZE 100
 
 typedef struct _graphNode GraphNode;
 typedef GraphNode *PtrToGraphNode;

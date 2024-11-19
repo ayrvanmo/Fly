@@ -6,7 +6,7 @@
 #ifndef STOP_WORDS_H
 #define STOP_WORDS_H
 
-#define STOP_WORDS_HASH_SIZE 100
+#define STOP_WORDS_HASH_SIZE 150
 
 typedef struct _stopWord StopWord;
 typedef StopWord *PtrToStopWord;

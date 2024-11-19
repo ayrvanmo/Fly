@@ -44,7 +44,7 @@ FileList get_files_from_directory(char *directory, FileList list)
                 continue;
             }
 
-            snprintf(entryPath, routeLength, "%s/%s", directory, Entry->d_name);
+            snprintf(entryPath, routeLength, "%s%s", directory, Entry->d_name);
             entryId = Entry->d_ino;
             entryName = get_only_fileName(entryPath);
             if (entryName == NULL) {
@@ -251,7 +251,7 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
     while (1){
         paragraph_start_position = ftell(file);
         if(fgets(fsize, fileSize + 1, file) == NULL){
-            print_error(100, NULL, NULL);
+            print_error(100, fileInfo->filePath, NULL);
             fclose(file);
             free(fsize);
             return;
