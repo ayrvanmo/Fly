@@ -250,7 +250,13 @@ void process_file(FilePosition fileInfo, Graph graph, ReverseIndexTable index, S
     // Leemos todo el archivo y clasificamos cada palabra/link segun corresponda
     while (1){
         paragraph_start_position = ftell(file);
-        fgets(fsize, fileSize + 1, file);
+        if(fgets(fsize, fileSize + 1, file) == NULL){
+            print_error(100, NULL, NULL);
+            fclose(file);
+            free(fsize);
+            return;
+        }
+
         // printf(ANSI_COLOR_RED"A procesar "ANSI_COLOR_RESET"%s\n", fsize);
         char *token;
         char *aux_ptr;

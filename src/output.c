@@ -55,7 +55,10 @@ void show_coincidences(ReverseIndexTable indexTable, char *asked_word)
     do{
         auxCount = 1;
         printf("Ingrese ID del archivo el cual quiere revisar (0 para salir): ");
-        scanf("%s", cadena_id_elegido);
+        if(scanf("%s", cadena_id_elegido) == 0){
+            print_error(201, NULL, NULL);
+            return;
+        }
         id_elegido = atoi(cadena_id_elegido);
 
         if(id_elegido == 0){
@@ -98,7 +101,12 @@ void print_file_paragraphs(FilePosition file, SentenceList bytes, char *asked_wo
     while (aux != NULL)
     {
         fseek(to_search_file, aux->byte, SEEK_SET);
-        fgets(buffer, 4096, to_search_file);
+        if(fgets(buffer, 4096, to_search_file) == NULL){
+            print_error(100, NULL, NULL);
+            fclose(to_search_file);
+            free(buffer);
+            return;
+        }
         printf("\n--------------------------------------------------------------------------------------------\n");
         char *aux_ptr;
         token = strtok_r(buffer, " \n\t", &aux_ptr);
