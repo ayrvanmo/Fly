@@ -4,15 +4,24 @@
 Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
 
 ## Ejecución del programa
-Para ejecutar el programa, se debe seguir los siguientes pasos:
+Para ejecutar el programa, se deben seguir los siguientes pasos:
 1. Clonar el repositorio
-2. Generar las carpetas necesarias con el comando 'make folders'
-3. Compilar el programa con el comando 'make'
-4. Entrar al directorio 'build' y ejecutar el programa con el comando './fly -d [directorio]'
+2. Generar las carpetas necesarias con el comando `make folders`
+3. Compilar el programa con el comando `make`
+4. Entrar al directorio `build` y ejecutar el programa con el comando `./fly -d [ruta / directorio]` (`fly` se encuentra dentro de build)
+5. Para utilizar el generador de archivos formateados`doc_generator.py` ,debe contar con `python3` junto a las siguientes bibliotecas:
+- `requests`
+- `time`
+- `os`
+- `random`
+
+> [!warning] Consideraciones
+> El API utilizado dentro del generador, tiene un maximo de 500 request por hora (por IP), por lo que se recomienda discrecion en su uso
 
 ### Otros comandos
-- 'make clean': Borra los archivos generados por el programa
-- 'doxygen': Genera la documentación del código
+- `make clean`: Borra los archivos generados por el programa
+- `make doc` Generará una documentación con [Doxygen](https://www.doxygen.nl/), que se presentará en la carpeta `docs/doxygen`, se recomienda abrir el archivo `docs/doxygen/html/index.html` para visualizar la documentación completa del programa.
+  - Alternativamente puede ejecutar `make` dentro de `docs/doxygen/latex/` para obtener un `refman.pdf` correspondiente a la documentación del proyecto en formato PDF.
 
 ## Manejo de errores
 Dentro del archivo [errors.c](src/errors.c) se encuentra la función `print_error` que se encarga de manejar los errores que puedan ocurrir en el programa. Los códigos de error que se manejan son los siguientes:
@@ -38,44 +47,4 @@ Donde:
 - 200 - 299 corresponden a errores fatales
 - 300 - 399 corresponden a advertencias
 
-# Bitacora
 
-
-## Objetivo
-Este proyecto tiene como objetivo la creación de un sistema avanzado de recuperación de información mediante el `Índice invertido` y el algoritmo `PageRank`.
-
-### Desglose de objetivos
-1. PageRank
-    - Investigar el algoritmo y su funcionamiento
-    - Investigar el concepto de `dumpingFactor` y el mejor valor para el mismo según bibliografía
-    - Cómo implementar esto en C teniendo ya un grafo dirigido creado con una **lista de adyacencias**
-2. Índice invertido
-    - Investigar el concepto y su funcionamiento
-    - PLantear opciones para su implementación
-    - Implementar la estructura de datos necesaria para el índice invertido
-        - Estructura de datos
-        - Funciones para que se comporte como un diccionario
-4. Recuperación de información
-    - ¿Cómo leer un directorio, sus elementos y sus sub-directorios?
-    - ¿Cómo procesar cada uno de estos elementos y guardar su información en el grafo de adyacencias y en el índice invertido?
-5. Otros conceptos
-    - Las `stopwords` y su importancia en el índice invertido.
-        - Cómo implementar una búsqueda dentro de un grupo de "stopwords" para filtrar los archivos
-        - ¿Podemos tener un archivo con "stopwords" personalizadas y leerlas de allí inicialmente?
-        - Implementación de archivos temporales con "stopwords" filtradas
-        - Valorar la necesidad del uso de un archivo intermedio, un archivo temporal, para almacenar los archivos filtrados
-        - Posibles conflictos con tildes?
-6. Otros objetivos
-    - Mantener una correcta bibliografía de la información consultada
-    - Documentación con comentarios de `Doxygen`
-
-### Fases
-
-#### Semana 1:
-- [ ] Investigación del concepto de `pageRank` (Ayrton)
-- [ ] Investigar el concepto de `Índice invertido` y su funcionamiento (Iván)
-- [ ] Implementación de la estructura del grafo de archivos con una lista de adyacencias (Milton)
-- [ ] Encontrar una manera de obtener referencias a los archivos de un directorio y sus subdirectorios mediante `dirent.h` (Franco)
-
-## Asignación de roles
-Sección Pendiente (se revisará luego de la primera semana)
