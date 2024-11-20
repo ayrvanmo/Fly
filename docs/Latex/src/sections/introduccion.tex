@@ -3,7 +3,7 @@ Un motor de búsqueda es una herramienta que permite buscar y recuperar datos en
 
 Particularmente, \textit{Fly} es un motor de búsqueda que indexa documentos enlazados entre sí mediante \textit{WikiLinks}\footnote{Un WikiLink es un tipo de enlace entre documentos de texto usado en la aplicación \href{https://obsidian.md/}{Obsidian.md} consistente en el siguiente formato: \texttt{[[nombre del archivo enlazado|Alias para el archivo de ser necesario]]}. Este formato tiene diversas facilidades para un sistema de archivos con las características deseadas razón por la cuál fue utilizado en este proyecto.}. De estos archivos este motor extrae todas las palabras \textit{relevantes} permitiendo al usuario buscar una palabra y encontrar las coincidencias de la misma a lo largo del sistema de archivos. Para llevar a cabo esta tarea, Fly utiliza técnicas como el \textit{índice invertido} (para la indexación de palabras) y el \textit{PageRank} (para la jerarquización de los archivos analizados).
 
-Las principales funciones de \textbf{Fly} son:
+Las principales funciones de \textit{Fly} son:
 \begin{enumerate}
     \item Generar un grafo con los archivos de un directorio, almacenando en cada nodo un archivo y relacionándolo con los archivos que lo enlazan y aquellos a los que se enlaza.
     \item Generar un índice invertido para almacenar la información de cada palabra relevante en el sistema de archivos.

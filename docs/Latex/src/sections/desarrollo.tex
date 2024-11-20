@@ -45,7 +45,7 @@ PageRank es un algoritmo creado por \textcite{PageRankArticle} que calcula la im
 
 La fórmula para calcular la importancia esta dada por:
 \begin{equation}
-PR(i) = \frac{1-d}{n} +d\left( \sum\limits_{i \in B_{i}}^{} \frac{PR(j)}{L(j)} +\frac{S}{N} \right)
+PR(i) = \frac{1-d}{N} +d\left( \sum\limits_{i \in B_{i}}^{} \frac{PR(j)}{L(j)} +\frac{S}{N} \right)
 \label{eq:PageRank}
 \end{equation}
 Donde:
@@ -61,7 +61,7 @@ Donde:
 
 Esta formula fue extraída del articulo original publicado por los autores de dicho algoritmo \cite{PageRankArticle}, sin embargo, en el presente proyecto fue ligeramente modificada con el fin de mantener consistencia al manejar los archivos que no referencian a ningún otro, es decir \textbf{sin enlaces adyacentes}. Se decidió optar por esta solución debido al poco coste de implementación que representa.
 
-Para explicar la interpretación del algoritmo, se utilizará la analogía presente en el siguiente articulo escrito por \textcite{IntroduccionPageRank}, la cuál imagina a un surfista, el cuál se encuentra navegando entre las diferentes páginas (en este caso archivos) de manera aleatoria. Lo que se busca con esto es construir una matriz con las probabilidades de escoger cada salto entre los archivos, según los enlaces presentes en estos. Dicho articulo profundiza en el trasfondo matemático del algoritmo, sin embargo, como este no es el objetivo del presente informe, únicamente se dejará la interpretación del \textbf{PageRank} de un archivo como la probabilidad que existe de que aquel surfista se encuentre en dicho archivo en un momento dado.
+Para explicar la interpretación del algoritmo, se utilizará la analogía presente en el siguiente articulo escrito por \textcite{IntroduccionPageRank}, la cuál imagina a un surfista, el cuál se encuentra navegando entre las diferentes páginas (en este caso archivos) de manera aleatoria. Lo que se busca con esto es construir una matriz con las probabilidades de escoger cada salto entre los archivos, según los enlaces presentes en estos. Dicho articulo profundiza en el trasfondo matemático del algoritmo, sin embargo, como este no es el objetivo del presente informe, únicamente se dejará la interpretación del \textit{PageRank} de un archivo como la probabilidad que existe de que aquel surfista se encuentre en dicho archivo en un momento dado.
 
 Una representación visual del funcionamiento del algoritmo se puede observar en la figura \ref{fig:page_rank}, la cual muestra un grafo de archivos con sus respectivos enlaces. Esta figura y ejemplo fue recuperada y adaptada del video creado por \textcite{PageRankVideo}.
 
@@ -72,4 +72,4 @@ Una representación visual del funcionamiento del algoritmo se puede observar en
     \label{fig:page_rank}
 \end{figure}
 
-Si se toma cada uno de los nodos con un valor de relevancia inicial $1$, este valor se reparte entre los nodos adyacentes; al resolver el sistema de ecuaciones lineales que resulta de esto, se puede observar que el nodo $1$ cuenta con $\frac{48}{31}$ de relevancia, el nodo $2$ con $\frac{16}{31}$, el nodo $3$ con $\frac{36}{31}$ y el nodo $4$ con $\frac{24}{31}$, como se puede observar, si se suman todas las relevancias, se cuenta con el total de relevancias iniciales que seria $4$, mostrándose asi un breve ejemplo de como se calcula el \textbf{PageRank} de cada nodo.
+Si se toma cada uno de los nodos con un valor de relevancia inicial $1$, este valor se reparte entre los nodos adyacentes; al resolver el sistema de ecuaciones lineales que resulta de esto, se puede observar que el nodo $1$ cuenta con $\frac{48}{31}$ de relevancia, el nodo $2$ con $\frac{16}{31}$, el nodo $3$ con $\frac{36}{31}$ y el nodo $4$ con $\frac{24}{31}$, como se puede observar, si se suman todas las relevancias, se cuenta con el total de relevancias iniciales que seria $4$, mostrándose asi un breve ejemplo de como se calcula el \textit{PageRank} de cada nodo.
