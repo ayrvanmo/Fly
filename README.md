@@ -15,8 +15,8 @@ Para ejecutar el programa, se deben seguir los siguientes pasos:
 - `os`
 - `random`
 
-> ⚠️ Advertencia
-> El API utilizado dentro del generador, tiene un maximo de 500 request por hora (por IP), por lo que se recomienda discrecion en su uso
+*⚠️ Advertencia*
+>El API utilizado dentro del generador, tiene un maximo de 500 request por hora (por IP), por lo que se recomienda discrecion en su uso
 
 ### Otros comandos
 - `make clean`: Borra los archivos generados por el programa
