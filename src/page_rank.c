@@ -1,5 +1,5 @@
 /**
- * @file page_rank.h
+ * @file page_rank.c
  * @author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
  * @brief Funciones relacionadas con la implementacion del algoritmo PageRank
  */

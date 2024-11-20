@@ -1,3 +1,9 @@
+/**
+ * @file main.c
+ * @author Franco Aguilar, Milton Hernandez, Ivan Mansilla, Ayrton Morrison
+ * @brief Flujo principal del programa
+*/
+
 #include <stdio.h>
 #include <time.h>
 #include <unistd.h>
