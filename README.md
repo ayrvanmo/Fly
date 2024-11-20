@@ -15,7 +15,7 @@ Para ejecutar el programa, se deben seguir los siguientes pasos:
 - `os`
 - `random`
 
-> [!warning] Consideraciones
+> [!WARNING] Consideraciones
 > El API utilizado dentro del generador, tiene un maximo de 500 request por hora (por IP), por lo que se recomienda discrecion en su uso
 
 ### Otros comandos
