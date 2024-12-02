@@ -44,7 +44,7 @@ FileList get_files_from_directory(char *directory, FileList list)
                 continue;
             }
 
-            snprintf(entryPath, routeLength, "%s%s", directory, Entry->d_name);
+            snprintf(entryPath, routeLength, "%s/%s", directory, Entry->d_name);
             entryId = Entry->d_ino;
             entryName = get_only_fileName(entryPath);
             if (entryName == NULL) {
